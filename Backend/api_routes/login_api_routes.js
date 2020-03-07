@@ -23,7 +23,7 @@ module.exports = function (app) {
             .then(function (member_response) {
                 console.log("Add Degree")
                 for(let i=0; i < member_info.degree.length; i++){
-                    vals = Object.values(member_info.degree[i])
+                    let vals = Object.values(member_info.degree[i])
                     if(vals[0] && vals[1]){
                         member_info.degree[i]["MemberId"] = member_response.dataValues.id;
                         console.log(member_info)
