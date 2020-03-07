@@ -1,0 +1,66 @@
+.jumbotron {
+    background-color: orange;
+};
+.carousel {
+    width: 300px;
+    height: 300px;
+}
+
+.carousel-item {
+    width: 400pxx;
+    height: 360px;
+}
+
+.login {
+    position: relative;
+    left: 45%;
+}
+
+
+.eventend {
+    width: 15%;
+}
+
+.timepicker {
+    width: 10%;
+}
+.date {
+    position: relative;
+    top: 20px;
+    width: 32%;
+}
+.date2 {
+    position: relative;
+    top: 20px;
+    right: 300px;
+    width: 200%;
+
+}
+.startlabel {
+    position: relative;
+    top: 20px;
+}
+.endlabel {
+    position: relative;
+    top: 20px;
+    right: 300px;
+    width: 150px;
+
+}
+.form-control {
+    position: relative;
+    left: 0%;
+}
+
+.register-btn {
+    position: relative;
+    left: 45%;
+}
+.reg-btn {
+    position: relative;
+    left: 40px;
+}
+.donatetab {
+    position: relative;
+    left: 20px;
+}
