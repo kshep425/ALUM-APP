@@ -1,10 +1,9 @@
 # Morgan State University Howard County - Alumni App
 
-##Description
+## Description
 
 ## Usage
 
 ## Contributors
 
 ## License
-
