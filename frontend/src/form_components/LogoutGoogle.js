@@ -1,17 +1,22 @@
 import React from 'react';
+import { GoogleLogout } from 'react-google-login';
+
 
 const logout = () => {
-    const auth2 = window.gapi.auth2.getAuthInstance();
-    auth2.signOut().then(()=>{
-        console.log("User signed out")
-    });
+    console.log("user logged out")
+    window.location = "/login"
 }
 
 const LogoutGoogle = () => {
 
     return (
         <div>
-            <a href="/" onClick={logout}>Logout</a>
+            <GoogleLogout
+                clientId="97008398572-7llholemgc2hs54cao34nk34v79l6hin.apps.googleusercontent.com"
+                buttonText="Logout"
+                onLogoutSuccess={logout}
+            >
+            </GoogleLogout>
         </div>
     );
 }
