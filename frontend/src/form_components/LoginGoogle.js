@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { GoogleLogin } from 'react-google-login';
 
 const responseGoogle = (googleUser) => {
     console.log(googleUser);
@@ -22,29 +23,22 @@ class LoginGoogle extends Component {
             isSignedIn: false
         }
     }
-    componentDidMount(){
-        window.gapi.load('auth2', () =>{
-            this.auth2 = window.gapi.auth2.init({
-                client_id: process.env.REACT_APP_CLIENT_ID,
-            })
-        })
-    }
 
     render(){
 
         return (
             <div>
-            <div className="g-signin2"
-                clientId={ process.env.REACT_APP_CLIENT_ID }
-                buttonText="Login with Google"
-                data-onSuccess={responseGoogle}
-                data-onFailure={responseGoogle}
+            <GoogleLogin
+                clientId="97008398572-7llholemgc2hs54cao34nk34v79l6hin.apps.googleusercontent.com"
+                buttonText="Login"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
                 cookiePolicy={'single_host_origin'}
                 />
-        </div>
+          </div>
         );
     }
 
-}
+};
 
 export default LoginGoogle
