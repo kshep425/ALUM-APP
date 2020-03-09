@@ -1,0 +1,27 @@
+.textBox {
+  background-color: rgba(255, 255, 255, 0.603);
+  border-radius: 5px;
+  box-shadow: 6px 6px 15px rgb(32, 32, 32);
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  width: 300px;
+  padding: 20px;
+  text-align: center;
+  color: #122f5e;
+  font-size: 22px;
+}
+
+.carouselItemDiv {
+  width: 100%;
+  position: relative;
+}
+
+.carouselItemTitle {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.carouselItemDescription {
+  font-size: 18px;
+}

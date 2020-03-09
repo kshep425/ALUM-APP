@@ -1,13 +1,14 @@
 import React from "react";
-import { Navbar } from "../building_components/Navbar/Navbar";
-import { Carosel } from "../building_components/Carosel/Carosel";
-import { Footer } from "../building_components/Footer/Footer";
+import Navbar from "../building_components/Navbar/Navbar";
+import Carousel from "../building_components/Carousel/Carousel";
+import Footer from "../building_components/Footer/Footer";
+import "./home.css";
 
 const Home = () => {
   return (
-    <div>
+    <div className="mainPage">
       <Navbar />
-      <Carosel />
+      <Carousel />
       <Footer />
     </div>
   );
