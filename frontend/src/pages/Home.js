@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React from "react";
+import Navbar from "../building_components/Navbar/Navbar";
+import Carousel from "../building_components/Carousel/Carousel";
+import Footer from "../building_components/Footer/Footer";
+import "./home.css";
 
-class Home extends Component {
-    render() {
-        return (
-            <div>
-                <h1>Home</h1>
-            </div>
-        );
-    }
-}
+const Home = () => {
+  return (
+    <div className="mainPage">
+      <Navbar />
+      <Carousel />
+      <Footer />
+    </div>
+  );
+};
 
 export default Home;

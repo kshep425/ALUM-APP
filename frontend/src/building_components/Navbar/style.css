@@ -1,0 +1,97 @@
+.navbar {
+  width: 100%;
+  height: 50px;
+  background-color: #122f5e;
+  padding: 0px;
+}
+
+.btn {
+  border-radius: 0px;
+  height: 100%;
+}
+
+.loginBtn,
+.registerBtn,
+.loginBtnDiv {
+  height: 100%;
+}
+
+.registerBtn {
+  background-color: #30363b;
+  border: #30363b;
+}
+
+.registerBtn:hover {
+  background-color: #222629;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+
+.loginBtn:hover,
+.donateBtn:hover {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+
+.loginBtn,
+.registerBtn,
+.donateBtn {
+  font-weight: bold;
+}
+
+.donateBtn {
+  font-size: 20px;
+  background-color: #fe7f18;
+  border: #fe7f18;
+}
+
+.donateBtn:hover {
+  background-color: #f76f00;
+}
+
+.lowerNav {
+  background-color: white;
+}
+
+.logo {
+  height: 100px;
+}
+
+.lowerNav {
+  text-align: center;
+}
+
+:root {
+  --mainColor: #f76f00;
+  --accentColor: black;
+}
+
+.navLink {
+  font-weight: bold;
+  font-size: 20;
+  text-decoration: none;
+  color: #122f5e;
+  padding: 7px 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--mainColor) 0%,
+    var(--mainColor) 100%
+  );
+  background-position: 0 100%;
+  background-repeat: repeat-x;
+  background-size: 4px 4px;
+  text-decoration: none;
+  transition: background-size 0.3s;
+}
+
+.navLink:hover {
+  text-decoration: none;
+  color: white;
+  background-size: 4px 50px;
+}
+
+.navItemDiv {
+  margin: 30px;
+}
+
+.row {
+  justify-content: center;
+}
