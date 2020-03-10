@@ -4,10 +4,34 @@
 }
 
 .eventPageDiv {
+  font-family: "Abel", sans-serif;
   padding: 50px 90px;
   background-color: whitesmoke;
   color: #122f5e;
 }
 
 .lineDivider {
+  margin-bottom: 40px;
+}
+
+.eventList {
+  text-align: center;
+}
+
+.addEventBtn {
+  height: initial;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  background-color: #fe7f18;
+  border: none;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.281);
+  font-family: "Abel", sans-serif;
+}
+
+.addEventBtn:hover {
+  background-color: #122f5e;
+}
+
+.calendarDiv {
+  text-align: center;
 }

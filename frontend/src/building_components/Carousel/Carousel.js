@@ -21,9 +21,15 @@ const Carousel = () => {
         autoplay={true}
         autoplaySpeed={5000}
       >
-        <CarouselItem src={photo1} title="Title1">Event Description 1</CarouselItem>
-        <CarouselItem src={photo2} title="Title2">Event Description 2</CarouselItem>
-        <CarouselItem src={photo3} title="Title3">Event Description 3</CarouselItem>
+        <CarouselItem src={photo1} title="Title1">
+          Event Description 1
+        </CarouselItem>
+        <CarouselItem src={photo2} title="Title2">
+          Event Description 2
+        </CarouselItem>
+        <CarouselItem src={photo3} title="Title3">
+          Event Description 3
+        </CarouselItem>
       </Slider>
     </div>
   );
