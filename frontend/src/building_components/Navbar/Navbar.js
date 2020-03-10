@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import logo from "../../images/MSU_Logo.JPG";
+import logo from "../../images/MSULNO1C.svg";
 import Navitem from "./NavItem";
 import Button from "../Button";
 
@@ -24,12 +24,15 @@ const Navbar = () => {
       </div>
       <div className="lowerNav">
         <div className="row logoDiv">
-          <a href="/">
-            <img src={logo} alt="Logo" className="logo"></img>
-          </a>
-          <h2 className="alumniText">ALUMNI</h2>
+          <div className="col">
+            <a href="/">
+              <img src={logo} alt="Logo" className="logo"></img>
+            </a>
+            <h2 className="alumniText">ALUMNI</h2>
+          </div>
         </div>
-        <div className="row">
+
+        <div className="row navRow">
           <Navitem href="/events">events</Navitem>
           <Navitem href="/about">about</Navitem>
           <Navitem href="/scholarships">Scholarships</Navitem>

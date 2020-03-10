@@ -43,7 +43,9 @@
 .loginBtn,
 .registerBtn,
 .donateBtn {
+  font-family: "Abel", sans-serif;
   font-weight: bold;
+  font-size: 20px;
   border: none;
 }
 
@@ -59,17 +61,16 @@
 /* lower nav section */
 .lowerNav {
   background-color: white;
-  /* border-bottom: solid 3px #122f5ea1; */
   text-align: center;
 }
 
 .logo {
-  height: 100px;
+  padding-top: 20px;
+  height: 150px;
 }
 
 .alumniText {
-  line-height: 2.5;
-  font-size: 45px;
+  font-size: 22px;
   color: #024885;
   font-family: "Times New Roman", Times, serif;
 }
@@ -80,8 +81,10 @@
 }
 
 .navLink {
+  font-family: "Abel", sans-serif;
   font-weight: bold;
-  font-size: 20;
+  font-size: 18px;
+  border-radius: 3px;
   text-transform: uppercase;
   text-decoration: none;
   color: #122f5e;
@@ -112,6 +115,7 @@
   margin: 30px;
 }
 
-.row {
+.navRow {
+  line-height: 0.5px;
   justify-content: center;
 }
