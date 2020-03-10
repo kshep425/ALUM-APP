@@ -7,8 +7,8 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <LoginForm></LoginForm>
-                <LoginGoogle></LoginGoogle>
+                <LoginForm />
+                <LoginGoogle />
             </div>
         );
     }

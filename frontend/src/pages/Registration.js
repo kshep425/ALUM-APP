@@ -11,9 +11,9 @@ class Registration extends Component {
             <div>
                 <Container>
                     <RegistrationLogin></RegistrationLogin>
-                    <RegistrationContactInfo></RegistrationContactInfo>
+                    {/*<RegistrationContactInfo></RegistrationContactInfo>
                     <RegistrationMemberInfo></RegistrationMemberInfo>
-                    <RegistrationMemberType></RegistrationMemberType>
+                    <RegistrationMemberType></RegistrationMemberType>*/}
                 </Container>
 
             </div>

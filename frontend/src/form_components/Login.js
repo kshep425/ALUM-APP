@@ -24,10 +24,11 @@ class Login extends Component {
 
         }
         console.log(member_obj)
+        /*
         fetch("/api/login", {
             method: "post",
             body: JSON.stringify(member_obj)
-        })
+        }).then(res => res.json())
         .then((response)=>{
             console.log(response)
         })
@@ -35,6 +36,7 @@ class Login extends Component {
             console.log("--------Error Occurred----------")
             console.log(err)
         })
+        */
     }
 
     render() {
