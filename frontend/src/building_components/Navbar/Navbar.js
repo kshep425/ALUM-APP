@@ -5,6 +5,14 @@ import Navitem from "./NavItem";
 import Button from "../Button";
 
 const Navbar = () => {
+  let navbar = document.getElementsByClassName("navbar");
+  window.onscroll = function() {
+    let sticky = navbar.offsetTop;
+    if (window.pageYOffset >= sticky) {
+      navbar.classList.add("sticky");
+    }
+  };
+
   return (
     <div>
       <div className="navbar">
@@ -12,16 +20,20 @@ const Navbar = () => {
           <Button className="btn btn-secondary loginBtn">LOGIN</Button>
           <Button className="btn btn-secondary registerBtn">REGISTER</Button>
         </div>
-        <button className="btn btn-success donateBtn">DONATE</button>
+        <button className="btn btn-success donateBtn">GIVE</button>
       </div>
       <div className="lowerNav">
-        <div className="logoDiv">
-          <img src={logo} alt="Logo" className="logo"></img>
+        <div className="row logoDiv">
+          <a href="/">
+            <img src={logo} alt="Logo" className="logo"></img>
+          </a>
+          <h2 className="alumniText">ALUMNI</h2>
         </div>
         <div className="row">
-          <Navitem href="google.com">EVENTS</Navitem>
-          <Navitem href="google.com">ABOUT</Navitem>
-          <Navitem href="google.com">MY MSU</Navitem>
+          <Navitem href="/events">events</Navitem>
+          <Navitem href="/about">about</Navitem>
+          <Navitem href="/scholarships">Scholarships</Navitem>
+          <Navitem href="/profile">my msu</Navitem>
         </div>
       </div>
     </div>

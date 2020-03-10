@@ -1,8 +1,18 @@
 .navbar {
   width: 100%;
   height: 50px;
-  background-color: #122f5e;
+  background: linear-gradient(#122f5e, #5e779e);
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.425);
+  z-index: 999;
   padding: 0px;
+  overflow: hidden;
+  position: sticky;
+  top: 0px;
+}
+
+.sticky {
+  position: fixed;
+  z-index: 999;
 }
 
 .btn {
@@ -18,7 +28,6 @@
 
 .registerBtn {
   background-color: #30363b;
-  border: #30363b;
 }
 
 .registerBtn:hover {
@@ -35,28 +44,34 @@
 .registerBtn,
 .donateBtn {
   font-weight: bold;
+  border: none;
 }
 
 .donateBtn {
   font-size: 20px;
   background-color: #fe7f18;
-  border: #fe7f18;
 }
 
 .donateBtn:hover {
-  background-color: #f76f00;
+  background-color: #ec6a00;
 }
 
+/* lower nav section */
 .lowerNav {
   background-color: white;
+  /* border-bottom: solid 3px #122f5ea1; */
+  text-align: center;
 }
 
 .logo {
   height: 100px;
 }
 
-.lowerNav {
-  text-align: center;
+.alumniText {
+  line-height: 2.5;
+  font-size: 45px;
+  color: #024885;
+  font-family: "Times New Roman", Times, serif;
 }
 
 :root {
@@ -67,6 +82,7 @@
 .navLink {
   font-weight: bold;
   font-size: 20;
+  text-transform: uppercase;
   text-decoration: none;
   color: #122f5e;
   padding: 7px 2px;
@@ -86,6 +102,10 @@
   text-decoration: none;
   color: white;
   background-size: 4px 50px;
+}
+
+.fa-caret-right {
+  font-size: 20px;
 }
 
 .navItemDiv {
