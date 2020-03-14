@@ -11,8 +11,6 @@ const config = {
     appId: process.env.REACT_APP_ID,
     measurementId: process.env.REACT_APP_MEASUREMENT_ID
 }
-console.log("env variables:")
-console.log(config);
 
 class Firebase {
     constructor() {
