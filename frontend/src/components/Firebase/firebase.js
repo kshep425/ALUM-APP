@@ -2,15 +2,17 @@ import app from 'firebase/app';
 import 'firebase/auth';
 
 const config = {
-    apiKey: "AIzaSyAJL0sGHphzroj8gisC9Vj0aBBy9b6wydk",
-    authDomain: "alum-app-1583628178800.firebaseapp.com",
-    databaseURL: "https://alum-app-1583628178800.firebaseio.com",
-    projectId: "alum-app-1583628178800",
-    storageBucket: "alum-app-1583628178800.appspot.com",
-    messagingSenderId: "97008398572",
-    appId: "1:97008398572:web:79815f75349e8a5ff1f5c9",
-    measurementId: "G-PMZV4DFMF1"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
 }
+console.log("env variables:")
+console.log(config);
 
 class Firebase {
     constructor() {
@@ -45,6 +47,10 @@ class Firebase {
             }
         })
     }
+
+    doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+
+    doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
  }
 
  export default Firebase;
