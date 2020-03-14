@@ -5,10 +5,10 @@
  */
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom'
+import { compose } from 'recompose';
 
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-
 
 
 const SignUpPage = () => (
@@ -112,7 +112,11 @@ const SignUpLink = () => (
 );
 
 // To redirect a user to another page programmatically, we need access to React Router to redirect the user to another page.
-const SignUpForm = withRouter(withFirebase(SignUpFormBase));
+// Use recompose to organize how this is called.  Since the higher-order components don't depend on each other, the order doesn't matter. Otherwise, it may be good to know that the compose function applies the higher-order components from right to left.
+const SignUpForm = compose(
+  withRouter,
+  withFirebase,
+)(SignUpFormBase);
 
 export default SignUpPage;
 
