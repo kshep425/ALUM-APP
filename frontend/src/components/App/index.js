@@ -13,9 +13,6 @@ import AccountPage from '../Account';
 import AdminPage from '../Admin';
 import * as ROUTES from '../../constants/routes';
 
-console.log("api_key:")
-console.log(process.env.REACT_APP_API_KEY);
-
 const App = () => (
   <Router>
     <div>
