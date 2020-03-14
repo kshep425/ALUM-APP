@@ -1,20 +1,20 @@
-import React, {Component} from 'react';
-import * as ROUTES from '../../constants/routes';
-import {FirebaseContext, withFirebase} from '../Firebase';
-import {Link, withRouter} from 'react-router-dom'
-
 /**
+ * Sign Up Form
  * Find the tutorial used to create this here:
  * https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial
  */
+import React, {Component} from 'react';
+import {Link, withRouter} from 'react-router-dom'
+
+import {withFirebase} from '../Firebase';
+import * as ROUTES from '../../constants/routes';
+
 
 
 const SignUpPage = () => (
   <div>
     <h1>SignUp</h1>
-    <FirebaseContext.Consumer>
-      {firebase => <SignUpForm firebase={firebase} />}
-    </FirebaseContext.Consumer>
+    <SignUpForm />
   </div>
 );
 
