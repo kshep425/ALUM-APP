@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
 import * as ROUTES from '../../constants/routes';
-import { FirebaseContext } from '../Firebase';
+import {FirebaseContext, withFirebase} from '../Firebase';
+import {Link, withRouter} from 'react-router-dom'
 
 /**
  * Find the tutorial used to create this here:
  * https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial
  */
+
+
 const SignUpPage = () => (
   <div>
     <h1>SignUp</h1>
     <FirebaseContext.Consumer>
       {firebase => <SignUpForm firebase={firebase} />}
     </FirebaseContext.Consumer>
-    <SignUpForm />
   </div>
 );
 
@@ -28,7 +29,7 @@ const INITIAL_STATE = {
 /**
  * You should be able to visit the /signup route in your browser after starting your application to confirm that the form with all its input fields shows up. You should also be able to type into it (confirmation that the local state updates are working) and able to enable the submit button by providing all input fields a string (confirmation that the validation works)
  */
-class SignUpForm extends Component {
+class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
@@ -39,6 +40,7 @@ class SignUpForm extends Component {
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         this.setState({ ...INITIAL_STATE });
+        this.props.history.push(ROUTES.HOME);
       })
       .catch(error => {
         this.setState({ error });
@@ -108,5 +110,10 @@ const SignUpLink = () => (
     Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
   </p>
 );
+
+// To redirect a user to another page programmatically, we need access to React Router to redirect the user to another page.
+const SignUpForm = withRouter(withFirebase(SignUpFormBase));
+
 export default SignUpPage;
+
 export { SignUpForm, SignUpLink };
