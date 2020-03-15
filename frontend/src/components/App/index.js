@@ -7,8 +7,11 @@ import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
-import AccountPage from '../Account';
+import MyMsuPage from '../MyMSU';
 import AdminPage from '../Admin';
+import AccountsPage from '../Accounts';
+import EventsPage from '../Events';
+import DonatePage from '../Donate';
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
@@ -25,8 +28,11 @@ const App = () => (
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
       <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
       <Route path={ROUTES.HOME} component={HomePage} />
-      <Route path={ROUTES.ACCOUNT} component={AccountPage} />
+      <Route path={ROUTES.MYMSU} component={MyMsuPage} />
+      <Route path={ROUTES.ACCOUNTS} component={AccountsPage} />
+      <Route path={ROUTES.EVENTS} component={EventsPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
+      <Route path={ROUTES.DONATE} component={DonatePage} />
     </div>
   </Router>
 );

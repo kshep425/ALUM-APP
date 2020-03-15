@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import { getDisplayName } from 'recompose';
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -83,7 +84,7 @@ class Firebase {
               email: authUser.email,
               emailVerified: authUser.emailVerified,
               providerData: authUser.providerData,
-              roles: {ADMIN: true}
+              roles: {USER: true},
        //       ...dbUser,
             };
             console.log(authUser)
