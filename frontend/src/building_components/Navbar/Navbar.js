@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import "./style.css";
 import logo from "../../images/MSULNO1C.svg";
 import Navitem from "./NavItem";
@@ -17,8 +18,9 @@ const Navbar = () => {
     <div>
       <div className="navbar">
         <div className="loginBtnDiv">
-          <Button className="btn btn-secondary loginBtn">LOGIN</Button>
-          <Button className="btn btn-secondary registerBtn">REGISTER</Button>
+          <Link to="/login"><Button className="btn btn-secondary loginBtn">LOGIN</Button></Link>
+          {/* <Button className="btn btn-secondary registerBtn" onClick={()=>{props.handleRegistrationButton()}}>REGISTER</Button> */}
+          <Button className='btn btn-success registerBtn'>REGISTER</Button>
         </div>
         <button className="btn btn-success donateBtn">GIVE</button>
       </div>

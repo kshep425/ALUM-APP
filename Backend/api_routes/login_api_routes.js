@@ -47,11 +47,18 @@ module.exports = function (app) {
             });
     });
 
+    app.post("/api/googleLogin", function (req, res) {
+        console.log("Google Login")
+        console.log(req.body)
+        console.log(req.headers)
+    })
+
     // Route for logging user out
     app.get("/api/logout", function (req, res) {
         req.logout();
         res.send("You have logged out")
         //res.redirect(307, "/api/login");
     });
+
 
 }
