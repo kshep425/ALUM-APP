@@ -32,6 +32,11 @@ class Firebase {
         return this.auth.signInWithEmailAndPassword(email,password)
     }
 
+
+    doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+
+    doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
+
     doSignInWithGoogleLogin = () => this.auth.signInWithPopup(this.googleProvider)
     doSignInWithFacebookLogin = () => this.auth.signInWithPopup(this.facebookProvider)
     doSignInWithTwitterLogin = () => this.auth.signInWithPopup(this.twitterProvider)
@@ -45,10 +50,6 @@ class Firebase {
             }
         })
     }
-
-    doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
-
-    doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
  }
 
  export default Firebase;
