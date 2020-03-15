@@ -1,15 +1,10 @@
-/**
- * Sign Up Form
- * Find the tutorial used to create this here:
- * https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial
- */
-import React, {Component} from 'react';
-import {Link, withRouter} from 'react-router-dom'
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 
-import {withFirebase} from '../Firebase';
+import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-
+import * as ROLES from '../../constants/roles';
 
 const SignUpPage = () => (
   <div>
@@ -23,33 +18,69 @@ const INITIAL_STATE = {
   email: '',
   passwordOne: '',
   passwordTwo: '',
+  isAdmin: false,
   error: null,
-}
+};
 
-/**
- * You should be able to visit the /signup route in your browser after starting your application to confirm that the form with all its input fields shows up. You should also be able to type into it (confirmation that the local state updates are working) and able to enable the submit button by providing all input fields a string (confirmation that the validation works)
- */
+const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use';
+
+const ERROR_MSG_ACCOUNT_EXISTS = `
+  An account with this E-Mail address already exists.
+  Try to login with this account instead. If you think the
+  account is already used from one of the social logins, try
+  to sign in with one of them. Afterward, associate your accounts
+  on your personal account page.
+`;
+
 class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
-    this.state = INITIAL_STATE;
+
+    this.state = { ...INITIAL_STATE };
   }
+
   onSubmit = event => {
-    const { email, passwordOne } = this.state;
+    const { username, email, passwordOne, isAdmin } = this.state;
+    const roles = {};
+
+    if (isAdmin) {
+      roles[ROLES.ADMIN] = ROLES.ADMIN;
+    }
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
+        // Create a user in your Firebase realtime database
+        return this.props.firebase.user(authUser.user.uid).set({
+          username,
+          email,
+          roles,
+        });
+      })
+      .then(() => {
+        return this.props.firebase.doSendEmailVerification();
+      })
+      .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
       .catch(error => {
+        if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
+          error.message = ERROR_MSG_ACCOUNT_EXISTS;
+        }
+
         this.setState({ error });
       });
+
     event.preventDefault();
-  }
+  };
+
   onChange = event => {
-    this.setState({[event.target.name]: event.target.value})
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  onChangeCheckbox = event => {
+    this.setState({ [event.target.name]: event.target.checked });
   };
 
   render() {
@@ -58,63 +89,71 @@ class SignUpFormBase extends Component {
       email,
       passwordOne,
       passwordTwo,
+      isAdmin,
       error,
     } = this.state;
 
-    // The user is only allowed to sign up if both passwords are the same, and if the username, email and at least one password are filled with a string.
     const isInvalid =
-    passwordOne !== passwordTwo ||
-    passwordOne === '' ||
-    email === '' ||
-    username === '';
-
+      passwordOne !== passwordTwo ||
+      passwordOne === '' ||
+      email === '' ||
+      username === '';
 
     return (
       <form onSubmit={this.onSubmit}>
-      <input
-        name="username"
-        value={username}
-        onChange={this.onChange}
-        type="text"
-        placeholder="Full Name"
-      />
-      <input
-        name="email"
-        value={email}
-        onChange={this.onChange}
-        type="text"
-        placeholder="Email Address"
-      />
-      <input
-        name="passwordOne"
-        value={passwordOne}
-        onChange={this.onChange}
-        type="password"
-        placeholder="Password"
-      />
-      <input
-        name="passwordTwo"
-        value={passwordTwo}
-        onChange={this.onChange}
-        type="password"
-        placeholder="Confirm Password"
-      />
-      <button type="submit" disabled={isInvalid}>Sign Up</button>
+        <input
+          name="username"
+          value={username}
+          onChange={this.onChange}
+          type="text"
+          placeholder="Full Name"
+        />
+        <input
+          name="email"
+          value={email}
+          onChange={this.onChange}
+          type="text"
+          placeholder="Email Address"
+        />
+        <input
+          name="passwordOne"
+          value={passwordOne}
+          onChange={this.onChange}
+          type="password"
+          placeholder="Password"
+        />
+        <input
+          name="passwordTwo"
+          value={passwordTwo}
+          onChange={this.onChange}
+          type="password"
+          placeholder="Confirm Password"
+        />
+        <label>
+          Admin:
+          <input
+            name="isAdmin"
+            type="checkbox"
+            checked={isAdmin}
+            onChange={this.onChangeCheckbox}
+          />
+        </label>
+        <button disabled={isInvalid} type="submit">
+          Sign Up
+        </button>
 
-      {error && <p>{error.message}</p>}
-    </form>
-
+        {error && <p>{error.message}</p>}
+      </form>
     );
   }
 }
+
 const SignUpLink = () => (
   <p>
     Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
   </p>
 );
 
-// To redirect a user to another page programmatically, we need access to React Router to redirect the user to another page.
-// Use recompose to organize how this is called.  Since the higher-order components don't depend on each other, the order doesn't matter. Otherwise, it may be good to know that the compose function applies the higher-order components from right to left.
 const SignUpForm = compose(
   withRouter,
   withFirebase,

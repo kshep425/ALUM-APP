@@ -7,12 +7,14 @@ import Events from "./pages/Events";
 import {
   BrowserRouter as Router,
   Route
-} from "../node_modules/react-router-dom";
+} from "react-router-dom";
 import Wrapper from "./building_components/Wrapper/Wrapper";
+import Navigation from './components/Navigation'
 
 class App extends Component {
   render() {
     return (
+
       <Router>
         <div>
           <Wrapper>

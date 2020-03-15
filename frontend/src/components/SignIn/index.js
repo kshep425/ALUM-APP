@@ -1,16 +1,7 @@
-/**
- * Sign In Form
- * This form allows user to sign in with email and password.
- * There is validation included
- *
- * TODO: After sign in, it should route to the HOME page but the
- * this.props.history(ROUTES.HOME) doesn't appear to work as advertised
- *
- * Tutorial to make this page is avaialble here: https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial
- */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
+
 import { SignUpLink } from '../SignUp';
 import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from '../Firebase';
@@ -20,6 +11,9 @@ const SignInPage = () => (
   <div>
     <h1>SignIn</h1>
     <SignInForm />
+    <SignInGoogle />
+    <SignInFacebook />
+    <SignInTwitter />
     <PasswordForgetLink />
     <SignUpLink />
   </div>
@@ -31,26 +25,41 @@ const INITIAL_STATE = {
   error: null,
 };
 
+const ERROR_CODE_ACCOUNT_EXISTS =
+  'auth/account-exists-with-different-credential';
+
+const ERROR_MSG_ACCOUNT_EXISTS = `
+  An account with an E-Mail address to
+  this social account already exists. Try to login from
+  this account instead and associate your social accounts on
+  your personal account page.
+`;
+
 class SignInFormBase extends Component {
   constructor(props) {
     super(props);
+
     this.state = { ...INITIAL_STATE };
   }
 
   onSubmit = event => {
-    event.preventDefault();
-
     const { email, password } = this.state;
 
     this.props.firebase
-      .doSignInUserWithEmailAndPassword(email, password)
-      .then(() => {
+      .doSignInWithEmailAndPassword(email, password)
+      .then((data) => {
+        console.log("Sign In with email",)
+        console.log(data)
+
         this.setState({ ...INITIAL_STATE });
+        console.log(INITIAL_STATE)
         this.props.history.push(ROUTES.HOME);
       })
       .catch(error => {
         this.setState({ error });
       });
+
+    event.preventDefault();
   };
 
   onChange = event => {
@@ -59,6 +68,7 @@ class SignInFormBase extends Component {
 
   render() {
     const { email, password, error } = this.state;
+
     const isInvalid = password === '' || email === '';
 
     return (
@@ -80,6 +90,146 @@ class SignInFormBase extends Component {
         <button disabled={isInvalid} type="submit">
           Sign In
         </button>
+
+        {error && <p>{error.message}</p>}
+      </form>
+    );
+  }
+}
+
+class SignInGoogleBase extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { error: null };
+  }
+
+  onSubmit = event => {
+    event.preventDefault();
+    this.props.firebase
+      .doSignInWithGoogle()
+      .then(socialAuthUser => {
+        // Create a user in your Firebase Realtime Database too
+        return this.props.firebase.user(socialAuthUser.user.uid).set({
+          username: socialAuthUser.user.displayName,
+          email: socialAuthUser.user.email,
+          roles: {},
+        });
+      })
+      .then(() => {
+        this.setState({ error: null });
+        this.props.history.push(ROUTES.HOME);
+      })
+      .catch(error => {
+        if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
+          error.message = ERROR_MSG_ACCOUNT_EXISTS;
+        }
+
+        this.setState({ error });
+      });
+
+
+  };
+
+  render() {
+    const { error } = this.state;
+
+    return (
+      <form onSubmit={this.onSubmit}>
+        <button type="submit">Sign In with Google</button>
+
+        {error && <p>{error.message}</p>}
+      </form>
+    );
+  }
+}
+
+class SignInFacebookBase extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { error: null };
+  }
+
+  onSubmit = event => {
+    this.props.firebase
+      .doSignInWithFacebook()
+      .then(socialAuthUser => {
+        // Create a user in your Firebase Realtime Database too
+        return this.props.firebase.user(socialAuthUser.user.uid).set({
+          username: socialAuthUser.additionalUserInfo.profile.name,
+          email: socialAuthUser.additionalUserInfo.profile.email,
+          roles: {},
+        });
+      })
+      .then(() => {
+        this.setState({ error: null });
+        this.props.history.push(ROUTES.HOME);
+      })
+      .catch(error => {
+        if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
+          error.message = ERROR_MSG_ACCOUNT_EXISTS;
+        }
+
+        this.setState({ error });
+      });
+
+    event.preventDefault();
+  };
+
+  render() {
+    const { error } = this.state;
+
+    return (
+      <form onSubmit={this.onSubmit}>
+        <button type="submit">Sign In with Facebook</button>
+
+        {error && <p>{error.message}</p>}
+      </form>
+    );
+  }
+}
+
+class SignInTwitterBase extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { error: null };
+  }
+
+  onSubmit = event => {
+    this.props.firebase
+      .doSignInWithTwitter()
+      .then(socialAuthUser => {
+        // Create a user in your Firebase Realtime Database too
+        return this.props.firebase.user(socialAuthUser.user.uid).set({
+          username: socialAuthUser.additionalUserInfo.profile.name,
+          email: socialAuthUser.additionalUserInfo.profile.email,
+          roles: {},
+        });
+      })
+      .then(() => {
+        this.setState({ error: null });
+        this.props.history.push(ROUTES.HOME);
+      })
+      .catch(error => {
+        if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
+          error.message = ERROR_MSG_ACCOUNT_EXISTS;
+        }
+
+        this.setState({ error });
+      });
+
+    event.preventDefault();
+  };
+
+  render() {
+    const { error } = this.state;
+
+    return (
+      <form onSubmit={this.onSubmit}>
+        <button type="submit">Sign In with Twitter</button>
+
         {error && <p>{error.message}</p>}
       </form>
     );
@@ -91,6 +241,21 @@ const SignInForm = compose(
   withFirebase,
 )(SignInFormBase);
 
+const SignInGoogle = compose(
+  withRouter,
+  withFirebase,
+)(SignInGoogleBase);
+
+const SignInFacebook = compose(
+  withRouter,
+  withFirebase,
+)(SignInFacebookBase);
+
+const SignInTwitter = compose(
+  withRouter,
+  withFirebase,
+)(SignInTwitterBase);
+
 export default SignInPage;
 
-export { SignInForm };
+export { SignInForm, SignInGoogle, SignInFacebook, SignInTwitter };

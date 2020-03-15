@@ -1,3 +1,7 @@
+/**
+ * App.js
+ */
+
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -11,15 +15,14 @@ import AccountPage from '../Account';
 import AdminPage from '../Admin';
 
 import * as ROUTES from '../../constants/routes';
-import { withAuthentication } from '../Session';
+// withAutthentication is used to tell if a user is logged in (a.k.a. authenticated)
+import {withAuthentication} from '../Session'
 
 const App = () => (
   <Router>
     <div>
       <Navigation />
-
       <hr />
-
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
@@ -31,4 +34,5 @@ const App = () => (
   </Router>
 );
 
+// the application passes the authenticated user implicitly via React's Context, rather than explicitly through the component tree using props.
 export default withAuthentication(App);

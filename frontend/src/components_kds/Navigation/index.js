@@ -7,23 +7,17 @@ import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
-const Navigation = () => {
-  console.log("Navigation - are you an authUser?")
-
-  return (
+const Navigation = () => (
   <AuthUserContext.Consumer>
-    {
-      authUser => {
-        console.log(authUser)
-        return authUser ? (
-          <NavigationAuth authUser={authUser} />
-          ) : (
-          <NavigationNonAuth />
-        )
-      }
+    {authUser =>
+      authUser ? (
+        <NavigationAuth authUser={authUser} />
+      ) : (
+        <NavigationNonAuth />
+      )
     }
   </AuthUserContext.Consumer>
-)};
+);
 
 const NavigationAuth = ({ authUser }) => (
   <ul>
@@ -36,12 +30,11 @@ const NavigationAuth = ({ authUser }) => (
     <li>
       <Link to={ROUTES.ACCOUNT}>Account</Link>
     </li>
-    {/* {console.log(authUser.roles)}
     {!!authUser.roles[ROLES.ADMIN] && (
       <li>
         <Link to={ROUTES.ADMIN}>Admin</Link>
       </li>
-    )} */}
+    )}
     <li>
       <SignOutButton />
     </li>
@@ -55,6 +48,9 @@ const NavigationNonAuth = () => (
     </li>
     <li>
       <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+    </li>
+    <li>
+      <Link to={ROUTES.ACCOUNT}>Account</Link>
     </li>
   </ul>
 );
