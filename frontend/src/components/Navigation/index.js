@@ -34,14 +34,30 @@ const NavigationAuth = ({ authUser }) => (
       <Link to={ROUTES.HOME}>Home</Link>
     </li>
     <li>
-      <Link to={ROUTES.ACCOUNT}>Account</Link>
+      <Link to={ROUTES.DONATE}>Donate</Link>
     </li>
-    {/* {console.log(authUser.roles)}
+    <li>
+      <Link to={ROUTES.MYMSU}>MyMSU</Link>
+    </li>
+    <li>
+      <Link to={ROUTES.EVENTS}>Events</Link>
+    </li>
+    {console.log(authUser.roles)}
     {!!authUser.roles[ROLES.ADMIN] && (
+      <>
+      <li>
+        <Link to={ROUTES.ACCOUNTS}>Accounts</Link>
+      </li>
       <li>
         <Link to={ROUTES.ADMIN}>Admin</Link>
       </li>
-    )} */}
+      </>
+    )}
+    {!!authUser.roles[ROLES.BOARD] && (
+      <li>
+        <Link to={ROUTES.ACCOUNTS}>Accounts</Link>
+      </li>
+    )}
     <li>
       <SignOutButton />
     </li>
@@ -56,7 +72,14 @@ const NavigationNonAuth = () => (
     <li>
       <Link to={ROUTES.SIGN_IN}>Sign In</Link>
     </li>
+    <li>
+      <Link to={ROUTES.EVENTS}>Events</Link>
+    </li>
+    <li>
+      <Link to={ROUTES.DONATE}>Donate</Link>
+    </li>
   </ul>
 );
+
 
 export default Navigation;
