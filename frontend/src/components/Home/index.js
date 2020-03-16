@@ -1,20 +1,18 @@
 import React from 'react';
 import { compose } from 'recompose';
-
+import Carousel from '../../building_components/Carousel/Carousel'
+import Footer from '../../building_components/Footer/Footer'
 import { AuthUserContext, withAuthorization, withEmailVerification } from '../Session';
 import Messages from '../Messages';
 
 const HomePage = () => (
 <AuthUserContext.Consumer>
     {authUser => (
-  <div>
-    <h1>Home Page</h1>
-    <h4>Welcome {authUser.providerData[0].displayName} </h4>
-    
-    <p>The Home Page is accessible by every signed in user.</p>
-
-    <Messages />
-  </div>
+      <div className="mainPage">
+        <h4>Welcome {authUser.providerData[0].displayName} </h4>
+        <Carousel />
+        <Footer />
+     </div>
     )}
     </AuthUserContext.Consumer>
 );

@@ -11,3 +11,5 @@ export const EVENT_DETAILS = '/events/:id';
 export const ADMIN = '/admin';
 export const ADMIN_DETAILS = '/admin/:id';
 export const DONATE = '/donate';
+export const ABOUT = '/about';
+export const SCHOLARSHIPS = '/scholarships'
