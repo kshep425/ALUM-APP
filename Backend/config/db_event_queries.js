@@ -4,17 +4,6 @@ const eventQueries = {
   createEvent: function(reqBody) {
     let [request, fields] = this.formatRequest(reqBody);
 
-    request = {
-      title: "fgfdgdggfd",
-      description: "fdfgdg",
-      startDate: "2020-03-18T15:45",
-      endDate: "2020-03-28T04:05"
-    };
-
-    fields = {
-      options: { fields: ["title", "description", "startDate", "endDate"] }
-    };
-
     return db.Event.create(request, fields);
   },
 
@@ -52,7 +41,7 @@ const eventQueries = {
   //   },
 
   getAllEvents: function() {
-    return db.Event.find();
+    return db.Event.findAll({});
   }
 };
 
