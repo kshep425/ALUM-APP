@@ -17,6 +17,12 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
+        first_name: {
+            type: DataTypes.STRING,
+        },
+        last_name: {
+            type: DataTypes.STRING,
+        },
         suffix: {
             type: DataTypes.STRING
         },
@@ -40,7 +46,9 @@ module.exports = function (sequelize, DataTypes) {
 
         occupation: DataTypes.STRING,
         member_type: DataTypes.STRING,
-        member_marital_status: DataTypes.STRING
+        member_marital_status: DataTypes.STRING,
+        google_token: DataTypes.STRING,
+        image_url: DataTypes.STRING
     });
 
     Member.associate = function (models) {

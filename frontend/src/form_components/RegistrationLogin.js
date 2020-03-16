@@ -9,16 +9,28 @@ class RegistrationLogin extends Component {
         }
     }
 
+    handleSubmit = e => {
+        e.preventDefault();
+        console.log('state values', this.state)
+    }
+
+
+    handleInputChange = e => this.setState({[e.target.id]: e.target.value})
+
     render() {
         return (
             <div>
                 <h5>Login Info</h5>
-                <label for="username">Username</label>
-                <input id="username" autocomplete="username" type="text" defaultValue='testuser1'></input>
-                <label for="password">Password</label>
-                <input id="password" autocomplete="password" type="password" defaultValue='tu1'></input>
-                <label for="password">Password</label>
-                <input id="password" autocomplete="password" type="password" defaultValue='tu1'></input>
+                <form onSubmit={this.handleSubmit}>
+                    <label for="username">Username</label>
+                    <input id="username" autocomplete="username" onChange={this.handleInputChange} type="text" defaultValue='testuser1'></input>
+                    <label for="email">email</label>
+                    <input id="email" autocomplete="email" onChange={this.handleInputChange} type="text" defaultValue='testuser1'></input>
+                    <label for="password">Password</label>
+                    <input id="password" autocomplete="password" onChange={this.handleInputChange} type="password" defaultValue='tu1'></input>
+                    <label for="passwordConfirm">Password</label>
+                    <input id="passwordConfirm" autocomplete="password" onChange={this.handleInputChange} type="password" defaultValue='tu1'></input>
+                </form>
             </div>
         )
     }

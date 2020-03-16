@@ -1,5 +1,4 @@
-import React, { useRef, useState } from "react";
-import Navbar from "../building_components/Navbar/Navbar";
+import React, { useRef } from "react";
 import Event from "../building_components/Event/Event";
 import Footer from "../building_components/Footer/Footer";
 import Button from "../building_components/Button";
@@ -20,6 +19,7 @@ const Events = () => {
   const handleSubmit = e => {
     e.preventDefault();
     console.log("CLICKED SUBMIT");
+    console.log(ADD_EVENT);
     dispatch({ type: ADD_EVENT });
     API.addEvent({
       title: eventTitleRef.current.value,
@@ -27,24 +27,7 @@ const Events = () => {
       startDate: startDateRef.current.value,
       endDate: endDateRef.current.value
     })
-      // .then(res => {
-      //   console.log("FIRST THEN******");
-      //   console.log(res);
-      //   return res.json();
-      //   return JSON.stringify(res);
-      // })
-      // .then(function(res) {
-      //   console.log(res);
-      //   return res;
-      // })
-      // .catch(function(err) {
-      //   return err;
-      // });
-      // .then(res => {
-      //   console.log("FIRST THEN******");
-      //   console.log(res);
-      //   return res.json();
-      // })
+
       .then(result => {
         console.log("ADDING EVENT");
         console.log(result);
@@ -71,7 +54,6 @@ const Events = () => {
 
   return (
     <div className="mainPage">
-      <Navbar />
       <div className="eventPageDiv">
         <h2>Event Calendar</h2>
         <p>
