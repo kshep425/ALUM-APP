@@ -15,4 +15,12 @@ module.exports = function(app) {
         return err;
       });
   });
+
+  app.get("/api/events", function(req, res) {
+    return db.getAllEvents().then(function(dbPost) {
+      console.log("DBPOST BELOW!!");
+      console.log(dbPost);
+      res.json(dbPost);
+    });
+  });
 };

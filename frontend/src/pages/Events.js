@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import Event from "../building_components/Event/Event";
 import Footer from "../building_components/Footer/Footer";
 import Button from "../building_components/Button";
@@ -9,12 +9,31 @@ import API from "../utils/API";
 import "./style.css";
 
 const Events = () => {
+  const [state, dispatch] = useStoreContext();
+
+  const getEvents = () => {
+    API.getEvents()
+      .then(results => {
+        console.log("GETTING EVENTS");
+        console.log(results.data);
+        console.log(results.data[0].id);
+        dispatch({
+          type: UPDATE_EVENTS,
+          events: results.data
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
+  // useEffect(() => {
+  //   getEvents();
+  // }, []);
+  getEvents();
+
   const eventTitleRef = useRef();
   const eventDescriptionRef = useRef();
   const startDateRef = useRef();
   const endDateRef = useRef();
-
-  const [state, dispatch] = useStoreContext();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -126,15 +145,21 @@ const Events = () => {
           </form>
           <div className="eventList col-md-8">
             <h4>Upcoming Events</h4>
-            <Event title="Event Title 1" start="3pm" end="5pm">
-              Event description 1
-            </Event>
-            <Event title="Event Title 2" start="6pm" end="7pm">
-              Event description 2
-            </Event>
-            <Event title="Event Title 3" start="1pm" end="2pm">
-              Event description 3
-            </Event>
+            {state.events.map(event => {
+              const newEvent = Object.assign({}, event);
+              console.log("EVENT BELOW!");
+              console.log(newEvent.title);
+              console.log("EVENT TITLE BELOW!");
+              console.log(newEvent.title);
+              return (
+                <Event
+                  title={newEvent.title}
+                  start={newEvent.startDate}
+                  end={newEvent.endDate}
+                  // key={event.title}
+                ></Event>
+              );
+            })}
           </div>
         </div>
       </div>
