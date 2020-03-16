@@ -5,13 +5,7 @@ import React from "react";
 
 const Button = props => {
   return (
-    <button
-      className={props.className}
-      key={props.key}
-      onClick={() => {
-        props.handleClick();
-      }}
-    >
+    <button className={props.className} key={props.key} onClick={props.onClick}>
       {props.children}
     </button>
   );
