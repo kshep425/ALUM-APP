@@ -5,7 +5,7 @@
 // *** Dependencies
 // =============================================================
 const express = require("express");
-const session = require("express-session")
+const session = require("express-session");
 // Requiring passport as we've configured it
 const passport = require("./backend/config/passport");
 
@@ -32,7 +32,9 @@ app.use(express.json());
 app.use(express.static("./frontend/public"));
 
 // We need to use sessions to keep track of our user's login status
-app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(
+  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -41,15 +43,15 @@ app.use(passport.session());
 //const api_routes = require("./routes/api_routes")
 //app.use(api_routes);
 
-require("./backend/api_routes/login_api_routes")(app)
-
+require("./backend/routes/api_routes/login_api_routes")(app);
+require("./backend/routes/api_routes/events")(app);
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-const sync = JSON.parse(process.env.DB_SYNC) || true
-db.sequelize.sync({ force: sync}).then(function () {
-    app.listen(PORT, function () {
-        console.log("App listening on PORT " + PORT);
-    });
+const sync = JSON.parse(process.env.DB_SYNC) || true;
+db.sequelize.sync({ force: sync }).then(function() {
+  app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });
 });
 
 module.exports = app;

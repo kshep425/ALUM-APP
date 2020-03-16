@@ -1,11 +1,10 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 import Button from "../Button";
-import SignoutButton from "../../components/SignOut"
+import SignoutButton from "../../components/SignOut";
 
-import { AuthUserContext } from '../../components/Session';
+import { AuthUserContext } from "../../components/Session";
 
 const TopNavBar = () => (
   <div className="navbar">
@@ -16,29 +15,25 @@ const TopNavBar = () => (
 
 const LogInOrOutBtn = () => (
   <AuthUserContext.Consumer>
-    {
-      authUser => {
-        console.log(authUser)
-        return authUser
-        ? (
-          <>
+    {authUser => {
+      console.log(authUser);
+      return authUser ? (
+        <>
           <div className="loginBtnDiv">
             <Link to="/">
-              <SignoutButton >LOGOUT</SignoutButton>
+              <SignoutButton>LOGOUT</SignoutButton>
             </Link>
             <Link to="/mymsu">
               <Button className="btn btn-secondary registerBtn">MY MSU</Button>
             </Link>
           </div>
-          </>
-          )
-        : (
-          <Link to="/signin">
-            <Button className="btn btn-secondary loginBtn">LOGIN</Button>
-          </Link>
-        )
-      }
-    }
+        </>
+      ) : (
+        <Link to="/signin">
+          <Button className="btn btn-secondary loginBtn">LOGIN</Button>
+        </Link>
+      );
+    }}
   </AuthUserContext.Consumer>
 );
 

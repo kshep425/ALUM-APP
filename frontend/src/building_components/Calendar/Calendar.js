@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./style.css";
+//import global state
+//import
 
-const ReactCalendar = () => {
-  const [date, setDate] = useState(new Date());
+const ReactCalendar = props => {
+  // const [date, setDate] = useState(new Date());
 
-  const onChange = date => {
-    setDate(date);
-  };
+  // const onChange = date => {
+  //   console.log("DATE BELOW!");
+  //   console.log(date);
+  //   setDate(date);
+  // };
 
   return (
     <div>
-      <Calendar
-        onChange={onChange}
-        value={date}
-        onClickDay={value => console.log(value + " clicked")}
-      />
-      {console.log(date)}
-      {date.toString()}
+      <Calendar onChange={props.updateDate} />
+      {/* {console.log(date)}
+      {date.toString()} */}
     </div>
   );
 };

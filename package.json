@@ -19,6 +19,7 @@
     "nodemon": "^1.19.4"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
