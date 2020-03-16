@@ -1,9 +1,3 @@
-import React from 'react';
-
-const Events = () => (
-  <div>
-    <h1>Events</h1>
-  </div>
-);
+import Events from '../../pages/Events'
 
 export default Events;

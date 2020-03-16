@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../building_components/Navbar/Navbar";
 import Event from "../building_components/Event/Event";
 import Footer from "../building_components/Footer/Footer";
 import Button from "../building_components/Button";
@@ -9,7 +8,6 @@ import "./style.css";
 const Events = () => {
   return (
     <div className="mainPage">
-      <Navbar />
       <div className="eventPageDiv">
         <h2>Event Calendar</h2>
         <p>

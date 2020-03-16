@@ -4,6 +4,11 @@ import "./style.css";
 import logo from "../../images/MSULNO1C.svg";
 import Navitem from "./NavItem";
 import Button from "../Button";
+import TopNavBar from "./TopNavBar"
+import Logo from '../Logo/index'
+import LowerNav from './LowerNav'
+
+import { AuthUserContext } from '../../components/Session';
 
 const Navbar = () => {
   let navbar = document.getElementsByClassName("navbar");
@@ -16,33 +21,11 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar">
-        <div className="loginBtnDiv">
-          <Link to="/login"><Button className="btn btn-secondary loginBtn">LOGIN</Button></Link>
-          {/* <Button className="btn btn-secondary registerBtn" onClick={()=>{props.handleRegistrationButton()}}>REGISTER</Button> */}
-          <Button className='btn btn-success registerBtn'>REGISTER</Button>
-        </div>
-        <button className="btn btn-success donateBtn">GIVE</button>
-      </div>
-      <div className="lowerNav">
-        <div className="row logoDiv">
-          <div className="col">
-            <a href="/">
-              <img src={logo} alt="Logo" className="logo"></img>
-            </a>
-            <h2 className="alumniText">ALUMNI</h2>
-          </div>
-        </div>
-
-        <div className="row navRow">
-          <Navitem href="/events">events</Navitem>
-          <Navitem href="/about">about</Navitem>
-          <Navitem href="/scholarships">Scholarships</Navitem>
-          <Navitem href="/profile">my msu</Navitem>
-        </div>
-      </div>
+    <TopNavBar />
+    <Logo />
+    <LowerNav />
     </div>
   );
-};
+}
 
 export default Navbar;
