@@ -29,7 +29,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Static directory
-app.use(express.static("./frontend/public"));
+if (process.env.NODE_ENV === "production") {
+  app.use(expres.static("/frontend/build"))
+} else {
+  app.use(express.static("./frontend/public"));
+}
 
 // We need to use sessions to keep track of our user's login status
 app.use(
