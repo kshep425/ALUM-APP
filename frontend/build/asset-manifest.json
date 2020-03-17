@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.18e036e7.chunk.css",
+    "main.js": "/static/js/main.b14c6ce4.chunk.js",
+    "main.js.map": "/static/js/main.b14c6ce4.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.aae9067a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.aae9067a.js.map",
+    "static/css/2.bd4c6b29.chunk.css": "/static/css/2.bd4c6b29.chunk.css",
+    "static/js/2.032da2c2.chunk.js": "/static/js/2.032da2c2.chunk.js",
+    "static/js/2.032da2c2.chunk.js.map": "/static/js/2.032da2c2.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.a14f2688829d3f5d12d4675bbe7ba310.js": "/precache-manifest.a14f2688829d3f5d12d4675bbe7ba310.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.bd4c6b29.chunk.css.map": "/static/css/2.bd4c6b29.chunk.css.map",
+    "static/css/main.18e036e7.chunk.css.map": "/static/css/main.18e036e7.chunk.css.map",
+    "static/js/2.032da2c2.chunk.js.LICENSE.txt": "/static/js/2.032da2c2.chunk.js.LICENSE.txt",
+    "static/media/MSULNO1C.svg": "/static/media/MSULNO1C.7a75874b.svg",
+    "static/media/football.jpg": "/static/media/football.13fdfc3a.jpg",
+    "static/media/meeting.jpg": "/static/media/meeting.a91aa63e.jpg",
+    "static/media/slick-theme.css": "/static/media/slick.f97e3bbf.svg",
+    "static/media/studying.jpg": "/static/media/studying.1fd750a7.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.aae9067a.js",
+    "static/css/2.bd4c6b29.chunk.css",
+    "static/js/2.032da2c2.chunk.js",
+    "static/css/main.18e036e7.chunk.css",
+    "static/js/main.b14c6ce4.chunk.js"
+  ]
+}
