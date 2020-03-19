@@ -7,6 +7,7 @@ const Home = () => {
 
   return (
     <div className="mainPage">
+      <h1>Scholarship Information</h1>
       <Carousel />
       <Footer />
     </div>

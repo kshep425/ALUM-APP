@@ -30,8 +30,9 @@ app.use(express.json());
 
 // Static directory
 if (true) {
-//if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/build"));
+} else {
+  app.use(express.static("frontend/public"))
 }
 
 //else {
