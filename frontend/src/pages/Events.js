@@ -16,7 +16,7 @@ const Events = () => {
       .then(results => {
         console.log("GETTING EVENTS");
         console.log(results.data);
-        console.log(results.data[0].id);
+        //console.log(results.data[0].id);
         dispatch({
           type: UPDATE_EVENTS,
           events: results.data
@@ -25,10 +25,10 @@ const Events = () => {
       .catch(err => console.log(err));
   };
 
-  // useEffect(() => {
-  //   getEvents();
-  // }, []);
-  getEvents();
+  useEffect(() => {
+    getEvents();
+  }, []);
+
 
   const eventTitleRef = useRef();
   const eventDescriptionRef = useRef();
@@ -54,6 +54,7 @@ const Events = () => {
           type: ADD_EVENT,
           event: result.data
         });
+        getEvents();
       })
       .catch(err => console.log(err));
 
