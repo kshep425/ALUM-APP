@@ -23,6 +23,9 @@ const LogInOrOutBtn = () => (
             <Link to="/">
               <SignoutButton>LOGOUT</SignoutButton>
             </Link>
+            <Link to="/home">
+              <Button className="btn btn-secondary registerBtn">Home</Button>
+            </Link>
             <Link to="/mymsu">
               <Button className="btn btn-secondary registerBtn">MY MSU</Button>
             </Link>
