@@ -9,7 +9,7 @@ const CarouselItem = props => {
         <h4 className="carouselItemTitle">{props.title}</h4>
         <p className="carouselItemDescription">{props.children}</p>
       </div>
-      <img src={props.src} width="100%" />
+      <img src={props.src} alt={props.alt} title={props.title} width="100%" />
     </div>
   );
 };
