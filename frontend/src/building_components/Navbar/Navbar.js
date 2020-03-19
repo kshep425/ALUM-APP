@@ -1,14 +1,7 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import "./style.css";
-import logo from "../../images/MSULNO1C.svg";
-import Navitem from "./NavItem";
-import Button from "../Button";
 import TopNavBar from "./TopNavBar"
 import Logo from '../Logo/index'
 import LowerNav from './LowerNav'
-
-import { AuthUserContext } from '../../components/Session';
 
 const Navbar = () => {
   let navbar = document.getElementsByClassName("navbar");
