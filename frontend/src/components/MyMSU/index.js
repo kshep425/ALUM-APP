@@ -35,7 +35,8 @@ const MyMsuPage = () => (
       <div>
         <h1>My MSU</h1>
         <h6>Name: {authUser.providerData[0].displayName}</h6>
-        {!!authUser.providerData[0].photoURL && (<img src={authUser.providerData[0].photoURL} width="200" height="200"></img>
+        {!!authUser.providerData[0].photoURL && (<img src={authUser.providerData[0].photoURL} width="200" height="200" alt=
+        "profile"></img>
         )}
         {!!authUser.providerData[0].Email && (<h6>Email: {authUser.providerData[0].Email}</h6>)}
         <h6>Email: {authUser.email}</h6>

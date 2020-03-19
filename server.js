@@ -30,7 +30,7 @@ app.use(express.json());
 
 // Static directory
 if (true) {
-  app.use(express.static("frontend/build"));
+  app.use(express.static("frontend/build/static"));
 } else {
   app.use(express.static("frontend/public"))
 }

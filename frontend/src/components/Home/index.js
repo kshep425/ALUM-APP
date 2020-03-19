@@ -3,7 +3,6 @@ import { compose } from 'recompose';
 import Carousel from '../../building_components/Carousel/Carousel'
 import Footer from '../../building_components/Footer/Footer'
 import { AuthUserContext, withAuthorization, withEmailVerification } from '../Session';
-import Messages from '../Messages';
 
 const HomePage = () => (
 <AuthUserContext.Consumer>

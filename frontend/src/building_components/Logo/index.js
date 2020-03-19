@@ -8,7 +8,7 @@ const Logo = () => {
     <div className="row logoDiv">
       <div className="col">
         <a href="/">
-          <img src={logo} alt="Logo" className="logo"></img>
+          <img src={logo} alt="MSU Logo" className="logo"></img>
         </a>
         <h2 className="alumniText">ALUMNI</h2>
       </div>
