@@ -20,7 +20,7 @@ const MyMsuLink = () => (
   <AuthUserContext.Consumer>
     {
       authUser => {
-        console.log(authUser)
+        // console.log(authUser)
         return authUser
         ? (
           <Navitem href={ROUTES.MYMSU}>my msu</Navitem>

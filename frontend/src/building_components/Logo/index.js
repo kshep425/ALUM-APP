@@ -2,7 +2,6 @@
 import React from 'react';
 import logo from "../../images/MSULNO1C.svg";
 const Logo = () => {
-  console.log("build logo")
   return (
   <div className="lowerNav">
     <div className="row logoDiv">

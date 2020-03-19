@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 
 const CarouselItem = props => {
-  console.log(props);
+  // console.log(props);
   return (
     <div className="carouselItemDiv">
       <div className="textBox">
