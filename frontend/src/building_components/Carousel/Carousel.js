@@ -3,11 +3,7 @@ import Slider from "react-slick";
 import "./style.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Image from "../Image/Image";
 import CarouselItem from "./CarouselItem";
-import photo1 from "../../images/football.jpg";
-import photo2 from "../../images/meeting.jpg";
-import photo3 from "../../images/studying.jpg";
 
 const photos = [
   {
