@@ -8,24 +8,24 @@ import CarouselItem from "./CarouselItem";
 const photos = [
   {
     key: '2',
-    alt: 'msu image',
+    alt: 'msu north garage',
     title: 'msu image',
     src: 'https://www.hfurrer.com/wp-content/uploads/2017/11/msu_north_garage_nite-2-web.jpg',
-    description: ''
+    description: 'msu north garage'
   },
   {
     key: '3',
-    alt: 'msu image',
+    alt: 'msu image logo',
     title: 'msu image',
     src: 'https://pbs.twimg.com/profile_images/961705793191112704/y3QjIHWn_400x400.jpg',
-    description: ''
+    description: 'msu logo'
   },
   {
     key: '4',
-    alt: 'msu image',
+    alt: 'Holmes Hall',
     title: 'msu image',
     src: 'https://news.morgan.edu/wp-content/uploads/news-SPrating-660x330.jpg',
-    description: ''
+    description: 'Holmes Hall'
   },
 
 ]
