@@ -5,14 +5,20 @@ const StoreContext = createContext();
 const { Provider } = StoreContext;
 
 const reducer = (state, action) => {
+  console.log(state.events);
+
   switch (action.type) {
     case UPDATE_EVENTS:
+      debugger;
       return {
         ...state,
         events: [...action.events]
       };
 
     case ADD_EVENT:
+      console.log("ACTION.EVENT BELOW");
+      console.log(action.event);
+      console.log(state.events);
       return {
         ...state,
         events: [action.event, ...state.events]
@@ -25,8 +31,6 @@ const reducer = (state, action) => {
           return event._id !== action._id;
         })
       };
-
-
 
     default:
       return state;
@@ -42,6 +46,8 @@ const StoreProvider = ({ value = [], ...props }) => {
       description: "",
       startDate: "",
       endDate: "",
+      address: "",
+      venueName: "",
       type: ""
     }
   });

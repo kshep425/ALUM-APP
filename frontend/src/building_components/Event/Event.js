@@ -7,6 +7,9 @@ const Event = props => {
       <h4 className="eventTitle">{props.title}</h4>
       <h2 className="eventStart">{props.start}</h2>
       <h2 className="eventEnd">{props.end}</h2>
+      <h2 className="eventEnd">{props.type}</h2>
+      <h2 className="eventEnd">{props.venueName}</h2>
+      <h2 className="eventEnd">{props.address}</h2>
       <p className="eventDescription">{props.children}</p>
     </div>
   );
