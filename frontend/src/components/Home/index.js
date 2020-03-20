@@ -6,9 +6,15 @@ import { AuthUserContext, withAuthorization, withEmailVerification } from '../Se
 
 const HomePage = () => (
 <AuthUserContext.Consumer>
-    {authUser => (
+    {authUser => authUser ? (
       <div className="mainPage">
         <h4>Welcome {authUser.providerData[0].displayName} </h4>
+        <Carousel />
+        <Footer />
+     </div>
+    ) : (
+      <div className="mainPage">
+        <h4>Welcome</h4>
         <Carousel />
         <Footer />
      </div>
@@ -16,10 +22,4 @@ const HomePage = () => (
     </AuthUserContext.Consumer>
 );
 
-// conditional statement to see if the user is authorized or not. authUser returns a user if logged in, and returns null if the user is not logged in.
-const condition = authUser => authUser != null;
-
-export default compose(
-  withEmailVerification,
-  withAuthorization(condition),
-)(HomePage);
+export default HomePage;
