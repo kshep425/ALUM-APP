@@ -16,7 +16,7 @@ const TopNavBar = () => (
 const LogInOrOutBtn = () => (
   <AuthUserContext.Consumer>
     {authUser => {
-      // console.log(authUser);
+      console.log(authUser);
       return authUser ? (
         <>
           <div className="loginBtnDiv">
