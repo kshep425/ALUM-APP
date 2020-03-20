@@ -29,11 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Static directory
-if (true) {
-  app.use(express.static("frontend/build/static"));
-} else {
-  app.use(express.static("frontend/public"))
-}
+app.use(express.static("frontend/build"));
 
 //else {
 //   app.use(express.static("./frontend/public"));
