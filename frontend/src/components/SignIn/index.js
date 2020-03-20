@@ -48,7 +48,7 @@ class SignInFormBase extends Component {
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then((data) => {
-        console.log("Sign In with email",)
+        // console.log("Sign In with email",)
         // console.log(data)
 
         this.setState({ ...INITIAL_STATE });

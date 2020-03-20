@@ -1,8 +1,7 @@
 import React from 'react';
-import { compose } from 'recompose';
 import Carousel from '../../building_components/Carousel/Carousel'
 import Footer from '../../building_components/Footer/Footer'
-import { AuthUserContext, withAuthorization, withEmailVerification } from '../Session';
+import { AuthUserContext } from '../Session';
 
 const HomePage = () => (
 <AuthUserContext.Consumer>
