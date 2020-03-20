@@ -49,10 +49,10 @@ class SignInFormBase extends Component {
       .doSignInWithEmailAndPassword(email, password)
       .then((data) => {
         console.log("Sign In with email",)
-        console.log(data)
+        // console.log(data)
 
         this.setState({ ...INITIAL_STATE });
-        console.log(INITIAL_STATE)
+        // console.log(INITIAL_STATE)
         this.props.history.push(ROUTES.HOME);
       })
       .catch(error => {
