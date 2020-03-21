@@ -1,20 +1,21 @@
 
 import React from 'react';
 import logo from "../../images/MSULNO1C.svg";
+import { Link } from "react-router-dom"
+import {HOME} from "../../constants/routes"
 const Logo = () => {
-  console.log("build logo")
   return (
-  <div className="lowerNav">
-    <div className="row logoDiv">
-      <div className="col">
-        <a href="/">
-          <img src={logo} alt="Logo" className="logo"></img>
-        </a>
-        <h2 className="alumniText">ALUMNI</h2>
+    <div className="lowerNav">
+      <div className="row logoDiv">
+        <div className="col">
+          <Link to={HOME}>
+            <img src={logo} alt="MSU Logo" className="logo"></img>
+            <h2 className="alumniText">ALUMNI</h2>
+          </Link>
+        </div>
       </div>
     </div>
-  </div>
-)
-  }
+  )
+}
 
 export default Logo;

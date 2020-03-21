@@ -67,6 +67,7 @@ const Events = () => {
           type: ADD_EVENT,
           event: result.data
         });
+        getEvents();
       })
       .catch(err => console.log(err));
 

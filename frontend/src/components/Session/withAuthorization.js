@@ -19,13 +19,12 @@ const withAuthorization = condition => Component => {
     componentDidMount() {
       this.listener = this.props.firebase.onAuthUserListener(
         authUser => {
-          // route user to sign in page if they don't meet the conditions.
-          // TODO: update to route to HomePage
+          // route user to home page if they don't meet the conditions.
           if (!condition(authUser)) {
-            this.props.history.push(ROUTES.SIGN_IN);
+            this.props.history.push(ROUTES.HOME);
           }
         },
-        () => this.props.history.push(ROUTES.SIGN_IN),
+        () => this.props.history.push(ROUTES.HOME),
       );
     }
 
