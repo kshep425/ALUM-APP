@@ -1,10 +1,12 @@
 import React from 'react';
+// import { Document } from 'react-pdf'
+
 
 const Scholarships = () => {
   return (
     <div>
-      <h1>scholarship Stuff will go HERE DUDE</h1>
-      <h2>incoming Scholarship document here</h2>
+
+      <h2>incoming Scholarship document 5here</h2>
       <h2>Howard County Chapter Bear Pride Scholarship Application</h2>
       <p>For New Students
 
@@ -31,28 +33,32 @@ const Scholarships = () => {
       <p>Awards vary in amount. The amount of the award will be announced and presented at the Howard County Chapter Scholarship Awards Ceremony in June. Checks will be disbursed upon verification of student enrollment as a full- time student at Morgan State University.
 </p>
 
-<h2>The Application Package:</h2>
+      <h2>The Application Package:</h2>
+      <br></br>
+      <p>Consideration will be given to candidates submitting complete application packages. To apply follow these steps:
 <br></br>
-<p>Consideration will be given to candidates submitting complete application packages. To apply follow these steps:
-<br></br>
-<li>Print or type all required information on the attached application.</li>
-<li>Attach an official, sealed transcript containing current grades.</li>
-<li>Attach a copy of combined SAT score (applicable to Howard County High School students).</li>
-<li>Attach two sealed letters of recommendation from non-family members (school, community, church).</li>
-<li>Attach a 500-word essay which clearly explains how this scholarship will assist you in achieving your goal of obtaining a college education at Morgan State University.</li>
-<br></br>
+        <li>Print or type all required information on the attached application.</li>
+        <li>Attach an official, sealed transcript containing current grades.</li>
+        <li>Attach a copy of combined SAT score (applicable to Howard County High School students).</li>
+        <li>Attach two sealed letters of recommendation from non-family members (school, community, church).</li>
+        <li>Attach a 500-word essay which clearly explains how this scholarship will assist you in achieving your goal of obtaining a college education at Morgan State University.</li>
+        <br></br>
 A complete application package must be postmarked no later than April 1st of the application year.
 <br></br>
-<h4>Mail to:</h4>
-<ul>Scholarship Committee </ul>
-<ul>Howard County Chapter</ul>
-<ul>Morgan State University</ul>
-<ul>Alumni Association</ul>
-<ul>P.O. Box 6847</ul>
-<ul>Columbia, Maryland 21045</ul>
+        <h4>Mail to:</h4>
+        <ul>Scholarship Committee </ul>
+        <ul>Howard County Chapter</ul>
+        <ul>Morgan State University</ul>
+        <ul>Alumni Association</ul>
+        <ul>P.O. Box 6847</ul>
+        <ul>Columbia, Maryland 21045</ul>
+        <br></br>
+        <p>Click <a target="_blank" href="https://docs.google.com/forms/d/16OfOpbXHg8fElSNSJjTbvtlKqvo_U46-5M6p5CZLWyA/viewform?edit_requested=true">Here for an online form</a> or print from below.</p>
 
 
-</p>
+
+      </p>
+
 
     </div>
   );
