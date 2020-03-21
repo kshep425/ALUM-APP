@@ -98,43 +98,50 @@ const Events = () => {
   return (
     <div className="mainPage">
       <div className="eventPageDiv">
-        <h2>Event Calendar</h2>
+        <h2>
+          <strong>MSU Howard County Alumni Events</strong>
+        </h2>
         <p>
           Strengthen your ties to the MSU family by participating in an MSU
           Alumni event near you!
         </p>
+        <Button
+          className="btn btn-primary addEventBtn"
+          onClick={showEventModal}
+        >
+          Create New Event
+        </Button>
+        <Button
+          className="btn btn-primary viewPastEventBtn"
+          onClick={showEventModal}
+        >
+          View Past Events
+        </Button>
         <hr className="lineDivider" />
 
         <div className="row">
           <div className="col-md-12">
             <h4>Upcoming Events</h4>
-            <Button
-              className="btn btn-primary addEventBtn"
-              onClick={showEventModal}
-            >
-              Create New Event
-            </Button>
-            <ReactCalendar />
+
+            {/* <ReactCalendar /> */}
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12 eventList">
+          <div className="col-md-12">
             {state.events.map(event => {
               const newEvent = Object.assign({}, event);
 
               console.log("EVENT TITLE BELOW!");
               console.log(newEvent.title);
               return (
-                <div className="newEventDiv">
-                  <Event
-                    title={newEvent.title}
-                    start={newEvent.startDate}
-                    end={newEvent.endDate}
-                    type={newEvent.type}
-                    venueName={newEvent.venueName}
-                    address={newEvent.address}
-                  ></Event>
-                </div>
+                <Event
+                  title={newEvent.title}
+                  start={newEvent.startDate}
+                  end={newEvent.endDate}
+                  type={newEvent.type}
+                  venueName={newEvent.venueName}
+                  address={newEvent.address}
+                ></Event>
               );
             })}
           </div>

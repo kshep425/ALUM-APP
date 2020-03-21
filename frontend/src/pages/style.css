@@ -10,9 +10,6 @@
   color: #122f5e;
 }
 
-.newEventDiv {
-  float: left;
-}
 .lineDivider {
   margin-bottom: 40px;
 }
@@ -24,7 +21,7 @@
 
 .addEventBtn {
   height: initial !important;
-  margin-bottom: 10px;
+  margin: 3px 5px;
   border-radius: 3px !important;
   background-color: #fe7f18;
   border: none;
@@ -33,6 +30,21 @@
 }
 
 .addEventBtn:hover {
+  background-color: #122f5e;
+}
+
+.viewPastEventBtn {
+  height: initial !important;
+  margin: 3px 5px;
+  border-radius: 3px !important;
+  background-color: grey;
+  color: white;
+  border: none;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.281);
+  font-family: "Abel", sans-serif;
+}
+
+.viewPastEventBtn:hover {
   background-color: #122f5e;
 }
 
