@@ -9,16 +9,12 @@ const reducer = (state, action) => {
 
   switch (action.type) {
     case UPDATE_EVENTS:
-      debugger;
       return {
         ...state,
         events: [...action.events]
       };
 
     case ADD_EVENT:
-      console.log("ACTION.EVENT BELOW");
-      console.log(action.event);
-      console.log(state.events);
       return {
         ...state,
         events: [action.event, ...state.events]

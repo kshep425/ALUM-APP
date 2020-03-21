@@ -10,12 +10,16 @@
   color: #122f5e;
 }
 
+.newEventDiv {
+  float: left;
+}
 .lineDivider {
   margin-bottom: 40px;
 }
 
 .eventList {
   text-align: center;
+  width: 100%;
 }
 
 .addEventBtn {

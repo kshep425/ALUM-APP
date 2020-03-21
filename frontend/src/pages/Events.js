@@ -49,7 +49,6 @@ const Events = () => {
   const handleSubmit = e => {
     e.preventDefault();
     console.log("CLICKED SUBMIT");
-    dispatch({ type: ADD_EVENT });
 
     API.addEvent({
       title: eventTitleRef.current.value,
@@ -108,20 +107,25 @@ const Events = () => {
 
         <div className="row">
           <div className="col-md-12">
-            <div className="eventList">
-              <h4>Upcoming Events</h4>
-              <Button
-                className="btn btn-primary addEventBtn"
-                onClick={showEventModal}
-              >
-                Create New Event
-              </Button>
-              {state.events.map(event => {
-                const newEvent = Object.assign({}, event);
+            <h4>Upcoming Events</h4>
+            <Button
+              className="btn btn-primary addEventBtn"
+              onClick={showEventModal}
+            >
+              Create New Event
+            </Button>
+            <ReactCalendar />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12 eventList">
+            {state.events.map(event => {
+              const newEvent = Object.assign({}, event);
 
-                console.log("EVENT TITLE BELOW!");
-                console.log(newEvent.title);
-                return (
+              console.log("EVENT TITLE BELOW!");
+              console.log(newEvent.title);
+              return (
+                <div className="newEventDiv">
                   <Event
                     title={newEvent.title}
                     start={newEvent.startDate}
@@ -130,118 +134,114 @@ const Events = () => {
                     venueName={newEvent.venueName}
                     address={newEvent.address}
                   ></Event>
-                );
-              })}
-            </div>
-            <ReactCalendar />
+                </div>
+              );
+            })}
           </div>
         </div>
+      </div>
 
-        <Modal
-          show={modalState.show}
-          handleClose={hideEventModal}
-          title="Host an MSU Alumni Event!"
-        >
-          <div className="row">
-            <form className="col-md-12 calendarDiv">
-              <div className="createEventDiv">
-                <label htmlFor="eventTitle">Event Name</label>
-                <input
-                  type="text"
-                  name="eventTitle"
-                  className="titleInput"
-                  ref={eventTitleRef}
-                ></input>
+      <Modal
+        show={modalState.show}
+        handleClose={hideEventModal}
+        title="Host an MSU Alumni Event!"
+      >
+        <div className="row">
+          <form className="col-md-12 calendarDiv">
+            <div className="createEventDiv">
+              <label htmlFor="eventTitle">Event Name</label>
+              <input
+                type="text"
+                name="eventTitle"
+                className="titleInput"
+                ref={eventTitleRef}
+              ></input>
 
-                <div className="row">
-                  <div className="col-md-6">
-                    <label htmlFor="startTime">Start Time</label>
-                    <input
-                      name="startTime"
-                      type="datetime-local"
-                      className="titleInput"
-                      ref={startDateRef}
-                    ></input>
-                  </div>
-
-                  <div className="col-md-6">
-                    <label htmlFor="endTime">End Time</label>
-                    <input
-                      name="endTime"
-                      type="datetime-local"
-                      className="titleInput"
-                      ref={endDateRef}
-                    ></input>
-                  </div>
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="startTime">Start Time</label>
+                  <input
+                    name="startTime"
+                    type="datetime-local"
+                    className="titleInput"
+                    ref={startDateRef}
+                  ></input>
                 </div>
 
-                <label htmlFor="eventTitle">Venue Name</label>
-                <input
-                  type="text"
-                  name="venueName"
-                  className="titleInput"
-                  ref={venueNameRef}
-                ></input>
-
-                <label htmlFor="address">Address</label>
-                <AddressInput onChange={handleAddressChange} />
-
-                <label htmlFor="eventType">Event Type</label>
-                <select
-                  id="eventType"
-                  className="titleInput"
-                  ref={eventTypeRef}
-                >
-                  <option>Meeting</option>
-                  <option>Party </option>
-                  <option>Performance/Concert </option>
-                  <option>Dinner/Gala</option>
-                  <option>Fair/Festival</option>
-                  <option>Other</option>
-                </select>
-
-                <label htmlFor="ticketType">Ticket Type</label>
-                <select
-                  id="ticketType"
-                  className="titleInput"
-                  ref={ticketTypeRef}
-                >
-                  <option>Open to Public - Free to Attend</option>
-                  <option>Open to Public - Available for Purchase </option>
-                  <option>Members Only - Free to Attend</option>
-                  <option>Members Only - Available for Purchase </option>
-                  <option>Board Members Only - Free to Attend</option>
-                  <option>Board Members Only - Available for Purchase</option>
-                </select>
-
-                <label htmlFor="message">Describe Your Event!</label>
-                <textarea
-                  name="message"
-                  type="text"
-                  className="descriptionInput"
-                  ref={eventDescriptionRef}
-                ></textarea>
-                <div className="row">
-                  <div className="col">
-                    <Button
-                      className="btn btn-primary submitEventBtn"
-                      onClick={handleSubmit}
-                    >
-                      Save Event
-                    </Button>
-                    <Button
-                      className="btn btn-primary cancelBtn"
-                      onClick={cancelBtnFunction}
-                    >
-                      Cancel
-                    </Button>
-                  </div>
+                <div className="col-md-6">
+                  <label htmlFor="endTime">End Time</label>
+                  <input
+                    name="endTime"
+                    type="datetime-local"
+                    className="titleInput"
+                    ref={endDateRef}
+                  ></input>
                 </div>
               </div>
-            </form>
-          </div>
-        </Modal>
-      </div>
+
+              <label htmlFor="eventTitle">Venue Name</label>
+              <input
+                type="text"
+                name="venueName"
+                className="titleInput"
+                ref={venueNameRef}
+              ></input>
+
+              <label htmlFor="address">Address</label>
+              <AddressInput onChange={handleAddressChange} />
+
+              <label htmlFor="eventType">Event Type</label>
+              <select id="eventType" className="titleInput" ref={eventTypeRef}>
+                <option>Meeting</option>
+                <option>Party </option>
+                <option>Performance/Concert </option>
+                <option>Dinner/Gala</option>
+                <option>Fair/Festival</option>
+                <option>Other</option>
+              </select>
+
+              <label htmlFor="ticketType">Ticket Type</label>
+              <select
+                id="ticketType"
+                className="titleInput"
+                ref={ticketTypeRef}
+              >
+                <option>Open to Public - Free to Attend</option>
+                <option>Open to Public - Available for Purchase </option>
+                <option>Members Only - Free to Attend</option>
+                <option>Members Only - Available for Purchase </option>
+                <option>Board Members Only - Free to Attend</option>
+                <option>Board Members Only - Available for Purchase</option>
+              </select>
+
+              <label htmlFor="message">Describe Your Event!</label>
+              <textarea
+                name="message"
+                type="text"
+                className="descriptionInput"
+                ref={eventDescriptionRef}
+              ></textarea>
+              <div className="row">
+                <div className="col">
+                  <Button
+                    className="btn btn-primary submitEventBtn"
+                    onClick={handleSubmit}
+                  >
+                    Save Event
+                  </Button>
+                  <Button
+                    className="btn btn-primary cancelBtn"
+                    onClick={cancelBtnFunction}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </Modal>
+
       <Footer />
     </div>
   );
