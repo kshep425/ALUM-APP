@@ -5,6 +5,8 @@ const StoreContext = createContext();
 const { Provider } = StoreContext;
 
 const reducer = (state, action) => {
+  console.log(state.events);
+
   switch (action.type) {
     case UPDATE_EVENTS:
       return {
@@ -26,8 +28,6 @@ const reducer = (state, action) => {
         })
       };
 
-
-
     default:
       return state;
   }
@@ -42,6 +42,8 @@ const StoreProvider = ({ value = [], ...props }) => {
       description: "",
       startDate: "",
       endDate: "",
+      address: "",
+      venueName: "",
       type: ""
     }
   });

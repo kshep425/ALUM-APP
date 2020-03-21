@@ -4,12 +4,11 @@ module.exports = function(sequelize, DataTypes) {
     description: DataTypes.STRING,
     startDate: DataTypes.DATE,
     endDate: DataTypes.DATE,
-    // type: DataTypes.STRING,
-    // address: DataTypes.STRING,
-    // city: DataTypes.STRING,
-    // state: DataTypes.STRING,
-    // zipcode: DataTypes.INTEGER,
-    // venueName: DataTypes.STRING
+    type: DataTypes.STRING,
+    address: DataTypes.STRING,
+    venueName: DataTypes.STRING,
+    ticketType: DataTypes.STRING,
+    host: DataTypes.STRING
   });
 
   return Event;
