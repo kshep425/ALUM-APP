@@ -24,5 +24,15 @@ export default {
 
   getAllUsers: function(data) {
     return axios.post("/api/users")
+  },
+
+  getUser: function(uid) {
+    return axios.get("/api/user/" + uid)
+  },
+
+  updateUser: function(uid, data) {
+    return axios.post("/api/update/" + uid, data)
   }
+
+
 };
