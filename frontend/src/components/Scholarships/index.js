@@ -1,19 +1,21 @@
 import React from 'react';
 // import { Document } from 'react-pdf'
+// import Viewer from '@phuocng/react-pdf-viewer';
+
 
 
 const Scholarships = () => {
   return (
     <div>
 
-      <h2>incoming Scholarship document 5here</h2>
+      <h2 className= "h2">incoming Scholarship document 5here</h2>
       <h2>Howard County Chapter Bear Pride Scholarship Application</h2>
       <p>For New Students
 
       The Howard County Chapter of Morgan State University Alumni Association is offering scholarship awards to Howard County residents who are graduating Howard County High School seniors or currently attending Howard Community College. The applicant must plan to enroll and attend Morgan State University for the upcoming academic year.
 
 </p>
-      <h2>Eligibility:</h2>
+      <h2 className="h2">Eligibility:</h2>
       <br></br>
       <p>To qualify for this scholarship, the applicant must:
 
@@ -23,7 +25,7 @@ const Scholarships = () => {
         <li>Have a combined math, writing and reading SAT score of 1200 or better.</li>
 
       </p>
-      <h2>Selection:</h2>
+      <h2 className="h2">Selection:</h2>
       <br></br>
       <p>Scholarship applications are to be postmarked no later than April 1st. Scholarship recipients will be determined no later than April 15th by the chapter scholarship committee. Recipients will be notified by April 30th.  If the scholarship applicant does not receive an award notification by April 30th, it unfortunately means that the applicant will not receive a scholarship award for this application year.
 </p>
@@ -33,7 +35,7 @@ const Scholarships = () => {
       <p>Awards vary in amount. The amount of the award will be announced and presented at the Howard County Chapter Scholarship Awards Ceremony in June. Checks will be disbursed upon verification of student enrollment as a full- time student at Morgan State University.
 </p>
 
-      <h2>The Application Package:</h2>
+      <h2 className="h2">The Application Package:</h2>
       <br></br>
       <p>Consideration will be given to candidates submitting complete application packages. To apply follow these steps:
 <br></br>
@@ -53,7 +55,7 @@ A complete application package must be postmarked no later than April 1st of the
         <ul>P.O. Box 6847</ul>
         <ul>Columbia, Maryland 21045</ul>
         <br></br>
-        <p>Click <a target="_blank" href="https://docs.google.com/forms/d/16OfOpbXHg8fElSNSJjTbvtlKqvo_U46-5M6p5CZLWyA/viewform?edit_requested=true">Here for an online form</a> or print from below.</p>
+        <p>Click <a target="_blank" href="https://docs.google.com/forms/d/16OfOpbXHg8fElSNSJjTbvtlKqvo_U46-5M6p5CZLWyA/viewform?edit_requested=true">Here for an online form</a> or print from <a target="_blank" href="https://docs.google.com/document/d/1j4AwqFuagIXkuLFhCWT1dBYnbpBRkTKl86Unvkm6iP4/edit?usp=sharing" >HERE</a>.</p>
 
 
 
