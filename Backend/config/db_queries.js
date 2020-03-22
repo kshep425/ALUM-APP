@@ -7,13 +7,13 @@ const db_queries = {
         return db.Member.create(request, fields)
     },
 
-    find_member: function(member_id){
-        return db.Member.findOne({id: member_id})
+    getMember: function(member_id){
+        return db.Member.findOne({uid: member_id})
     },
 
-    update_member: function(update_request, member_id){
+    updateMember: function(member_id, update_request ){
         const [request] = this.formatRequest(update_request)
-        return db.Member.update(request, {where: {id: member_id}})
+        return db.Member.update(request, {where: {uid: member_id}})
     },
 
     delete_member: function(member_id){
