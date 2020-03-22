@@ -2,6 +2,7 @@ import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 // import { getDisplayName } from 'recompose';
+import API from '../../utils/API'
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -64,33 +65,23 @@ class Firebase {
 
   // *** Merge Auth and DB User API *** //
 
-  onAuthUserListener = (next, fallback) =>
-    this.auth.onAuthStateChanged(authUser => {
+  onAuthUserListener = async (next, fallback) =>
+    this.auth.onAuthStateChanged(async authUser => {
        if (authUser) {
-      //   this.user(authUser.uid)
-      //     .once('value')
-      //     .then(snapshot => {
-      //       const dbUser = snapshot.val();
 
-      //       // default empty roles
-      //       if (!dbUser.roles) {
-      //         dbUser.roles = {};
-      //       }
+            const db = await API.getUser(authUser.uid);
 
-      //       // merge auth and db user
-      // console.log(authUser)
             authUser = {
               uid: authUser.uid,
               email: authUser.email,
               emailVerified: authUser.emailVerified,
               providerData: authUser.providerData,
               roles: {USER: true},
-       //       ...dbUser,
+              db: db.data,
             };
             // console.log(authUser)
 
              next(authUser);
-      //     });
        } else {
          fallback();
        }
@@ -98,24 +89,6 @@ class Firebase {
 
 
     });
-
-    // firebase.auth().onAuthStateChanged(function(user) {
-    //   if (user) {
-    //     // User is signed in.
-    //     var displayName = user.displayName;
-    //     var email = user.email;
-    //     var emailVerified = user.emailVerified;
-    //     var photoURL = user.photoURL;
-    //     var isAnonymous = user.isAnonymous;
-    //     var uid = user.uid;
-    //     var providerData = user.providerData;
-    //     // ...
-    //   } else {
-    //     // User is signed out.
-    //     // ...
-    //   }
-    // });
-
 
   // *** User API ***
 
