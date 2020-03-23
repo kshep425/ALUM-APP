@@ -23,7 +23,7 @@ export default {
   },
 
   getAllUsers: function(data) {
-    return axios.post("/api/users")
+    return axios.get("/api/users")
   },
 
   getUser: function(uid) {
