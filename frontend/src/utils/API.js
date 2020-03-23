@@ -1,4 +1,5 @@
 import axios from "axios";
+import {auth} from '../components/Firebase';
 
 export default {
   // Gets all events
@@ -30,9 +31,18 @@ export default {
     return axios.get("/api/user/" + uid)
   },
 
-  updateUser: function(uid, data) {
-    return axios.post("/api/update/" + uid, data)
+  // updateUser: function(uid, data) {
+  //   return axios.post("/api/update/" + uid, data)
+  // },
+  updateUser: function(data, token) {
+
+    return axios.post('/api/update',
+    {
+      headers: {
+        authorization: `Bearer ${token}`
+      },
+      data: data
+    })
+    .then(res => res.data)
   }
-
-
 };
