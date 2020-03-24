@@ -30,12 +30,8 @@ export default {
     return axios.get("/api/user/" + uid)
   },
 
-  updateUser: function(uid, data) {
-    return axios.post("/api/update/" + uid, data)
-  },
-
-  updateUserWithToken: function(data, token) {
-    return axios.post('/api/updateUserWithToken/',data, {
+  updateUser: function(data, token) {
+    return axios.post('/api/updateUser/',data, {
       headers: {
         authorization: `Bearer ${token}`
       }

@@ -32,36 +32,10 @@ module.exports = function (app) {
       });
   });
 
-  app.post("/api/update", function (req, res) {
-    return db.updateMember(req.body.uid, req.body)
+  app.post("/api/updateUser", checkIfAuthenticated, function (req, res) {
+    return db.updateMember(req.authId, req.body)
       .then(function (result) {
         res.status(200).json(result);
       });
-  });
-
-  app.post("/api/updateUserWithToken", checkIfAuthenticated, function (req, res) {
-    console.log("Update User With Token")
-    console.log(req.body)
-
-    return res.status(200).json({ result: "done" })
   })
 };
-
-
-
-function listAllUsers(nextPageToken) {
-  // List batch of users, 1000 at a time.
-  admin.auth().listUsers(1000, nextPageToken)
-    .then(function (listUsersResult) {
-      listUsersResult.users.forEach(function (userRecord) {
-        console.log('user', userRecord.toJSON());
-      });
-      if (listUsersResult.pageToken) {
-        // List next batch of users.
-        listAllUsers(listUsersResult.pageToken);
-      }
-    })
-    .catch(function (error) {
-      console.log('Error listing users:', error);
-    });
-}
