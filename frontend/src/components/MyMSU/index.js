@@ -36,7 +36,6 @@ const MyMsuPage = () => (
     {authUser => (
       <div className='container'>
         <h1>My MSU</h1>
-        <EditLink />
         <div className='container-sm'>
           <div className='card'>
             <h6>Name: {authUser.providerData[0].displayName}</h6>
@@ -235,10 +234,6 @@ class DefaultLoginToggle extends Component {
   }
 }
 
-const EditLink = () => (
-  <Link to={EDIT}><i className="fa fa-edit"></i>
-  Edit Contact Info</Link>
-);
 
 const LoginManagement = withFirebase(LoginManagementBase);
 
