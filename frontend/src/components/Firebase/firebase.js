@@ -69,7 +69,6 @@ class Firebase {
     this.auth.onAuthStateChanged(async authUser => {
       if (authUser) {
         const token = await this.auth.currentUser.getIdToken(/* forceRefresh */ true)
-        console.log(token);
         const db = await API.getUser(authUser.uid);
         authUser = {
           uid: authUser.uid,
@@ -80,8 +79,6 @@ class Firebase {
           db: db.data,
           token
         };
-        console.log(authUser)
-
         next(authUser);
       } else {
         fallback();
