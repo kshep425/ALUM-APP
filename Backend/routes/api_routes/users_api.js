@@ -1,5 +1,6 @@
 const db = require("../../config/db_queries");
 const admin = require('firebase-admin');
+const checkIfAuthenticated = require('../../config/middleware/auth-middleware');
 
 module.exports = function (app) {
   app.post("/api/user", function (req, res) {
@@ -37,7 +38,16 @@ module.exports = function (app) {
         res.status(200).json(result);
       });
   });
+
+  app.post("/api/updateUserWithToken", checkIfAuthenticated, function (req, res) {
+    console.log("Update User With Token")
+    console.log(req.body)
+
+    return res.status(200).json({ result: "done" })
+  })
 };
+
+
 
 function listAllUsers(nextPageToken) {
   // List batch of users, 1000 at a time.
