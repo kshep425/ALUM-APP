@@ -29,7 +29,9 @@ const withAuthorization = condition => Component => {
     }
 
     componentWillUnmount() {
-      this.listener();
+      if(typeof this.listener === "function"){
+        this.listener();
+      }
     }
     // This context is needed to avoid showing the protected page before the redirect happens.
     render() {

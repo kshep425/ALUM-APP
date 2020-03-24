@@ -9,6 +9,7 @@ import { useStoreContext } from "../utils/GlobalState";
 import { ADD_EVENT, REMOVE_EVENT, UPDATE_EVENTS } from "../utils/actions";
 import API from "../utils/API";
 import "./style.css";
+import { AuthUserContext } from "../components/Session";
 
 const Events = () => {
   const [state, dispatch] = useStoreContext();
@@ -40,7 +41,9 @@ const Events = () => {
   let addressRef;
   const venueNameRef = useRef();
   const ticketTypeRef = useRef();
-
+  const hostNameRef = useRef();
+  const hostEmailRef = useRef();
+  const creatorIdRef = useRef();
   const handleAddressChange = value => {
     // let eventLocation = event.target;
     addressRef = value;
@@ -58,7 +61,10 @@ const Events = () => {
       type: eventTypeRef.current.value,
       address: addressRef,
       venueName: venueNameRef.current.value,
-      ticketType: ticketTypeRef.current.value
+      ticketType: ticketTypeRef.current.value,
+      hostName: hostNameRef.current.value,
+      hostEmail: hostEmailRef.current.value,
+      creatorId: creatorIdRef.current.value
     })
       .then(result => {
         console.log("ADDING EVENT (RESULT BELOW)");
@@ -77,6 +83,9 @@ const Events = () => {
     startDateRef.current.value = "";
     endDateRef.current.value = "";
     venueNameRef.current.value = "";
+    hostNameRef.current.value = "";
+    hostEmailRef.current.value = "";
+    creatorIdRef.current.value = "";
     hideEventModal();
   };
 
@@ -96,6 +105,7 @@ const Events = () => {
   };
 
   console.log(state.events);
+
   return (
     <div className="mainPage">
       <div className="eventPageDiv">
@@ -106,12 +116,7 @@ const Events = () => {
           Strengthen your ties to the MSU family by participating in an MSU
           Alumni event near you!
         </p>
-        <Button
-          className="btn btn-primary addEventBtn"
-          onClick={showEventModal}
-        >
-          Create New Event
-        </Button>
+        <CreateEventButton onClick={showEventModal} />
         <Button
           className="btn btn-primary viewPastEventBtn"
           onClick={showEventModal}
@@ -163,8 +168,10 @@ const Events = () => {
                 name="eventTitle"
                 className="titleInput"
                 ref={eventTitleRef}
+                defaultValue="Event Title"
               ></input>
 
+              <EventHost hostNameRef={hostNameRef} hostEmailRef={hostEmailRef} creatorIdRef={creatorIdRef} />
               <div className="row">
                 <div className="col-md-6">
                   <label htmlFor="startTime">Start Time</label>
@@ -173,6 +180,7 @@ const Events = () => {
                     type="datetime-local"
                     className="titleInput"
                     ref={startDateRef}
+                    defaultValue={Date.now()}
                   ></input>
                 </div>
 
@@ -183,6 +191,7 @@ const Events = () => {
                     type="datetime-local"
                     className="titleInput"
                     ref={endDateRef}
+                    defaultValue={Date.now()}
                   ></input>
                 </div>
               </div>
@@ -193,13 +202,14 @@ const Events = () => {
                 name="venueName"
                 className="titleInput"
                 ref={venueNameRef}
+                defaultValue="Kahler Hall"
               ></input>
 
               <label htmlFor="address">Address</label>
               <AddressInput onChange={handleAddressChange} />
 
               <label htmlFor="eventType">Event Type</label>
-              <select id="eventType" className="titleInput" ref={eventTypeRef}>
+              <select id="eventType" className="titleInput" ref={eventTypeRef} defaultValue="Meeting">
                 <option>Meeting</option>
                 <option>Party </option>
                 <option>Performance/Concert </option>
@@ -213,13 +223,11 @@ const Events = () => {
                 id="ticketType"
                 className="titleInput"
                 ref={ticketTypeRef}
+                defaultValue="Free"
               >
-                <option>Open to Public - Free to Attend</option>
-                <option>Open to Public - Available for Purchase </option>
-                <option>Members Only - Free to Attend</option>
-                <option>Members Only - Available for Purchase </option>
-                <option>Board Members Only - Free to Attend</option>
-                <option>Board Members Only - Available for Purchase</option>
+                <option>Free</option>
+                <option>Paid</option>
+                <option>Donation</option>
               </select>
 
               <label htmlFor="message">Describe Your Event!</label>
@@ -228,6 +236,7 @@ const Events = () => {
                 type="text"
                 className="descriptionInput"
                 ref={eventDescriptionRef}
+                defaultValue="Event Description"
               ></textarea>
               <div className="row">
                 <div className="col">
@@ -252,6 +261,61 @@ const Events = () => {
 
       <Footer />
     </div>
+  );
+};
+
+const CreateEventButton = (props) => {
+  console.log("Add Create event button")
+  return (
+    <AuthUserContext.Consumer>
+      {authUser => {
+        console.log(authUser.roles.ADMIN)
+        return (
+          (authUser.roles.ADMIN)
+            ? (
+              <Button
+                className="btn btn-primary addEventBtn"
+                onClick={props.onClick}
+              >
+                Create New Event
+              </Button>
+            )
+            : null
+        )
+      }}
+    </AuthUserContext.Consumer>
+  )
+}
+
+const EventHost = (props) => {
+  return (
+    <AuthUserContext.Consumer>
+      {authUser => {
+        return (
+          <>
+            <label htmlFor="hostName">HostName</label>
+            <input
+              id="hostName"
+              type="text"
+              name="HostName"
+              className="titleInput"
+              ref={props.hostNameRef}
+              defaultValue={authUser.providerData[0].displayName}
+            />
+            <label htmlFor="hostEmail">HostEmail</label>
+            <input
+              id="hostEmail"
+              type="text"
+              name="hostEmail"
+              className="titleInput"
+              ref={props.hostEmailRef}
+              defaultValue={authUser.email}
+            />
+            <input ref={props.creatorIdRef} defaultValue={authUser.uid} hidden></input>
+          </>
+        )
+      }}
+    </AuthUserContext.Consumer>
   );
 };
 

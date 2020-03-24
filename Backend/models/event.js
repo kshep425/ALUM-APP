@@ -8,8 +8,19 @@ module.exports = function(sequelize, DataTypes) {
     address: DataTypes.STRING,
     venueName: DataTypes.STRING,
     ticketType: DataTypes.STRING,
-    host: DataTypes.STRING
+    hostName: DataTypes.STRING,
+    hostEmail: DataTypes.STRING,
+    creatorId: DataTypes.STRING
   });
+
+  Event.associate = function (models) {
+    models.Event.belongsTo(models.Member, {
+        onDelete: "CASCADE",
+        foreignKey: {
+            allowNull: true
+        }
+    });
+};
 
   return Event;
 };

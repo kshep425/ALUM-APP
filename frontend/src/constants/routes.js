@@ -4,6 +4,7 @@ export const SIGN_IN = '/signin';
 export const PASSWORD_FORGET = '/pw-forget';
 export const HOME = '/home';
 export const MYMSU = '/mymsu';
+export const EDIT = '/edit'
 export const ACCOUNTS = '/accounts';
 export const ACCOUNT_DETAILS = '/accounts/:id';
 export const EVENTS = '/events';
