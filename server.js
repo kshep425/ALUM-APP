@@ -7,10 +7,18 @@
 const express = require("express");
 const session = require("express-session");
 // Requiring passport as we've configured it
-const passport = require("./Backend/config/passport");
-
+var admin = require('firebase-admin');
+// Initialize the default app
+var admin = require('firebase-admin');
 // Requiring dotenv for syncing variable
 require("dotenv").config();
+
+const fb_db_url = process.env.FIREBASE_DATABASE_URL
+// Initialize the Firebase Admin SDK
+admin.initializeApp({
+  credential: admin.credential.applicationDefault(),
+  databaseURL: fb_db_url,
+});
 
 // Sets up the Express App
 // =============================================================
@@ -39,8 +47,6 @@ app.use(express.static("frontend/build"));
 app.use(
   session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
 );
-app.use(passport.initialize());
-app.use(passport.session());
 
 // Routes
 // =============================================================
@@ -53,7 +59,7 @@ require("./backend/routes/api_routes/users_api")(app);
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 const sync = JSON.parse(process.env.DB_SYNC) || true;
-db.sequelize.sync({ force: sync }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
