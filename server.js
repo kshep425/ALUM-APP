@@ -15,10 +15,11 @@ require("dotenv").config();
 
 const fb_db_url = process.env.FIREBASE_DATABASE_URL
 // Initialize the Firebase Admin SDK
+// Added replace because of failures in heroku
 admin.initializeApp({
   credential: admin.credential.cert({
     "project_id": process.env.FIREBASE_PROJECT_ID,
-    "private_key": process.env.FIREBASE_PRIVATE_KEY,
+    "private_key": process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
     "client_email": process.env.FIREBASE_CLIENT_EMAIL,
   }),
   databaseURL: fb_db_url,
