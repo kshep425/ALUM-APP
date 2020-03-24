@@ -8,8 +8,8 @@ import { AuthUserContext } from '../../components/Session';
 const LowerNav = () => (
   <div className="lowerNav">
     <div className="row navRow">
-      <Navitem href={ROUTES.EVENTS}>events</Navitem>
-      <Navitem href={ROUTES.ABOUT}>about</Navitem>
+      <Navitem href={ROUTES.EVENTS}>Events</Navitem>
+      <Navitem href={ROUTES.ABOUT}>About</Navitem>
       <Navitem href={ROUTES.SCHOLARSHIPS}>Scholarships</Navitem>
       <MyMsuLink />
   </div>
@@ -20,7 +20,7 @@ const MyMsuLink = () => (
   <AuthUserContext.Consumer>
     {
       authUser => {
-        console.log(authUser)
+        // console.log(authUser)
         return authUser
         ? (
           <Navitem href={ROUTES.MYMSU}>my msu</Navitem>

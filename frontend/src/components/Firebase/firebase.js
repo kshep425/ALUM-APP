@@ -78,7 +78,7 @@ class Firebase {
       //       }
 
       //       // merge auth and db user
-      console.log(authUser)
+      // console.log(authUser)
             authUser = {
               uid: authUser.uid,
               email: authUser.email,
@@ -87,7 +87,7 @@ class Firebase {
               roles: {USER: true},
        //       ...dbUser,
             };
-            console.log(authUser)
+            // console.log(authUser)
 
              next(authUser);
       //     });

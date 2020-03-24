@@ -36,6 +36,7 @@
     "pdfjs-dist": "^2.2.228",
     "react-calendar": "^3.0.0",
     "react-google-login": "^5.1.1",
+    "react-places-autocomplete": "^7.2.1",
     "react-slick": "^0.25.2",
     "recompose": "^0.30.0",
     "sequelize": "^5.21.5",
