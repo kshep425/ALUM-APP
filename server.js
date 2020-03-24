@@ -2,7 +2,7 @@
 
 const express = require("express");
 const session = require("express-session");
-const routes = require("./backend/routes");
+const routes = require("./Backend/routes");
 // Initialize the default app
 var admin = require('firebase-admin');
 // Requiring dotenv for syncing variable
