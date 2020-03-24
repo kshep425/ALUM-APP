@@ -6,8 +6,7 @@
 // =============================================================
 const express = require("express");
 const session = require("express-session");
-// Requiring passport as we've configured it
-var admin = require('firebase-admin');
+
 // Initialize the default app
 var admin = require('firebase-admin');
 // Requiring dotenv for syncing variable
@@ -61,6 +60,7 @@ app.use(
 require("./Backend/routes/api_routes/login_api_routes")(app);
 require("./Backend/routes/api_routes/events")(app);
 require("./Backend/routes/api_routes/users_api")(app);
+require("./Backend/routes/index.js")(app);
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 const sync = JSON.parse(process.env.DB_SYNC) || true;
