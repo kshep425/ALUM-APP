@@ -67,40 +67,38 @@ class Firebase {
 
   onAuthUserListener = async (next, fallback) =>
     this.auth.onAuthStateChanged(async authUser => {
-       if (authUser) {
+      if (authUser) {
+        const token = await this.auth.currentUser.getIdToken(/* forceRefresh */ true)
+        console.log(token);
+        const db = await API.getUser(authUser.uid);
+        authUser = {
+          uid: authUser.uid,
+          email: authUser.email,
+          emailVerified: authUser.emailVerified,
+          providerData: authUser.providerData,
+          roles: { ADMIN: true },
+          db: db.data,
+          token
+        };
+        console.log(authUser)
 
-            const db = await API.getUser(authUser.uid);
-
-            authUser = {
-              uid: authUser.uid,
-              email: authUser.email,
-              emailVerified: authUser.emailVerified,
-              providerData: authUser.providerData,
-              roles: {USER: true},
-              db: db.data,
-            };
-            // console.log(authUser)
-
-             next(authUser);
-       } else {
-         fallback();
-       }
-
-
-
+        next(authUser);
+      } else {
+        fallback();
+      }
     });
 
   // *** User API ***
 
-  user = uid => this.db.ref(`users/${uid}`);
+  // user = uid => this.db.ref(`users/${uid}`);
 
-  users = () => this.db.ref('users');
+  users = () => API.getAllUsers();
 
   // *** Message API ***
 
-  message = uid => this.db.ref(`messages/${uid}`);
+  // message = uid => this.db.ref(`messages/${uid}`);
 
-  messages = () => this.db.ref('messages');
+  // messages = () => this.db.ref('messages');
 }
 
 export default Firebase;
