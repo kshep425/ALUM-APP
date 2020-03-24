@@ -38,7 +38,7 @@ const EditContactInfo = () => {
       zip: zip.current.value,
     };
 
-    API.updateUserWithToken(data, token.current.value);
+    API.updateUser(data, token.current.value);
   };
 
   return (
