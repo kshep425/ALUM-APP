@@ -1,13 +1,8 @@
-// *****************************************************************************
 // Server.js - This file is the initial starting point for the Node/Express server.
-//
-// ******************************************************************************
-// *** Dependencies
-// =============================================================
+
 const express = require("express");
 const session = require("express-session");
-// Requiring passport as we've configured it
-var admin = require('firebase-admin');
+const routes = require("./Backend/routes");
 // Initialize the default app
 var admin = require('firebase-admin');
 // Requiring dotenv for syncing variable
@@ -44,10 +39,6 @@ app.use(express.json());
 // Static directory
 app.use(express.static("frontend/build"));
 
-//else {
-//   app.use(express.static("./frontend/public"));
-// }
-
 // We need to use sessions to keep track of our user's login status
 app.use(
   session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
@@ -57,7 +48,7 @@ app.use(
 // =============================================================
 //const api_routes = require("./routes/api_routes")
 //app.use(api_routes);
-
+app.use(routes)
 require("./Backend/routes/api_routes/login_api_routes")(app);
 require("./Backend/routes/api_routes/events")(app);
 require("./Backend/routes/api_routes/users_api")(app);
