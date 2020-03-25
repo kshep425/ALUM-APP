@@ -26,8 +26,12 @@ export default {
     return axios.get("/api/users")
   },
 
-  getUser: function(uid) {
-    return axios.get("/api/user/" + uid)
+  getUser: function(token) {
+    return axios.get("/api/user/", {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
   },
 
   updateUser: function(data, token) {
