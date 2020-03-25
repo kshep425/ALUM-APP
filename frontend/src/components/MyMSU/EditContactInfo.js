@@ -6,25 +6,25 @@ import API from '../../utils/API'
 import {MYMSU} from '../../constants/routes'
 
 const EditContactInfo = () => {
-  const uid = useRef()
-  const prefix = useRef()
-  const firstName = useRef()
-  const lastName = useRef()
-  const suffix = useRef()
-  const email = useRef()
-  const phone = useRef()
-  const streetAddress1 = useRef()
-  const streetAddress2 = useRef()
-  const city = useRef()
-  const state = useRef()
-  const zip = useRef()
+  const uid = useRef();
+  const token = useRef();
+  const prefix = useRef();
+  const firstName = useRef();
+  const lastName = useRef();
+  const suffix = useRef();
+  const email = useRef();
+  const phone = useRef();
+  const streetAddress1 = useRef();
+  const streetAddress2 = useRef();
+  const city = useRef();
+  const state = useRef();
+  const zip = useRef();
 
   const handleSubmit = event => {
     event.preventDefault();
     console.log("Clicked Submit");
-    console.log(uid)
+
     const data = {
-      uid: uid.current.value,
       prefix: prefix.current.value,
       firstName: firstName.current.value,
       lastName: lastName.current.value,
@@ -36,9 +36,9 @@ const EditContactInfo = () => {
       city: city.current.value,
       state: state.current.value,
       zip: zip.current.value,
-    }
-    console.log(data)
-    API.updateUser(data.uid, data)
+    };
+
+    API.updateUser(data, token.current.value);
   };
 
   return (
@@ -47,6 +47,7 @@ const EditContactInfo = () => {
       <h1>Edit Contact Info</h1>
       <RegistrationContactInfo
         uidRef={uid}
+        tokenRef={token}
         prefixRef={prefix}
         firstNameRef={firstName}
         lastNameRef={lastName}

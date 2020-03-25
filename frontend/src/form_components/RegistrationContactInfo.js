@@ -10,9 +10,13 @@ function RegistrationContactInfo(props) {
       {authUser =>
         (
           <div className="container">
-            <div className="form-group">
+            <div className="form-group hidden">
               <label htmlFor="uid">uid</label>
               <input uid="uid" type="text" className="form-control" defaultValue={get(authUser, "uid")} ref={props.uidRef}></input>
+            </div>
+            <div className="form-group hidden">
+              <label htmlFor="token">token</label>
+              <input uid="token" type="text" className="form-control" defaultValue={get(authUser, "token")} ref={props.tokenRef}></input>
             </div>
             <div className="form-group">
               <label htmlFor="prefix">Prefix</label>

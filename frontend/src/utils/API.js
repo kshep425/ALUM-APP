@@ -23,16 +23,18 @@ export default {
   },
 
   getAllUsers: function(data) {
-    return axios.post("/api/users")
+    return axios.get("/api/users")
   },
 
   getUser: function(uid) {
     return axios.get("/api/user/" + uid)
   },
 
-  updateUser: function(uid, data) {
-    return axios.post("/api/update/" + uid, data)
+  updateUser: function(data, token) {
+    return axios.post('/api/updateUser/',data, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
   }
-
-
 };

@@ -8,7 +8,7 @@ const db_queries = {
     },
 
     getMember: function(member_id){
-        return db.Member.findOne({uid: member_id})
+        return db.Member.findOne({where: {uid: member_id}})
     },
 
     updateMember: function(member_id, update_request ){
@@ -17,11 +17,11 @@ const db_queries = {
     },
 
     delete_member: function(member_id){
-        return db.Member.destroy({id: member_id})
+        return db.Member.destroy({uid: member_id})
     },
 
     getAllMembers: function(){
-        return db.Member.find();
+        return db.Member.findAll();
     },
 
     formatRequest: function(reqBody){

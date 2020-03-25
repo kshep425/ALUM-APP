@@ -1,45 +1,14 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import { withFirebase } from '../Firebase';
 
-class UserItem extends Component {
-  constructor(props) {
-    super(props);
+function UserItem(props){
+  const [loading, setLoading] = useState({loading: false})
+  const [user, setUser] = useState({user: props.user})
 
-    this.state = {
-      loading: false,
-      user: null,
-      ...props.location.state,
-    };
-  }
-
-  componentDidMount() {
-    if (this.state.user) {
-      return;
-    }
-
-    this.setState({ loading: true });
-
-    this.props.firebase
-      .user(this.props.match.params.id)
-      .on('value', snapshot => {
-        this.setState({
-          user: snapshot.val(),
-          loading: false,
-        });
-      });
-  }
-
-  componentWillUnmount() {
-    this.props.firebase.user(this.props.match.params.id).off();
-  }
-
-  onSendPasswordResetEmail = () => {
-    this.props.firebase.doPasswordReset(this.state.user.email);
+  const onSendPasswordResetEmail = () => {
+    props.firebase.doPasswordReset(this.state.user.email);
   };
-
-  render() {
-    const { user, loading } = this.state;
 
     return (
       <div>
@@ -60,7 +29,7 @@ class UserItem extends Component {
             <span>
               <button
                 type="button"
-                onClick={this.onSendPasswordResetEmail}
+                onClick={onSendPasswordResetEmail}
               >
                 Send Password Reset
               </button>
@@ -69,7 +38,7 @@ class UserItem extends Component {
         )}
       </div>
     );
-  }
 }
+
 
 export default withFirebase(UserItem);
