@@ -23,16 +23,16 @@ module.exports = function (app) {
       });
   });
 
-  app.get("/api/user/:uid", function (req, res) {
-    console.log("Get User by UID")
-    console.log(req.params.uid)
-    return db.getMember(req.params.uid)
+  app.get("/api/user/", checkIfAuthenticated, function (req, res) {
+    console.log("Get User")
+    return db.getMember(req.authId)
       .then(function (result) {
         res.status(200).json(result);
       });
   });
 
   app.post("/api/updateUser", checkIfAuthenticated, function (req, res) {
+    console.log("Update User")
     return db.updateMember(req.authId, req.body)
       .then(function (result) {
         res.status(200).json(result);
