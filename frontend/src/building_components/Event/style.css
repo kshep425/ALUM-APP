@@ -82,6 +82,8 @@
 }
 .open {
   display: block;
+  -webkit-animation: slide-down 0.3s ease-out;
+  -moz-animation: slide-down 0.3s ease-out;
 }
 
 .eventHr {
