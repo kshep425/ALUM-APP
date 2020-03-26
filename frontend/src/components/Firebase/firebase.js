@@ -69,7 +69,7 @@ class Firebase {
     this.auth.onAuthStateChanged(async authUser => {
       if (authUser) {
         const token = await this.auth.currentUser.getIdToken(/* forceRefresh */ true)
-        const db = await API.getUser(authUser.uid);
+        const db = await API.getUser(token);
         authUser = {
           uid: authUser.uid,
           email: authUser.email,

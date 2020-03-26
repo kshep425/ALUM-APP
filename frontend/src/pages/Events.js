@@ -137,7 +137,6 @@ const Events = () => {
           <div className="col-md-12">
             {state.events.map(event => {
               const newEvent = Object.assign({}, event);
-
               console.log("EVENT TITLE BELOW!");
               console.log(newEvent.title);
               return (
@@ -148,6 +147,7 @@ const Events = () => {
                   type={newEvent.type}
                   venueName={newEvent.venueName}
                   address={newEvent.address}
+                  key={newEvent.id}
                 ></Event>
               );
             })}

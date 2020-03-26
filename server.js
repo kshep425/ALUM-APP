@@ -48,10 +48,10 @@ app.use(
 // =============================================================
 //const api_routes = require("./routes/api_routes")
 //app.use(api_routes);
-app.use(routes)
 require("./Backend/routes/api_routes/login_api_routes")(app);
 require("./Backend/routes/api_routes/events")(app);
 require("./Backend/routes/api_routes/users_api")(app);
+app.use(routes)
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 const sync = JSON.parse(process.env.DB_SYNC) || true;
