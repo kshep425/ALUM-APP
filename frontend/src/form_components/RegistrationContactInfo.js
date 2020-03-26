@@ -3,8 +3,6 @@ import { AuthUserContext } from '../components/Session';
 import get from 'lodash/get'
 
 function RegistrationContactInfo(props) {
-
-
   return (
     <AuthUserContext.Consumer>
       {authUser =>

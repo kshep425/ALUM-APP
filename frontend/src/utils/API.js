@@ -2,36 +2,59 @@ import axios from "axios";
 
 export default {
   // Gets all events
-  getEvents: function() {
+  getEvents: function () {
     return axios.get("/api/events");
   },
   // Gets the event with the given id
-  getEvent: function(id) {
+  getEvent: function (id) {
     return axios.get("/api/events/" + id);
   },
   // Deletes the event with the given id
-  deleteEvent: function(id) {
+  deleteEvent: function (id) {
     return axios.delete("/api/events/" + id);
   },
   // Saves a event to the database
-  addEvent: function(eventData) {
+  addEvent: function (eventData) {
     return axios.post("/api/events", eventData);
   },
 
-  addNewUser: function(data) {
+  addNewUser: function (data) {
     return axios.post("/api/user", data)
   },
 
-  getAllUsers: function(data) {
+  getAllUsers: function () {
     return axios.get("/api/users")
   },
 
-  getUser: function(uid) {
-    return axios.get("/api/user/" + uid)
+  getAllUsersWithToken: async function (token) {
+    console.log(token)
+    return axios.get("/api/users", {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
   },
 
-  updateUser: function(data, token) {
-    return axios.post('/api/updateUser/',data, {
+
+
+  getUser: function (token) {
+    return axios.get("/api/user/", {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+  },
+
+  updateUser: function (data, token) {
+    return axios.post('/api/updateUser/', data, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+  },
+
+  setUserRole: function (data, token) {
+    return axios.post('/api/setUserRole/', data, {
       headers: {
         authorization: `Bearer ${token}`
       }

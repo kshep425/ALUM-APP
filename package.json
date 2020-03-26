@@ -10,7 +10,8 @@
     "frontend": "cd frontend && npm run start",
     "install": "cd frontend && npm install",
     "build": "cd frontend && npm run build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "test": "jest --watch --coverage"
   },
   "author": "",
   "license": "ISC",
@@ -31,6 +32,7 @@
     "firebase-service": "^4.0.221",
     "http2": "^3.3.7",
     "if-env": "^1.0.4",
+    "jest": "^25.1.0",
     "lodash": "^4.17.15",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
