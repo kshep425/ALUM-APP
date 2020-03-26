@@ -1,6 +1,5 @@
 const db = require("../../config/db_queries");
-const admin = require('firebase-admin');
-const {checkIfAuthenticated} = require('../../config/middleware/auth-middleware');
+const {checkIfAuthenticated, checkIfAdmin} = require('../../config/middleware/auth-middleware');
 
 module.exports = function (app) {
   app.post("/api/user", function (req, res) {
@@ -37,5 +36,11 @@ module.exports = function (app) {
       .then(function (result) {
         res.status(200).json(result);
       });
-  })
+  });
+
+  app.post("/api/setUserRole", checkIfAdmin, function(req,res){
+    console.log("Set User Role")
+    console.log(req.body);
+    return db.updateMember(req.uid, {role: req.body.role})
+  });
 };

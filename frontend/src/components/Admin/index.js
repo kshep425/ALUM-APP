@@ -10,22 +10,31 @@ const AdminPage = () => {
   const getAllUsers = async () => {
     console.log("Get all users")
     API.getAllUsers()
-     .then((result) => {
-       console.log(result.data)
-       setUsers({ users: result.data })
-     });
+      .then((result) => {
+        setUsers({ users: result.data })
+      });
   }
 
   useEffect(() => {
     getAllUsers()
   }, [])
 
+  const setUserRole = (uid, role) => {
+    API.setUserRole({uid, role}, token);
+  }
+
   const displayUsers = (users) => {
     console.log("Display Users");
-    console.log(users);
     return (
       users.users.map((user) =>
-        <li key={user.id}>{user.id}: {user.username}, {user.firstName} {user.lastName}</li>
+        <li key={user.uid}>{user.uid}: {user.username}, {user.firstName} {user.lastName} {user.role}
+          <input type="radio" id="user" name="role" className="" value="USER" onChange={() => {setUserRole(user.uid, "USER")}} defaultChecked={(user.role === "USER")}/>
+            <label htmlFor="user">USER</label>
+          <input type="radio" id="user" name="role" className="" value="BOARD" onChange={() => {setUserRole(user.uid, "BOARD")}}defaultChecked={(user.role === "BOARD")}/>
+            <label htmlFor="user">BOARD</label>
+          <input type="radio" id="user" name="role" className="" value="ADMIN" onChange={() => {setUserRole(user.uid, "ADMIN")}} defaultChecked={(user.role === "ADMIN")}/>
+            <label htmlFor="user">ADMIN</label>
+        </li>
       ))
   }
 
@@ -39,8 +48,12 @@ const AdminPage = () => {
   );
 }
 
-const condition = authUser =>
-  authUser && !!authUser.roles[ROLES.ADMIN];
+let token;
+
+const condition = authUser =>{
+ token = authUser.token
+ return authUser && !!authUser.roles[ROLES.ADMIN];
+}
 
 export default compose(
   withEmailVerification,

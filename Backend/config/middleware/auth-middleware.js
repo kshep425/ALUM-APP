@@ -5,6 +5,7 @@
  */
 // const admin = require('firebase-service');
 const admin = require('firebase-admin');
+const db = require('../db_queries')
 
 const getAuthToken = (req, res, next) => {
   if (
@@ -39,12 +40,63 @@ const checkIfAuthenticated = (req, res, next) => {
   });
 };
 
-const makeUserAdmin = async (req, res) => {
-  const {userId} = req.body; // userId is the firebase uid for the user
+const setUserRole = async (req, res) => {
+  const { uid, role } = req.body; // userId is the firebase uid for the user
+  console.log(uid)
+  console.log(role)
+  getAuthToken(req, res, async () => {
+    try {
+      const { authToken } = req;
+      const userInfo = await admin
+        .auth()
+        .verifyIdToken(authToken);
 
-  await admin.auth().setCustomUserClaims(userId, {admin: true});
+      if (userInfo.admin === true) {
+        req.authId = userInfo.uid;
+        return next();
+      }
 
-  return res.send({message: 'Success'})
+      throw new Error('unauthorized')
+    } catch (e) {
+      return res
+        .status(401)
+        .send({ error: 'You are not an admin and cannot change a role' });
+    }
+  });
 }
 
-module.exports = {checkIfAuthenticated, makeUserAdmin}
+const checkIfAdmin = (req, res, next) => {
+  getAuthToken(req, res, async () => {
+    try {
+      const { authToken } = req;
+      const userInfo = await admin
+        .auth()
+        .verifyIdToken(authToken);
+      console.log(userInfo.uid)
+      db.getMember(userInfo.uid)
+      .then((result) =>{
+        console.log(result.dataValues.role)
+        if (result.dataValues.role === "ADMIN") {
+          console.log("You are an admin")
+          req.uid = userInfo.uid;
+          return next();
+        }
+
+        throw new Error('unauthorized')
+      }).catch(e  => {
+        // console.log(e)
+        return res
+          .status(401)
+          .send({ error: 'You are not authorized to make this request' });
+      })
+
+    } catch (e) {
+      // console.log(e)
+      return res
+        .status(401)
+        .send({ error: 'You are not authorized to make this request' });
+    }
+  });
+};
+
+module.exports = { checkIfAuthenticated, setUserRole, checkIfAdmin }
