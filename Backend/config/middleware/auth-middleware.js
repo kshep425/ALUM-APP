@@ -6,7 +6,6 @@
 // const admin = require('firebase-service');
 const admin = require('firebase-admin');
 
-
 const getAuthToken = (req, res, next) => {
   if (
     req.headers.authorization &&
@@ -40,4 +39,12 @@ const checkIfAuthenticated = (req, res, next) => {
   });
 };
 
-module.exports = checkIfAuthenticated
+const makeUserAdmin = async (req, res) => {
+  const {userId} = req.body; // userId is the firebase uid for the user
+
+  await admin.auth().setCustomUserClaims(userId, {admin: true});
+
+  return res.send({message: 'Success'})
+}
+
+module.exports = {checkIfAuthenticated, makeUserAdmin}
