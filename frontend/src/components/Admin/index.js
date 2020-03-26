@@ -7,7 +7,7 @@ import { withAuthorization, withEmailVerification } from '../Session';
 import * as ROLES from '../../constants/roles';
 // import * as ROUTES from '../../constants/routes';
 import API from '../../utils/API'
-// import get from 'lodash/get';
+import get from 'lodash/get';
 
 const AdminPage = () => {
   const [users, setUsers] = useState({ users: [] })
@@ -47,8 +47,13 @@ const AdminPage = () => {
   );
 }
 
-const condition = authUser =>
-  authUser && !!authUser.roles[ROLES.ADMIN];
+let token;
+
+const condition = authUser => {
+  token = authUser.token
+  console.log(get(authUser, 'db.role'))
+  return authUser && !!authUser.db.role === ROLES.ADMIN;
+}
 
 export default compose(
   withEmailVerification,

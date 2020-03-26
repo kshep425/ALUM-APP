@@ -75,7 +75,6 @@ class Firebase {
           email: authUser.email,
           emailVerified: authUser.emailVerified,
           providerData: authUser.providerData,
-          roles: { ADMIN: true },
           db: db.data,
           token
         };

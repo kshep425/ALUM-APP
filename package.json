@@ -16,7 +16,8 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^4.1.2",
-    "nodemon": "^1.19.4"
+    "nodemon": "^1.19.4",
+    "jest": "^25.1.0"
   },
   "dependencies": {
     "@phuocng/react-pdf-viewer": "^1.4.0",
