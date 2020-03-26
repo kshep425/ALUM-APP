@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
-// import { Switch, Route } from 'react-router-dom';
 import { compose } from 'recompose';
-
 import { withAuthorization, withEmailVerification } from '../Session';
-// import { UserList, UserItem } from '../Users';
 import * as ROLES from '../../constants/roles';
-// import * as ROUTES from '../../constants/routes';
 import API from '../../utils/API'
-// import get from 'lodash/get';
 
 const AdminPage = () => {
   const [users, setUsers] = useState({ users: [] })
@@ -15,10 +10,10 @@ const AdminPage = () => {
   const getAllUsers = async () => {
     console.log("Get all users")
     API.getAllUsers()
-      .then((result) => {
-        console.log(result.data)
-        setUsers({ users: result.data })
-      });
+     .then((result) => {
+       console.log(result.data)
+       setUsers({ users: result.data })
+     });
   }
 
   useEffect(() => {
@@ -27,6 +22,7 @@ const AdminPage = () => {
 
   const displayUsers = (users) => {
     console.log("Display Users");
+    console.log(users);
     return (
       users.users.map((user) =>
         <li key={user.id}>{user.id}: {user.username}, {user.firstName} {user.lastName}</li>
@@ -39,10 +35,6 @@ const AdminPage = () => {
       <p>The Admin Page is accessible by every signed in admin user.</p>
       <h1>Users</h1>
       <ul>{displayUsers(users)}</ul>
-      {/* <Switch>
-        <Route exact path={ROUTES.ADMIN_DETAILS} component={UserItem} />
-        <Route exact path={ROUTES.ADMIN} component={UserList} />
-      </Switch> */}
     </div>
   );
 }

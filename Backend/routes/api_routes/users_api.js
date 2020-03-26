@@ -1,6 +1,6 @@
 const db = require("../../config/db_queries");
 const admin = require('firebase-admin');
-const checkIfAuthenticated = require('../../config/middleware/auth-middleware');
+const {checkIfAuthenticated} = require('../../config/middleware/auth-middleware');
 
 module.exports = function (app) {
   app.post("/api/user", function (req, res) {
@@ -16,9 +16,9 @@ module.exports = function (app) {
 
   app.get("/api/users", function (req, res) {
     console.log("Get all members")
-    // listAllUsers();
     return db.getAllMembers()
       .then(function (result) {
+        console.log(result)
         res.status(200).json(result);
       });
   });

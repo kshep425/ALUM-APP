@@ -22,9 +22,20 @@ export default {
     return axios.post("/api/user", data)
   },
 
-  getAllUsers: function(data) {
+  getAllUsers: function() {
     return axios.get("/api/users")
   },
+
+  getAllUsersWithToken: async function(token) {
+    console.log(token)
+    return axios.get("/api/users", {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+  },
+
+
 
   getUser: function(token) {
     return axios.get("/api/user/", {
