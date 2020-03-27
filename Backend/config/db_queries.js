@@ -2,47 +2,52 @@ const db = require("../models")
 
 const db_queries = {
 
-    create_member: function(req_body){
-        const [request, fields] = this.format_request(req_body)
+    createMember: function(reqBody){
+        const [request, fields] = this.formatRequest(reqBody)
         return db.Member.create(request, fields)
     },
 
-    find_member: function(member_id){
-        return db.Member.findOne({id: member_id})
+    getMember: function(member_id){
+        return db.Member.findOne({where: {uid: member_id}})
     },
 
-    update_member: function(update_request, member_id){
-        const [request] = this.format_request(update_request)
-        return db.Member.update(request, {where: {id: member_id}})
+    updateMember: function(member_id, update_request ){
+        const [request] = this.formatRequest(update_request)
+        return db.Member.update(request, {where: {uid: member_id}})
     },
 
     delete_member: function(member_id){
-        return db.Member.destroy({id: member_id})
+        return db.Member.destroy({uid: member_id})
     },
 
-    get_all_members: function(member_id){
-        return db.Member.find();
+    getAllMembers: function(){
+        return db.Member.findAll();
     },
 
-    format_request: function(req_body){
+    formatRequest: function(reqBody){
         let fields = {options: {fields: []}};
         console.log("Create Member Called")
         let request = {
-            username: req_body.username,
-            password: req_body.password,
-            full_name: req_body.full_name,
-            email: req_body.email,
-            prefix: req_body.prefix,
-            suffix: req_body.suffix,
-            phone: req_body.phone,
-            street_address_1: req_body.street_address_1,
-            street_address_2: req_body.street_address_2,
-            city: req_body.city,
-            state: req_body.state,
-            zip: req_body.zip,
-            occupation: req_body.occupation,
-            member_type: req_body.member_type,
-            member_marital_status: req_body.member_marital_status
+            username: reqBody.username,
+            password: reqBody.password,
+            fullName: reqBody.fullName,
+            firstName: reqBody.firstName,
+            lastName: reqBody.lastName,
+            email: reqBody.email,
+            prefix: reqBody.prefix,
+            suffix: reqBody.suffix,
+            phone: reqBody.phone,
+            streetAddress1: reqBody.streetAddress1,
+            streetAddress2: reqBody.streetAddress2,
+            city: reqBody.city,
+            state: reqBody.state,
+            zip: reqBody.zip,
+            occupation: reqBody.occupation,
+            memberType: reqBody.memberType,
+            memberMaritalStatus: reqBody.memberMaritalStatus,
+            imageUrl: reqBody.imageUrl,
+            uid: reqBody.uid,
+            role: reqBody.role,
         };
         Object.keys(request).forEach(key => {
             if (!request[key]) {
@@ -57,11 +62,11 @@ const db_queries = {
 
     /**
      * Add a degree
-     * @param {*} req_body Should be a object {memberId: val, degree: val, year: val}
+     * @param {*} reqBody Should be a object {memberId: val, degree: val, year: val}
      */
-    add_degree: function(req_body){
-        console.log(req_body)
-        return db.Degree.create(req_body)
+    add_degree: function(reqBody){
+        console.log(reqBody)
+        return db.Degree.create(reqBody)
     },
 
     all_degrees: function(){

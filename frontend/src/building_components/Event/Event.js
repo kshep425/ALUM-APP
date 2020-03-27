@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./style.css";
+import Button from "../Button";
+import { AuthUserContext } from "../../components/Session";
+import * as ROLES from "../../constants/roles"
 
 const Event = props => {
   const [state, setState] = useState({ eventOpen: false });
@@ -43,10 +46,41 @@ const Event = props => {
           >
             Hide Details
           </button>
+          <AdminButtons />
         </div>
       </div>
     </div>
   );
 };
+
+const UpdateEventButton = () => {
+  return (
+    <Button>Update Event</Button>
+  )
+}
+const CancelEventButton = () => {
+  return (
+    <Button>Cancel Event</Button>
+  )
+}
+
+const AdminButtons = (props) =>{
+  console.log("render admin buttons")
+  return (
+    <AuthUserContext.Consumer>
+      {authUser => {
+        return (authUser.db.role=== ROLES.ADMIN)
+      ? (
+        <>
+        <p>admin buttons</p>
+          <UpdateEventButton />
+          <CancelEventButton />
+        </>
+      )
+      : null
+    }}
+    </AuthUserContext.Consumer>
+  )
+}
 
 export default Event;
