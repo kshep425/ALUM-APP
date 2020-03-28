@@ -17,6 +17,7 @@ import AboutPage from "./components/About";
 import AdminPage from "./components/Admin";
 import AccountsPage from "./components/Accounts";
 import EditContactInfo from './components/MyMSU/EditContactInfo'
+import EditMemberInfo from './components/MyMSU/EditMemberInfo'
 
 import NAVBAR from "./building_components/Navbar/Navbar";
 import * as ROUTES from "./constants/routes";
@@ -47,6 +48,7 @@ class App extends Component {
               <Route path={ROUTES.SCHOLARSHIPS} component={ShcolarshipPage} />
               <Route path={ROUTES.ABOUT} component={AboutPage} />
               <Route path={ROUTES.EDIT} component={EditContactInfo} />
+              <Route path={ROUTES.EDIT_MEMBER_INFO} component={EditMemberInfo} />
             </Wrapper>
           </div>
         </StoreProvider>

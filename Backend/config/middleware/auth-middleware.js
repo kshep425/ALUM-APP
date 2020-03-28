@@ -29,7 +29,7 @@ const checkIfAuthenticated = (req, res, next) => {
       const userInfo = await admin
         .auth()
         .verifyIdToken(authToken);
-      req.authId = userInfo.uid;
+      req.uid = userInfo.uid;
       return next();
     } catch (e) {
       console.log(e)
@@ -52,7 +52,7 @@ const setUserRole = async (req, res) => {
         .verifyIdToken(authToken);
 
       if (userInfo.admin === true) {
-        req.authId = userInfo.uid;
+        req.uid = userInfo.uid;
         return next();
       }
 

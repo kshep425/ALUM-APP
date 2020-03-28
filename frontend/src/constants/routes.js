@@ -14,3 +14,4 @@ export const ADMIN_DETAILS = '/admin/:id';
 export const DONATE = '/donate';
 export const ABOUT = '/about';
 export const SCHOLARSHIPS = '/scholarships'
+export const EDIT_MEMBER_INFO = '/editMemberInfo'

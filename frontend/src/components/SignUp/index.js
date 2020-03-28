@@ -47,14 +47,19 @@ class SignUpFormBase extends Component {
       .then(authUser => {
         // Add user to our database
         API.addNewUser({uid: authUser.user.uid, username, email, role: ROLES.USER})
+          .then(result => {
+            console.log(result)
+          })
 
         // Create a user in your Firebase realtime database
-        return this.props.firebase.user(authUser.user.uid).set({
-          username,
-          email,
-        });
+        // return this.props.firebase.user(authUser.user.uid).set({
+        //   username,
+        //   email,
+        //   role
+        // });
       })
       .then(() => {
+        console.log("Send Email Verification")
         return this.props.firebase.doSendEmailVerification();
       })
       .then(() => {
