@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { compose } from 'recompose';
 
 import {
@@ -11,6 +10,7 @@ import { withFirebase } from '../Firebase';
 import PasswordChangeForm from '../PasswordChange';
 import ContactInfo from './ContactInfo'
 import MemberInfo from './MemberInfo'
+import MemberType from './MemberType.js'
 
 const SIGN_IN_METHODS = [
   {
@@ -48,7 +48,8 @@ const MyMsuPage = () => (
           </div>
         </div>
         <ContactInfo authUser={authUser} />
-        <MemberInfo authUser={authUser}/>
+        <MemberInfo authUser={authUser} />
+        <MemberType authUser={authUser} />
         <PasswordChangeForm />
         <LoginManagement authUser={authUser} />
       </div>

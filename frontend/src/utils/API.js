@@ -91,5 +91,14 @@ export default {
         authorization: `Bearer ${token}`
       }
     })
+  },
+
+  myPayments: function (token) {
+    console.log("myPayments")
+    return axios.get("/api/myPayments", {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
   }
 };
