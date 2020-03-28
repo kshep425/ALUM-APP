@@ -1,4 +1,6 @@
 import React from 'react';
+import Footer from "../building_components/Footer/Footer";
+import "./style.css";
 
 const About = () => {
   return (
@@ -32,8 +34,9 @@ const About = () => {
       <h4 className="title">National Association - Karen Wright</h4>
       <h4 className="title">Historian - Robert Sturtevant</h4>
       <h4 className="title">Publication - Dianne Oliver</h4>
-
-
+    </div>
+    <div>
+      <Footer />
     </div>
   );
 };
