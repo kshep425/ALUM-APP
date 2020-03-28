@@ -11,9 +11,9 @@ const db_queries = {
         return db.Member.findOne({where: {uid: member_id}
     })},
 
-    updateMember: function(member_id, update_request ){
+    updateMember: function(uid, update_request ){
         const [request] = this.formatRequest(update_request)
-        return db.Member.update(request, {where: {uid: member_id}})
+        return db.Member.update(request, {where: {uid}})
     },
 
     delete_member: function(member_id){

@@ -61,16 +61,32 @@ export default {
 
   getUserDegrees: function (token) {
     console.log("getUserDegrees")
-      return axios.get('/api/getUserDegreesWithUid', {
+    return axios.get('/api/getUserDegreesWithUid', {
       headers: {
         authorization: `Bearer ${token}`
       }
     })
   },
 
-  updateDegreeInfo: function(data, token) {
+  updateDegreeInfo: function (data, token) {
     console.log("updateDegreeInfo: ", data)
     return axios.post('/api/updateDegreeInfo/', data, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+  },
+
+  /**
+   * payDues - submit payment for dues
+   * @param {} data
+   *    {memberType,
+   *    memberId}
+   * @param {*} token
+   */
+  payDues: function (data, token) {
+    console.log("payDues")
+    return axios.post("/api/payDues", data, {
       headers: {
         authorization: `Bearer ${token}`
       }

@@ -23,7 +23,7 @@ class RegistrationMemberType extends Component {
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="member_type" id="inputCurrentLifeMemberMarried"
-                        value="Current Life Member Married Couple " data-marital_status="married" ></input>
+                        value="Current Life Member Married Couple" data-marital_status="married" ></input>
                     <label class="form-check-label" for="inputCurrentLifeMemberMarried">
                         Current Life Member Married Couple $45
                     </label>
@@ -44,7 +44,7 @@ class RegistrationMemberType extends Component {
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="member_type" id="inputIndividualLifeMemberInstallment"
-                        value="Individual Life Membership Installment " data-marital_status="individual" ></input>
+                        value="Individual Life Membership Installment" data-marital_status="individual" ></input>
                     <label class="form-check-label" for="inputIndividualLifeMemberInstallment">
                         Individual Life Membership Installment $150
                     </label>
