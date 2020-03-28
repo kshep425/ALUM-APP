@@ -11,6 +11,7 @@ import PasswordChangeForm from '../PasswordChange';
 import ContactInfo from './ContactInfo'
 import MemberInfo from './MemberInfo'
 import MemberType from './MemberType.js'
+import PaymentHistory from './PaymentHistory'
 
 const SIGN_IN_METHODS = [
   {
@@ -50,6 +51,7 @@ const MyMsuPage = () => (
         <ContactInfo authUser={authUser} />
         <MemberInfo authUser={authUser} />
         <MemberType authUser={authUser} />
+        <PaymentHistory authUser={authUser} />
         <PasswordChangeForm />
         <LoginManagement authUser={authUser} />
       </div>
