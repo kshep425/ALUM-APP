@@ -35,8 +35,6 @@ export default {
     })
   },
 
-
-
   getUser: function (token) {
     return axios.get("/api/user/", {
       headers: {
@@ -55,6 +53,24 @@ export default {
 
   setUserRole: function (data, token) {
     return axios.post('/api/setUserRole/', data, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+  },
+
+  getUserDegrees: function (token) {
+    console.log("getUserDegrees")
+      return axios.get('/api/getUserDegreesWithUid', {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+  },
+
+  updateDegreeInfo: function(data, token) {
+    console.log("updateDegreeInfo: ", data)
+    return axios.post('/api/updateDegreeInfo/', data, {
       headers: {
         authorization: `Bearer ${token}`
       }

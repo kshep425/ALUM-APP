@@ -70,12 +70,14 @@ class Firebase {
       if (authUser) {
         const token = await this.auth.currentUser.getIdToken(/* forceRefresh */ true)
         const db = await API.getUser(token);
+        const degrees = await API.getUserDegrees(token);
         authUser = {
           uid: authUser.uid,
           email: authUser.email,
           emailVerified: authUser.emailVerified,
           providerData: authUser.providerData,
           db: db.data,
+          degrees: degrees.data,
           token
         };
         next(authUser);

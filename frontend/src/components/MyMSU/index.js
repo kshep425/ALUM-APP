@@ -10,7 +10,7 @@ import {
 import { withFirebase } from '../Firebase';
 import PasswordChangeForm from '../PasswordChange';
 import ContactInfo from './ContactInfo'
-import { EDIT } from '../../constants/routes'
+import MemberInfo from './MemberInfo'
 
 const SIGN_IN_METHODS = [
   {
@@ -47,7 +47,8 @@ const MyMsuPage = () => (
             {!!authUser.providerData[0].phoneNumber && (<h6>Phone: {authUser.providerData[0].phoneNumber}</h6>)}
           </div>
         </div>
-        <ContactInfo />
+        <ContactInfo authUser={authUser} />
+        <MemberInfo authUser={authUser}/>
         <PasswordChangeForm />
         <LoginManagement authUser={authUser} />
       </div>
