@@ -21,7 +21,7 @@ const LogInOrOutBtn = () => (
         <>
           <div className="dropdown loginBtnDiv">
             <button
-              class="btn dropdown-toggle"
+              className="btn dropdown-toggle"
               type="button"
               id="dropdownMenuButton"
               data-toggle="dropdown"
