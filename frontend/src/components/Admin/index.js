@@ -53,8 +53,8 @@ let token;
 
 const condition = authUser => {
   token = authUser.token
-  console.log(get(authUser, 'db.role'))
-  return authUser && !!authUser.db.role === ROLES.ADMIN;
+  console.log(get(authUser, 'member.role'))
+  return authUser && !!authUser.members.role === ROLES.ADMIN;
 }
 
 export default compose(

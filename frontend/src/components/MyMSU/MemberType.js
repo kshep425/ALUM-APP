@@ -6,8 +6,8 @@ const MemberType = (props) => {
   console.log(props)
 
   function getMemberType() {
-    if (props.authUser.db.memberType) {
-      return (<p>{props.authUser.db.memberType}</p>)
+    if (props.authUser.members.memberType) {
+      return (<p>{props.authUser.members.memberType}</p>)
     } else {
       return (
         <div>

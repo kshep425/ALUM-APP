@@ -13,10 +13,10 @@ const MemberInfo = (props) => {
   const GetOccupation = () => {
     console.log("Get Occupation")
     return (
-      (authUser.db && !!authUser.db.occupation)
+      (authUser.members && !!authUser.members.occupation)
         ? (
         <>
-          <p><strong>{authUser.db.occupation}</strong></p>
+          <p><strong>{authUser.members.occupation}</strong></p>
         </>)
         : (<p>Add your Occupation</p>)
     )

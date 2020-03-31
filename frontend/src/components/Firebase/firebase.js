@@ -68,21 +68,28 @@ class Firebase {
   onAuthUserListener = async (next, fallback) =>
     this.auth.onAuthStateChanged(async authUser => {
       if (authUser) {
-        const token = await this.auth.currentUser.getIdToken(/* forceRefresh */ true)
-        const db = await API.getUser(token);
-        const degrees = await API.getUserDegrees(token);
-        const payments = await API.myPayments(token);
-        authUser = {
-          uid: authUser.uid,
-          email: authUser.email,
-          emailVerified: authUser.emailVerified,
-          providerData: authUser.providerData,
-          db: db.data,
-          degrees: degrees.data,
-          payments: payments.data,
-          token
-        };
-        next(authUser);
+        // Get User Token
+        this.auth.currentUser.getIdToken(/* forceRefresh */ true)
+        .then((token) =>{
+          // Get User Info from members, degrees, and payments table
+          Promise.all([API.getUser(token), API.getUserDegrees(token),API.myPayments(token)])
+          .then(result => {
+            console.log(result)
+            let [members, degrees, payments] = result;
+              // add table data to authUser for use in myMSU and Events Pages.
+              authUser = {
+                uid: authUser.uid,
+                email: authUser.email,
+                emailVerified: authUser.emailVerified,
+                providerData: authUser.providerData,
+                members: members.data || {},
+                degrees: degrees.data,
+                payments: payments.data,
+                token
+              };
+              next(authUser);
+          })
+        })
       } else {
         fallback();
       }

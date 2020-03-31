@@ -25,7 +25,7 @@ const PayMembershipDues = (props) => {
     if (paymentObj.memberType) {
       API.payDues(paymentObj, token)
         .then((result) => {
-          alert("You hae paid your dues!")
+          alert("You have paid your dues!")
           props.history.push(ROUTES.MYMSU)
         })
         .catch((err) => {
@@ -39,7 +39,7 @@ const PayMembershipDues = (props) => {
   return (
     <AuthUserContext.Consumer>
       {authUser => {
-        memberId = authUser.db.id
+        memberId = authUser.members.id
         token = authUser.token
         return (
           <div>
