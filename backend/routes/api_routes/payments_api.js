@@ -1,6 +1,6 @@
 const dbPayment = require("../../config/db_payment_queries");
 const dbMember = require("../../config/db_queries")
-const { checkIfAuthenticated, checkIfAdmin } = require('../../config/middleware/auth-middleware');
+const { checkIfAuthenticated } = require('../../config/middleware/auth-middleware');
 
 function getMemberDueAmount(memberType) {
     let amount;
