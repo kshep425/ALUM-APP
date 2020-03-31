@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  let Event = sequelize.define("Event", {
+  let Event = sequelize.define("event", {
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     startDate: DataTypes.DATE,
@@ -8,19 +8,13 @@ module.exports = function(sequelize, DataTypes) {
     address: DataTypes.STRING,
     venueName: DataTypes.STRING,
     ticketType: DataTypes.STRING,
-    hostName: DataTypes.STRING,
-    hostEmail: DataTypes.STRING,
-    creatorId: DataTypes.STRING
+    //string? or integer for hostUid
+    hostUid: DataTypes.STRING
   });
 
-  Event.associate = function (models) {
-    models.Event.belongsTo(models.Member, {
-        onDelete: "CASCADE",
-        foreignKey: {
-            allowNull: true
-        }
-    });
-};
+  Event.associate = function(models) {
+    Event.belongsToMany(models.Member, { through: "event_members" });
+  };
 
   return Event;
 };

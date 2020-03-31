@@ -4,14 +4,11 @@ import Footer from "../building_components/Footer/Footer";
 import "./style.css";
 
 const Home = () => {
-
   return (
     <div className="mainPage">
-      <h1>Scholarship Information</h1>
       <Carousel />
       <Footer />
     </div>
-
   );
 };
 

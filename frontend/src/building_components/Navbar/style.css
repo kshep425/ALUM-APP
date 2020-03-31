@@ -3,9 +3,9 @@
   height: 50px;
   background: linear-gradient(#122f5e, #5e779e);
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.425);
-  z-index: 999;
+  z-index: 1;
   padding: 0px;
-  overflow: hidden;
+
   position: sticky;
   top: 0px;
 }
@@ -17,13 +17,7 @@
 
 .btn {
   border-radius: 0px;
-  height: 100%;
-}
-
-.loginBtn,
-.registerBtn,
-.loginBtnDiv {
-  height: 100%;
+  height: 50px;
 }
 
 .registerBtn {
@@ -65,8 +59,7 @@
 }
 
 .logo {
-  padding-top: 20px;
-  height: 140px;
+  height: 130px;
 }
 
 .logoDiv {
@@ -92,7 +85,7 @@
   text-transform: uppercase;
   text-decoration: none;
   color: #122f5e;
-  padding: 7px 2px;
+  padding: 15px 2px;
   background: linear-gradient(
     to bottom,
     var(--mainColor) 0%,
@@ -106,20 +99,67 @@
 }
 
 .navLink:hover {
-  text-decoration: none;
   color: white;
   background-size: 4px 50px;
 }
 
 .fa-caret-right {
+  color: #122f5e;
+  padding: 5px 0px 0px 0px;
+  text-decoration: none;
   font-size: 20px;
+}
+
+.fa-caret-right:hover {
+  color: #122f5e;
+  text-decoration: none !important;
+  border: none;
 }
 
 .navItemDiv {
   margin: 30px;
+  text-decoration: none;
+}
+
+.navItemDiv:hover {
+  text-decoration: none;
 }
 
 .navRow {
   line-height: 0.5px;
   justify-content: center;
+}
+
+.navPhoto {
+  border-radius: 50%;
+}
+.dropdown-toggle:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.signoutBtn {
+  font-family: "Abel", sans-serif;
+  font-weight: bold;
+  color: #122f5e;
+  background-color: white;
+  border: none;
+  box-shadow: none;
+  padding: 5px 10px;
+}
+
+.myMSUlink {
+  font-family: "Abel", sans-serif;
+  font-weight: bold;
+  color: #122f5e;
+  background-color: white;
+  border: none;
+  box-shadow: none;
+  padding: 5px 10px;
+}
+
+.myMSUlink:hover,
+.signoutBtn:hover {
+  text-decoration: none;
+  color: #fe7f18;
 }

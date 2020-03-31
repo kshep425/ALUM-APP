@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
+import moment from "moment-timezone";
 import Button from "../Button";
 import { AuthUserContext } from "../../components/Session";
 import * as ROLES from "../../constants/roles"
@@ -12,33 +13,60 @@ const Event = props => {
   };
 
   return (
-    // <div className="eventDiv">
-    //   <h4 className="eventTitle">{props.title}</h4>
-    //   <h2 className="eventStart">{props.start}</h2>
-    //   <h2 className="eventEnd">{props.end}</h2>
-    //   <h2 className="eventEnd">{props.type}</h2>
-    //   <h2 className="eventEnd">{props.venueName}</h2>
-    //   <h2 className="eventEnd">{props.address}</h2>
-    //   <p className="eventDescription">{props.children}</p>
-    // </div>
     <div className="eventBox">
       <h1>{props.title}</h1>
 
       <hr className="eventHr" />
-      <h6>{props.type}</h6>
+      <h6>
+        <strong>Event Type:</strong> {props.type}
+      </h6>
+      <form className="rsvpForm" onSubmit={props.handleRSVP}>
+        <label className="formTitle">RSVP:</label>
+        <input type="radio" id="yes" name={"rsvp" + props.index} value="yes" />
+        <label>Yes</label>
 
+        <input type="radio" id="no" name={"rsvp" + props.index} value="no" />
+        <label>No</label>
+
+        <input
+          type="radio"
+          id="maybe"
+          name={"rsvp" + props.index}
+          value="maybe"
+        />
+        <label>Maybe</label>
+
+        <input className="open btn rsvpBtn" type="submit" value="Submit RSVP" />
+      </form>
       <button
         className={state.eventOpen ? "hidden" : "open btn detailsBtn"}
         onClick={viewDetails}
       >
-        View Details
+        Show Details
       </button>
       <div className={state.eventOpen ? "open" : "hidden"}>
-        <h1>{props.description}</h1>
-        <p>Starts: {props.start}</p>
-        <p>Ends: {props.end}</p>
-        <p>{props.venueName}</p>
-        <p>{props.address}</p>
+        <p>
+          <strong>About:</strong> {props.description}
+        </p>
+        <p>
+          <strong>Starts:</strong>{" "}
+          {moment
+            .tz(props.start, "America/New_York")
+            .format("MM/DD/YYYY hh:mm a")}
+        </p>
+        <p>
+          <strong>Ends:</strong>{" "}
+          {moment
+            .tz(props.end, "America/New_York")
+            .format("MM/DD/YYYY hh:mm a")}
+        </p>
+        <p>
+          <strong>Location:</strong>
+        </p>
+        <p>
+          {props.venueName}: {props.address}
+        </p>
+
         <div className="buttonDiv">
           <button
             className={state.eventOpen ? "open btn detailsBtn" : "hidden"}
