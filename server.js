@@ -51,7 +51,7 @@ app.use(
 require("./Backend/routes/api_routes/login_api_routes")(app);
 require("./Backend/routes/api_routes/events")(app);
 require("./Backend/routes/api_routes/users_api")(app);
-require("./backend/routes/api_routes/payments_api")(app);
+require("./Backend/routes/api_routes/payments_api")(app);
 app.use(routes)
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
