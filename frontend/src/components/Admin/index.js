@@ -57,6 +57,7 @@ const condition = authUser => {
   return authUser && !!authUser.members.role === ROLES.ADMIN;
 }
 
+
 export default compose(
   withEmailVerification,
   withAuthorization(condition),
