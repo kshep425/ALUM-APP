@@ -14,7 +14,7 @@ const PaymentHistory = (props) => {
     <div className="container">
       <div className="card">
         <h1 className="card-title">Payment History</h1>
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">Date</th>

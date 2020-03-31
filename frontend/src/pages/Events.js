@@ -271,7 +271,7 @@ const CreateEventButton = (props) => {
     <AuthUserContext.Consumer>
       {authUser => {
         return (
-          (authUser.db.role === ROLES.ADMIN)
+          (authUser && authUser.members.role === ROLES.ADMIN)
             ? (
               <Button
                 className="btn btn-primary addEventBtn"
@@ -292,7 +292,8 @@ const EventHost = (props) => {
     <AuthUserContext.Consumer>
       {authUser => {
         return (
-          <>
+          (authUser)
+          ? (<>
             <label htmlFor="hostName">HostName</label>
             <input
               id="hostName"
@@ -312,7 +313,8 @@ const EventHost = (props) => {
               defaultValue={authUser.email}
             />
             <input ref={props.creatorIdRef} defaultValue={authUser.uid} hidden></input>
-          </>
+          </>)
+          : null
         )
       }}
     </AuthUserContext.Consumer>

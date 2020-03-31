@@ -69,7 +69,7 @@ const AdminButtons = (props) =>{
   return (
     <AuthUserContext.Consumer>
       {authUser => {
-        return (authUser.db.role=== ROLES.ADMIN)
+        return (authUser.members.role=== ROLES.ADMIN)
       ? (
         <>
         <p>admin buttons</p>
