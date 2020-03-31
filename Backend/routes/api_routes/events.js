@@ -23,4 +23,22 @@ module.exports = function(app) {
       res.json(dbPost);
     });
   });
+
+  app.get("/api/event/:id/members", function(req, res) {
+    eventId = req.params.id;
+    return db
+      .getAllEventMembers(eventId)
+      .then(function(result) {
+        console.log("EVENTS RES BELOW!");
+        console.log(result);
+        res.status(200).json(result);
+      })
+      .catch(function(err) {
+        return err;
+      });
+  });
+
+  app.patch("/api/event/:id/members", function(req, res) {
+    return db.addMemberToEvent(req.body.member, req.body.event, req.body.rsvp);
+  });
 };

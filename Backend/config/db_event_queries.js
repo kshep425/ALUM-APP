@@ -3,7 +3,7 @@ const db = require("../models");
 const eventQueries = {
   createEvent: function(reqBody) {
     let [request, fields] = this.formatRequest(reqBody);
-    return db.Event.create(request, fields);
+    return db.event.create(request, fields);
   },
 
   formatRequest: function(reqBody) {
@@ -32,7 +32,7 @@ const eventQueries = {
   },
 
   findEvent: function(eventId) {
-    return db.Event.findOne({ id: eventId });
+    return db.event.findOne({ id: eventId });
   },
 
   //   updateEvent: function(updateRequest, eventId) {
@@ -44,7 +44,32 @@ const eventQueries = {
   //   },
 
   getAllEvents: function() {
-    return db.Event.findAll({});
+    return db.event.findAll({});
+  },
+
+  getAllEventMembers: function(eventId) {
+    return db.event.findOne({ id: eventId }).then(function(result) {
+      return result.getMembers();
+    });
+  },
+
+  //get all events that member is attending
+  getAllMemberEvents: function() {
+    return db.event
+      .findAll({
+        include: [db.Member],
+        through: { where: { rsvp: "Yes" } }
+      })
+      .then(data => {
+        console.log(data);
+      });
+  },
+
+  //when member clicks attending, add them to the event
+  addMemberToEvent: function(memberId, eventId, rsvp) {
+    return db.event
+      .findOne({ where: { id: eventId } })
+      .then(event => event.addMember(memberId, { through: { rsvp: rsvp } }));
   }
 };
 
