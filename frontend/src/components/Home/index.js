@@ -7,7 +7,8 @@ const HomePage = () => (
 <AuthUserContext.Consumer>
     {authUser => authUser ? (
       <div className="mainPage">
-        <h4>Welcome {authUser.providerData[0].displayName} </h4>
+        {console.log(authUser)}
+        <h4>Welcome {authUser.members.username || authUser.providerData[0].displayName} </h4>
         <Carousel />
         <Footer />
      </div>

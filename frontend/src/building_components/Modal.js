@@ -10,12 +10,11 @@ const Modal = ({ handleClose, show, children, title }) => {
         <div className="row">
           <div className="col-md-12 modal-title">
             <button onClick={handleClose} className="closeBtn">
-              <i class="fa fa-times" aria-hidden="true"></i>
+              <i className="fa fa-times" aria-hidden="true"></i>
             </button>
             <h1 className="title">{title}</h1>
           </div>
         </div>
-
         {children}
       </div>
     </div>

@@ -1,5 +1,3 @@
-const bcrypt = require("bcryptjs")
-
 module.exports = function (sequelize, DataTypes) {
     console.log('Create Member Table')
     var Member = sequelize.define("Member", {
@@ -13,14 +11,14 @@ module.exports = function (sequelize, DataTypes) {
         prefix: {
             type: DataTypes.STRING
         },
-        full_name: {
+        fullName: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
-        first_name: {
+        firstName: {
             type: DataTypes.STRING,
         },
-        last_name: {
+        lastName: {
             type: DataTypes.STRING,
         },
         suffix: {
@@ -34,10 +32,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING
         },
         // Home Address
-        street_address_1: {
+        streetAddress1: {
             type: DataTypes.STRING
         },
-        street_address_2: {
+        streetAddress2: {
             type: DataTypes.STRING
         },
         city: DataTypes.STRING,
@@ -45,10 +43,12 @@ module.exports = function (sequelize, DataTypes) {
         zip: DataTypes.INTEGER(5),
 
         occupation: DataTypes.STRING,
-        member_type: DataTypes.STRING,
-        member_marital_status: DataTypes.STRING,
-        google_token: DataTypes.STRING,
-        image_url: DataTypes.STRING
+        memberType: DataTypes.STRING,
+        memberMaritalStatus: DataTypes.STRING,
+        googleToken: DataTypes.STRING,
+        imageUrl: DataTypes.STRING,
+        uid: DataTypes.STRING,
+        role: DataTypes.STRING,
     });
 
     Member.associate = function (models) {
@@ -59,15 +59,9 @@ module.exports = function (sequelize, DataTypes) {
         models.Member.hasMany(models.Payment);
     }
 
-    // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
-    Member.prototype.validPassword = function (password) {
-        return bcrypt.compareSync(password, this.password);
-    };
-
-    // Before a User is created, we will automatically hash their password
-    Member.addHook("beforeCreate", function (user) {
-        user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
-    });
+    Member.associate = function (models) {
+      models.Member.hasMany(models.Event);
+  }
 
     return Member;
 };
