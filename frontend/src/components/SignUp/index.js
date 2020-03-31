@@ -41,23 +41,21 @@ class SignUpFormBase extends Component {
 
   onSubmit = event => {
     const { username, email, passwordOne } = this.state;
-    const roles = {};
-    roles[ROLES.USER] = true;
-
+    console.log(username)
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
-        // Add user to our database
+        this.setState({...INITIAL_STATE})
+
         API.addNewUser({uid: authUser.user.uid, username, email, role: ROLES.USER})
+          .then(result => {
+            console.log(result)
+          })
 
         // Create a user in your Firebase realtime database
-        return this.props.firebase.user(authUser.user.uid).set({
-          username,
-          email,
-          roles,
-        });
       })
       .then(() => {
+        console.log("Send Email Verification")
         return this.props.firebase.doSendEmailVerification();
       })
       .then(() => {

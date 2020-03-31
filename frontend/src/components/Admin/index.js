@@ -3,6 +3,7 @@ import { compose } from 'recompose';
 import { withAuthorization, withEmailVerification } from '../Session';
 import * as ROLES from '../../constants/roles';
 import API from '../../utils/API'
+import get from 'lodash/get';
 
 const AdminPage = () => {
   const [users, setUsers] = useState({ users: [] })
@@ -50,9 +51,10 @@ const AdminPage = () => {
 
 let token;
 
-const condition = authUser =>{
- token = authUser.token
- return authUser && !!authUser.roles[ROLES.ADMIN];
+const condition = authUser => {
+  token = authUser.token
+  console.log(get(authUser, 'member.role'))
+  return authUser && !!authUser.members.role === ROLES.ADMIN;
 }
 
 export default compose(

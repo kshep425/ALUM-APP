@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { compose } from 'recompose';
 
 import {
@@ -10,7 +9,9 @@ import {
 import { withFirebase } from '../Firebase';
 import PasswordChangeForm from '../PasswordChange';
 import ContactInfo from './ContactInfo'
-import { EDIT } from '../../constants/routes'
+import MemberInfo from './MemberInfo'
+import MemberType from './MemberType.js'
+import PaymentHistory from './PaymentHistory'
 
 const SIGN_IN_METHODS = [
   {
@@ -47,7 +48,10 @@ const MyMsuPage = () => (
             {!!authUser.providerData[0].phoneNumber && (<h6>Phone: {authUser.providerData[0].phoneNumber}</h6>)}
           </div>
         </div>
-        <ContactInfo />
+        <ContactInfo authUser={authUser} />
+        <MemberInfo authUser={authUser} />
+        <MemberType authUser={authUser} />
+        <PaymentHistory authUser={authUser} />
         <PasswordChangeForm />
         <LoginManagement authUser={authUser} />
       </div>

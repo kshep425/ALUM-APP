@@ -1,11 +1,11 @@
 import React, {useRef} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import RegistrationContactInfo from '../../form_components/RegistrationContactInfo';
 import Button from '../../building_components/Button';
 import API from '../../utils/API'
-import {MYMSU} from '../../constants/routes'
+import * as ROUTES from '../../constants/routes';
 
-const EditContactInfo = () => {
+const EditContactInfo = (props) => {
   const uid = useRef();
   const token = useRef();
   const prefix = useRef();
@@ -39,6 +39,7 @@ const EditContactInfo = () => {
     };
 
     API.updateUser(data, token.current.value);
+    props.history.push(ROUTES.MYMSU)
   };
 
   return (
@@ -60,10 +61,10 @@ const EditContactInfo = () => {
         stateRef={state}
         zipRef={zip}
       />
-      <Link to={MYMSU}><Button>Cancel</Button></Link>
+      <Link to={ROUTES.MYMSU}><Button>Cancel</Button></Link>
       <Button onClick={handleSubmit}>Submit</Button>
     </div>
   );
 };
 
-export default EditContactInfo;
+export default withRouter(EditContactInfo);

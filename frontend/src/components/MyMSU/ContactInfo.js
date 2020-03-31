@@ -7,26 +7,26 @@ const ContactInfo = () => {
   return (
     <AuthUserContext.Consumer>
       {authUser => (
-        (authUser.db)
+        (authUser.members)
           ? (
             <div className='container-sm'>
               <div className='card m-1 p-1'>
                 <EditLink />
                 <address>
-                  <strong>{authUser.db.prefix} {authUser.db.firstName} {authUser.db.lastName} {authUser.db.suffix}</strong>
+                  <strong>{authUser.members.prefix} {authUser.members.firstName} {authUser.members.lastName} {authUser.members.suffix}</strong>
                   <br />
-                  {authUser.db.streetAddress1}
-                  {authUser.db.streetAddress2 || null}
+                  {authUser.members.streetAddress1}
+                  {authUser.members.streetAddress2 || null}
                   <br />
-                  {authUser.db.city},
+                  {authUser.members.city},
                   {" "}
-                  {authUser.db.state}
+                  {authUser.members.state}
                   {" "}
-                  {authUser.db.zip}
+                  {authUser.members.zip}
                   <br />
-                  {authUser.db.phone}
+                  {authUser.members.phone}
                   <br />
-                  {authUser.db.email}
+                  {authUser.members.email}
                 </address>
               </div>
             </div>

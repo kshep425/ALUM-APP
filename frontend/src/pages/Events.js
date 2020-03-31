@@ -10,6 +10,7 @@ import { ADD_EVENT, REMOVE_EVENT, UPDATE_EVENTS } from "../utils/actions";
 import API from "../utils/API";
 import "./style.css";
 import { AuthUserContext } from "../components/Session";
+import * as ROLES from "../constants/roles"
 
 const Events = () => {
   const [state, dispatch] = useStoreContext();
@@ -269,9 +270,8 @@ const CreateEventButton = (props) => {
   return (
     <AuthUserContext.Consumer>
       {authUser => {
-        console.log(authUser.roles.ADMIN)
         return (
-          (authUser.roles.ADMIN)
+          (authUser && authUser.members.role === ROLES.ADMIN)
             ? (
               <Button
                 className="btn btn-primary addEventBtn"
@@ -292,7 +292,8 @@ const EventHost = (props) => {
     <AuthUserContext.Consumer>
       {authUser => {
         return (
-          <>
+          (authUser)
+          ? (<>
             <label htmlFor="hostName">HostName</label>
             <input
               id="hostName"
@@ -312,7 +313,8 @@ const EventHost = (props) => {
               defaultValue={authUser.email}
             />
             <input ref={props.creatorIdRef} defaultValue={authUser.uid} hidden></input>
-          </>
+          </>)
+          : null
         )
       }}
     </AuthUserContext.Consumer>

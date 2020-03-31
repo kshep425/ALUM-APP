@@ -110,11 +110,11 @@ class SignInGoogleBase extends Component {
       .doSignInWithGoogle()
       .then(socialAuthUser => {
         // Create a user in your Firebase Realtime Database too
-        return this.props.firebase.user(socialAuthUser.user.uid).set({
-          username: socialAuthUser.user.displayName,
-          email: socialAuthUser.user.email,
-          roles: {},
-        });
+        console.log(socialAuthUser)
+        // return this.props.firebase.user(socialAuthUser.user.uid).set({
+        //   username: socialAuthUser.user.displayName,
+        //   email: socialAuthUser.user.email,
+        // });
       })
       .then(() => {
         this.setState({ error: null });
@@ -156,11 +156,11 @@ class SignInFacebookBase extends Component {
       .doSignInWithFacebook()
       .then(socialAuthUser => {
         // Create a user in your Firebase Realtime Database too
-        return this.props.firebase.user(socialAuthUser.user.uid).set({
-          username: socialAuthUser.additionalUserInfo.profile.name,
-          email: socialAuthUser.additionalUserInfo.profile.email,
-          roles: {},
-        });
+        console.log(socialAuthUser)
+        // return this.props.firebase.user(socialAuthUser.user.uid).set({
+        //   username: socialAuthUser.additionalUserInfo.profile.name,
+        //   email: socialAuthUser.additionalUserInfo.profile.email,
+        // });
       })
       .then(() => {
         this.setState({ error: null });
@@ -202,11 +202,11 @@ class SignInTwitterBase extends Component {
       .doSignInWithTwitter()
       .then(socialAuthUser => {
         // Create a user in your Firebase Realtime Database too
-        return this.props.firebase.user(socialAuthUser.user.uid).set({
-          username: socialAuthUser.additionalUserInfo.profile.name,
-          email: socialAuthUser.additionalUserInfo.profile.email,
-          roles: {},
-        });
+        console.log(socialAuthUser)
+        // return this.props.firebase.user(socialAuthUser.user.uid).set({
+        //   username: socialAuthUser.additionalUserInfo.profile.name,
+        //   email: socialAuthUser.additionalUserInfo.profile.email,
+        // });
       })
       .then(() => {
         this.setState({ error: null });

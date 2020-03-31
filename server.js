@@ -2,7 +2,7 @@
 
 const express = require("express");
 const session = require("express-session");
-const routes = require("./Backend/routes");
+const routes = require("./backend/routes");
 // Initialize the default app
 var admin = require('firebase-admin');
 // Requiring dotenv for syncing variable
@@ -27,7 +27,7 @@ admin.initializeApp({
 const PORT = process.env.PORT || 3001;
 
 // Requiring our models for syncing
-const db = require("./Backend/models");
+const db = require("./backend/models");
 
 // Creating express app and configuring middleware needed for authentication
 const app = express();
@@ -48,14 +48,17 @@ app.use(
 // =============================================================
 //const api_routes = require("./routes/api_routes")
 //app.use(api_routes);
-require("./Backend/routes/api_routes/login_api_routes")(app);
-require("./Backend/routes/api_routes/events")(app);
-require("./Backend/routes/api_routes/users_api")(app);
+require("./backend/routes/api_routes/login_api_routes")(app);
+require("./backend/routes/api_routes/events")(app);
+require("./backend/routes/api_routes/users_api")(app);
+require("./backend/routes/api_routes/payments_api")(app);
 app.use(routes)
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-const sync = JSON.parse(process.env.DB_SYNC) || true;
-db.sequelize.sync({ force: false }).then(function() {
+
+const sync = !!JSON.parse(process.env.DB_SYNC);
+console.log(process.env.DB_SYNC, sync)
+db.sequelize.sync({ force: sync }).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });

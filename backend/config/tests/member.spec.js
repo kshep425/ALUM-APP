@@ -16,4 +16,11 @@ describe('Member Query Tests', () => {
     console.log(member[0])
     expect (typeof member[0]).toBe("object")
   })
+
+  it('Test Get Member Degrees', async () => {
+    const degrees = await db.findMemberDegreeswWithUid('X4KX5r1rSlQoFQu1RBsCYV8Cv4m2')
+    expect(typeof degrees).toBe("object")
+    const expected = [];
+    expect(degrees).toStrictEqual(expected)
+  })
 })
