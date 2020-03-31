@@ -7,8 +7,11 @@ import {
   withEmailVerification,
 } from '../Session';
 import { withFirebase } from '../Firebase';
-import { PasswordForgetForm } from '../PasswordForget';
 import PasswordChangeForm from '../PasswordChange';
+import ContactInfo from './ContactInfo'
+import MemberInfo from './MemberInfo'
+import MemberType from './MemberType.js'
+import PaymentHistory from './PaymentHistory'
 
 const SIGN_IN_METHODS = [
   {
@@ -32,17 +35,23 @@ const SIGN_IN_METHODS = [
 const MyMsuPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
-      <div>
+      <div className='container'>
         <h1>My MSU</h1>
-        <h6>Name: {authUser.providerData[0].displayName}</h6>
-        {!!authUser.providerData[0].photoURL && (<img src={authUser.providerData[0].photoURL} width="200" height="200" alt=
-        "profile"></img>
-        )}
-        {!!authUser.providerData[0].Email && (<h6>Email: {authUser.providerData[0].Email}</h6>)}
-        <h6>Email: {authUser.email}</h6>
-        {!!authUser.providerData[0].phoneNumber && (<h6>Phone: {authUser.providerData[0].phoneNumber}</h6>)}
-
-        <PasswordForgetForm />
+        <div className='container-sm'>
+          <div className='card'>
+            <h6>Name: {authUser.providerData[0].displayName}</h6>
+            {!!authUser.providerData[0].photoURL && (<img src={authUser.providerData[0].photoURL} width="200" height="200" alt=
+              "profile"></img>
+            )}
+            {!!authUser.providerData[0].Email && (<h6>Email: {authUser.providerData[0].Email}</h6>)}
+            <h6>Email: {authUser.email}</h6>
+            {!!authUser.providerData[0].phoneNumber && (<h6>Phone: {authUser.providerData[0].phoneNumber}</h6>)}
+          </div>
+        </div>
+        <ContactInfo authUser={authUser} />
+        <MemberInfo authUser={authUser} />
+        <MemberType authUser={authUser} />
+        <PaymentHistory authUser={authUser} />
         <PasswordChangeForm />
         <LoginManagement authUser={authUser} />
       </div>
@@ -123,14 +132,14 @@ class LoginManagementBase extends Component {
                     onUnlink={this.onUnlink}
                   />
                 ) : (
-                  <SocialLoginToggle
-                    onlyOneLeft={onlyOneLeft}
-                    isEnabled={isEnabled}
-                    signInMethod={signInMethod}
-                    onLink={this.onSocialLoginLink}
-                    onUnlink={this.onUnlink}
-                  />
-                )}
+                    <SocialLoginToggle
+                      onlyOneLeft={onlyOneLeft}
+                      isEnabled={isEnabled}
+                      signInMethod={signInMethod}
+                      onLink={this.onSocialLoginLink}
+                      onUnlink={this.onUnlink}
+                    />
+                  )}
               </li>
             );
           })}
@@ -157,13 +166,13 @@ const SocialLoginToggle = ({
       Deactivate {signInMethod.id}
     </button>
   ) : (
-    <button
-      type="button"
-      onClick={() => onLink(signInMethod.provider)}
-    >
-      Link {signInMethod.id}
-    </button>
-  );
+      <button
+        type="button"
+        onClick={() => onLink(signInMethod.provider)}
+      >
+        Link {signInMethod.id}
+      </button>
+    );
 
 class DefaultLoginToggle extends Component {
   constructor(props) {
@@ -205,29 +214,30 @@ class DefaultLoginToggle extends Component {
         Deactivate {signInMethod.id}
       </button>
     ) : (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="New Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm New Password"
-        />
+        <form onSubmit={this.onSubmit}>
+          <input
+            name="passwordOne"
+            value={passwordOne}
+            onChange={this.onChange}
+            type="password"
+            placeholder="New Password"
+          />
+          <input
+            name="passwordTwo"
+            value={passwordTwo}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Confirm New Password"
+          />
 
-        <button disabled={isInvalid} type="submit">
-          Link {signInMethod.id}
-        </button>
-      </form>
-    );
+          <button disabled={isInvalid} type="submit">
+            Link {signInMethod.id}
+          </button>
+        </form>
+      );
   }
 }
+
 
 const LoginManagement = withFirebase(LoginManagementBase);
 

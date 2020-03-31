@@ -17,7 +17,9 @@ const eventQueries = {
       address: reqBody.address,
       venueName: reqBody.venueName,
       ticketType: reqBody.ticketType,
-      host: reqBody.host
+      hostName: reqBody.hostName,
+      creatorId: reqBody.creatorId,
+      hostEmail: reqBody.hostEmail,
     };
 
     Object.keys(request).forEach(key => {
