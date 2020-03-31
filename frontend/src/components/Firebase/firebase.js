@@ -71,6 +71,7 @@ class Firebase {
         const token = await this.auth.currentUser.getIdToken(/* forceRefresh */ true)
         const db = await API.getUser(token);
         const degrees = await API.getUserDegrees(token);
+        const payments = await API.myPayments(token);
         authUser = {
           uid: authUser.uid,
           email: authUser.email,
@@ -78,6 +79,7 @@ class Firebase {
           providerData: authUser.providerData,
           db: db.data,
           degrees: degrees.data,
+          payments: payments.data,
           token
         };
         next(authUser);

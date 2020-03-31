@@ -15,3 +15,4 @@ export const DONATE = '/donate';
 export const ABOUT = '/about';
 export const SCHOLARSHIPS = '/scholarships'
 export const EDIT_MEMBER_INFO = '/editMemberInfo'
+export const PAY_DUES = '/payMembershipDues'
