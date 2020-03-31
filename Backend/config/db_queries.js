@@ -8,12 +8,12 @@ const db_queries = {
     },
 
     getMember: function(member_id){
-        return db.Member.findOne({where: {uid: member_id}})
-    },
+        return db.Member.findOne({where: {uid: member_id}
+    })},
 
-    updateMember: function(member_id, update_request ){
+    updateMember: function(uid, update_request ){
         const [request] = this.formatRequest(update_request)
-        return db.Member.update(request, {where: {uid: member_id}})
+        return db.Member.update(request, {where: {uid}})
     },
 
     delete_member: function(member_id){
@@ -76,6 +76,10 @@ const db_queries = {
     find_member_degrees: function(member_id){
         return db.Degree.findOne({where: {MemberId: member_id}})
     },
+
+    findMemberDegreeswWithUid: function(uid){
+        return db.Degree.findAll({where: {uid}})
+    },
     /**
      *
      * @param {*} degree_id
@@ -87,6 +91,19 @@ const db_queries = {
 
     delete_member_degree: function(degree_id){
         return db.Degree.destroy({where: {id: degree_id}})
+    },
+
+    /**
+     * degree_obj object containing {year, degree, memberId, and degreeId}
+     */
+    createOrUpdateMemberDegrees: function(degreeObj) {
+      if (degreeObj.degreeId){
+        console.log("Update Degree: ", degreeObj.degreeId)
+        return db.Degree.update(degreeObj, {where: {id: degreeObj.degreeId}})
+      } else {
+        console.log("Create Degree")
+        return db.Degree.create(degreeObj)
+      }
     }
 
 

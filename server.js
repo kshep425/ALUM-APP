@@ -51,11 +51,14 @@ app.use(
 require("./Backend/routes/api_routes/login_api_routes")(app);
 require("./Backend/routes/api_routes/events")(app);
 require("./Backend/routes/api_routes/users_api")(app);
+require("./Backend/routes/api_routes/payments_api")(app);
 app.use(routes)
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-const sync = JSON.parse(process.env.DB_SYNC) || true;
-db.sequelize.sync({ force: false }).then(function() {
+
+const sync = !!JSON.parse(process.env.DB_SYNC);
+console.log(process.env.DB_SYNC, sync)
+db.sequelize.sync({ force: sync }).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
