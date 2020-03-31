@@ -1,33 +1,28 @@
-
-import React from 'react';
+import React from "react";
 import Navitem from "./NavItem";
-import * as ROUTES from '../../constants/routes';
+import * as ROUTES from "../../constants/routes";
 
-import { AuthUserContext } from '../../components/Session';
+import { AuthUserContext } from "../../components/Session";
 
 const LowerNav = () => (
   <div className="lowerNav">
     <div className="row navRow">
+      <Navitem href={ROUTES.HOME}>Home</Navitem>
       <Navitem href={ROUTES.EVENTS}>Events</Navitem>
-      <Navitem href={ROUTES.ABOUT}>About</Navitem>
+
       <Navitem href={ROUTES.SCHOLARSHIPS}>Scholarships</Navitem>
+      <Navitem href={ROUTES.ABOUT}>About</Navitem>
       <MyMsuLink />
+    </div>
   </div>
-</div>
-)
+);
 
 const MyMsuLink = () => (
   <AuthUserContext.Consumer>
-    {
-      authUser => {
-        // console.log(authUser)
-        return authUser
-        ? (
-          <Navitem href={ROUTES.MYMSU}>my msu</Navitem>
-        )
-        : (<></>)
-      }
-    }
+    {authUser => {
+      // console.log(authUser)
+      return authUser ? <Navitem href={ROUTES.MYMSU}>my msu</Navitem> : <></>;
+    }}
   </AuthUserContext.Consumer>
 );
 

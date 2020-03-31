@@ -1,9 +1,9 @@
-import React from 'react';
-
-import { withFirebase } from '../Firebase';
+import React from "react";
+import "../../building_components/Navbar/style.css";
+import { withFirebase } from "../Firebase";
 
 const SignOutButton = ({ firebase }) => (
-  <button className="btn btn-secondary loginBtn" type="button" onClick={firebase.doSignOut}>
+  <button className="signoutBtn" type="button" onClick={firebase.doSignOut}>
     Sign Out
   </button>
 );

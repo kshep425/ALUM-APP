@@ -70,6 +70,7 @@ const Events = () => {
       .then(result => {
         console.log("ADDING EVENT (RESULT BELOW)");
         console.log(result);
+
         dispatch({
           type: ADD_EVENT,
           event: result.data
@@ -105,6 +106,11 @@ const Events = () => {
     setModalState({ show: false });
   };
 
+  const handleRSVP = event => {
+    event.preventDefault();
+    console.log(event.target.value);
+  };
+
   console.log(state.events);
 
   return (
@@ -125,28 +131,28 @@ const Events = () => {
           View Past Events
         </Button>
         <hr className="lineDivider" />
-
         <div className="row">
           <div className="col-md-12">
             <h4>Upcoming Events</h4>
-
-            {/* <ReactCalendar /> */}
           </div>
         </div>
         <div className="row">
           <div className="col-md-12">
-            {state.events.map(event => {
+            {state.events.map((event, index) => {
+              console.log(index);
               const newEvent = Object.assign({}, event);
-              console.log("EVENT TITLE BELOW!");
-              console.log(newEvent.title);
               return (
                 <Event
+                  key={index}
+                  index={index}
                   title={newEvent.title}
                   start={newEvent.startDate}
                   end={newEvent.endDate}
                   type={newEvent.type}
                   venueName={newEvent.venueName}
                   address={newEvent.address}
+                  description={newEvent.description}
+                  handleRSVP={handleRSVP}
                   key={newEvent.id}
                 ></Event>
               );
@@ -227,8 +233,8 @@ const Events = () => {
                 defaultValue="Free"
               >
                 <option>Free</option>
-                <option>Paid</option>
-                <option>Donation</option>
+                <option>Available for Purchase </option>
+                <option>Donate</option>
               </select>
 
               <label htmlFor="message">Describe Your Event!</label>
