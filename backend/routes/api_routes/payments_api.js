@@ -33,7 +33,7 @@ function getMemberDueAmount(memberType) {
 module.exports = function (app) {
     app.post("/api/payDues", checkIfAuthenticated, function (req, res) {
         console.log("Pay Dues")
-        console.log(req.body)
+        // console.log(req.body)
         const memberType = req.body.memberType
         const MemberId = req.body.memberId
         const uid = req.uid
@@ -46,7 +46,7 @@ module.exports = function (app) {
         }
         return dbPayment.makePayment(paymentObj)
             .then(function (result1) {
-                console.log(result1)
+                // console.log(result1.dataValues)
                 dbMember.updateMember(uid, { memberType })
                     .then(function (result2) {
                         console.log(result2)
@@ -59,7 +59,7 @@ module.exports = function (app) {
         console.log("Get My Payment History")
         return dbPayment.getPayments(req.uid)
             .then(function (result) {
-                console.log(result)
+                // console.log(result.dataValues)
                 res.status(200).json(result);
             });
     })

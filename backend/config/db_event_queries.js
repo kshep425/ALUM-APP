@@ -1,4 +1,5 @@
 const db = require("../models");
+const Op = db.Sequelize.Op;
 
 const eventQueries = {
   createEvent: function(reqBody) {
@@ -63,7 +64,7 @@ const eventQueries = {
         through: { where: { rsvp: "Yes" } }
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
       });
   },
 
@@ -76,21 +77,37 @@ const eventQueries = {
 
   /**
    *
-   * @param {*} eventRSVP {MemberId, eventId, rsvp}
+   * @param {*} eventRSVP {MemberId, eventId, rsvp, uid}
    */
   addEventRSVP: function(eventRSVP) {
-    console.log(eventRSVP)
+    // console.log(eventRSVP)
 
-    return db.event_members.create({eventId: eventRSVP.eventId, MemberId: eventRSVP.MemberId, rsvp: eventRSVP.rsvp})
+    return db.event_members.create({eventId: eventRSVP.eventId, MemberId: eventRSVP.MemberId, rsvp: eventRSVP.rsvp, uid: eventRSVP.uid})
     .then((result) => {
       console.log("Did it create?")
-      console.log(result);
+      //console.log(result);
       return result;
     })
     .catch(err => {
       console.log(err);
       throw err;
     });
+  },
+
+  myEvents: function(uid) {
+    console.log("Get my events")
+    return db.event_members.findAll({attributes: ["eventId"], where: {uid: uid}})
+    .then((events)=>{
+      let eventIds = events.map(event => event.dataValues.eventId)
+      console.log(eventIds)
+      return db.event.findAll({
+        where: {
+          id: {
+            [Op.in]: eventIds
+          }
+        }
+      })
+    })
   }
 };
 

@@ -6,6 +6,10 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         isIn: [["yes", "no", "maybe"]]
       }
+    },
+    uid: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   });
 

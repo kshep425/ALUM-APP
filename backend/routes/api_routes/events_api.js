@@ -4,12 +4,12 @@ const { checkIfAuthenticated } = require('../../config/middleware/auth-middlewar
 module.exports = function(app) {
   app.post("/api/events", function(req, res) {
     console.log("REQ BODY IS BELOW FOR EVENTS************");
-    console.log(req.body);
+    //console.log(req.body);
     return db
       .createEvent(req.body)
       .then(function(result) {
-        console.log("EVENTS RES.DATAVALUES BELOW!");
-        console.log(result.dataValues);
+        console.log("EVENTS RES.DATAVALUES BELOW!  /api/events post");
+        // console.log(result.dataValues);
         res.status(200).json(result.dataValues);
       })
       .catch(function(err) {
@@ -19,8 +19,8 @@ module.exports = function(app) {
 
   app.get("/api/events", function(req, res) {
     return db.getAllEvents().then(function(dbPost) {
-      console.log("DBPOST BELOW!!");
-      console.log(dbPost);
+      console.log("DBPOST BELOW!! for /api/events");
+      console.log(dbPost.dataValues);
       res.json(dbPost);
     });
   });
@@ -30,8 +30,8 @@ module.exports = function(app) {
     return db
       .getAllEventMembers(eventId)
       .then(function(result) {
-        console.log("EVENTS RES BELOW!");
-        console.log(result);
+        console.log("EVENTS RES BELOW! for /api/event/:id/members");
+        //console.log(result);
         res.status(200).json(result);
       })
       .catch(function(err) {
@@ -41,10 +41,11 @@ module.exports = function(app) {
 
   app.post("/api/newEventRSVP", checkIfAuthenticated, function(req, res) {
     console.log("Add Member to Event with RSVP")
-    console.log(req.body)
+    // console.log(req.body)
+    req.body["uid"] = req.uid
     return db.addEventRSVP(req.body)
     .then(function(result) {
-      console.log(result);
+      // console.log(result);
       res.status(200).json(result);
     })
     .catch(function(err) {
@@ -54,12 +55,9 @@ module.exports = function(app) {
 
   app.get("/api/myEvents", checkIfAuthenticated, function(req, res) {
     console.log("Get My Events");
-    console.log(req.uid);
-    return db.getAllMemberEvents()
+    // console.log(req.uid);
+    return db.myEvents(req.uid)
     .then(function(result) {
-      console.log("All Member Events below")
-      console.log(result);
-      console.log("All Member Events above")
       res.status(200).json(result);
     })
     .catch(function(err) {
