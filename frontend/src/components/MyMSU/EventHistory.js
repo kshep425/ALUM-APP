@@ -2,7 +2,7 @@ import React from 'react';
 
 const EventHistory = (props) => {
   console.log(props)
-  const events = [] // props.authUser.events || []
+  const events = props.authUser.events || []
 
   function formatDate(date) {
     let d = new Date(date)
