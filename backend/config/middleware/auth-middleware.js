@@ -5,7 +5,7 @@
  */
 // const admin = require('firebase-service');
 const admin = require('firebase-admin');
-const db = require('../db_queries')
+const db = require('../db_member_queries')
 
 const getAuthToken = (req, res, next) => {
   if (

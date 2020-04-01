@@ -72,6 +72,25 @@ const eventQueries = {
     return db.event
       .findOne({ where: { id: eventId } })
       .then(event => event.addMember(memberId, { through: { rsvp: rsvp } }));
+  },
+
+  /**
+   *
+   * @param {*} eventRSVP {MemberId, eventId, rsvp}
+   */
+  addEventRSVP: function(eventRSVP) {
+    console.log(eventRSVP)
+
+    return db.event_members.create({eventId: eventRSVP.eventId, MemberId: eventRSVP.MemberId, rsvp: eventRSVP.rsvp})
+    .then((result) => {
+      console.log("Did it create?")
+      console.log(result);
+      return result;
+    })
+    .catch(err => {
+      console.log(err);
+      throw err;
+    });
   }
 };
 

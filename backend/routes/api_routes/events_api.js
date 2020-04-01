@@ -1,4 +1,5 @@
 const db = require("../../config/db_event_queries");
+const { checkIfAuthenticated } = require('../../config/middleware/auth-middleware');
 
 module.exports = function(app) {
   app.post("/api/events", function(req, res) {
@@ -38,7 +39,32 @@ module.exports = function(app) {
       });
   });
 
-  app.patch("/api/event/:id/members", function(req, res) {
-    return db.addMemberToEvent(req.body.member, req.body.event, req.body.rsvp);
+  app.post("/api/newEventRSVP", checkIfAuthenticated, function(req, res) {
+    console.log("Add Member to Event with RSVP")
+    console.log(req.body)
+    return db.addEventRSVP(req.body)
+    .then(function(result) {
+      console.log(result);
+      res.status(200).json(result);
+    })
+    .catch(function(err) {
+      return err;
+    });;
   });
+
+  app.get("/api/myEvents", checkIfAuthenticated, function(req, res) {
+    console.log("Get My Events");
+    console.log(req.uid);
+    return db.getAllMemberEvents()
+    .then(function(result) {
+      console.log("All Member Events below")
+      console.log(result);
+      console.log("All Member Events above")
+      res.status(200).json(result);
+    })
+    .catch(function(err) {
+      return err;
+    });
+
+  })
 };

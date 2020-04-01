@@ -100,5 +100,24 @@ export default {
         authorization: `Bearer ${token}`
       }
     })
+  },
+
+  myEvents: function (token) {
+    console.log("myEvents")
+    return axios.get("/api/myEvents", {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+  },
+
+  newEventRSVP: function (newEventRSVP, token){
+    console.log("newEventRSVP")
+    console.log(newEventRSVP)
+    return axios.post("/api/newEventRSVP", newEventRSVP, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    });
   }
 };

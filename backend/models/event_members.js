@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isIn: [["Yes", "No", "Maybe"]]
+        isIn: [["yes", "no", "maybe"]]
       }
     }
   });
