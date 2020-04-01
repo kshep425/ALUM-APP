@@ -1,4 +1,4 @@
-const db_queries = require("../../config/db_queries");
+const db_queries = require("../../config/db_member_queries");
 // Using the passport.authenticate middleware with our local strategy.
 // If the user has valid login credentials, send them to the members page.
 // Otherwise the user will be sent an error
