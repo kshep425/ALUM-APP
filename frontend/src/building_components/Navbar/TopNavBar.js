@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Button from "../Button";
 import SignoutButton from "../../components/SignOut";
-import * as ROUTES from "../../constants/routes"
+import * as ROUTES from "../../constants/routes";
 
 import { AuthUserContext } from "../../components/Session";
 
@@ -19,16 +19,37 @@ const LogInOrOutBtn = () => (
     {authUser => {
       return authUser ? (
         <>
-          <div className="loginBtnDiv">
-            <Link to={ROUTES.HOME}>
-              <SignoutButton>LOGOUT</SignoutButton>
-            </Link>
-            <Link to={ROUTES.HOME}>
-              <Button className="btn btn-secondary registerBtn">Home</Button>
-            </Link>
-            <Link to={ROUTES.MYMSU}>
-              <Button className="btn btn-secondary registerBtn">MY MSU</Button>
-            </Link>
+          <div className="dropdown loginBtnDiv">
+            <button
+              className="btn dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <img
+                src={authUser.providerData[0].photoURL}
+                height="40px"
+                width="40px"
+                alt="profile"
+                className="navPhoto"
+              ></img>
+            </button>
+
+            <div className="dropdown-menu">
+              <Link to={ROUTES.HOME}>
+                <SignoutButton className="signoutBtn">LOGOUT</SignoutButton>
+              </Link>
+
+              <Link to={ROUTES.MYMSU} className="myMSUlink">
+                <p className="myMSUlink">My Msu</p>
+              </Link>
+            </div>
+          </div>
+          <div>
+            <h1 className="alumniText topNavBarText">Morgan State University Howard County Alumni Chapter</h1>
+
           </div>
         </>
       ) : (
@@ -40,14 +61,12 @@ const LogInOrOutBtn = () => (
   </AuthUserContext.Consumer>
 );
 
-
 const DonateBtn = () => {
   return (
     <Link to={ROUTES.DONATE}>
       <button className="btn btn-success donateBtn">GIVE</button>
     </Link>
-  )
-}
-
+  );
+};
 
 export default TopNavBar;

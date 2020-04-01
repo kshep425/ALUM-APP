@@ -104,8 +104,12 @@ const db_queries = {
         console.log("Create Degree")
         return db.Degree.create(degreeObj)
       }
-    }
+    },
 
+    getMemberId: function(uid){
+      console.log("Get Member ID")
+      return db.Member.findOne({where: uid, attributes: ['id']})
+    }
 
 }
 

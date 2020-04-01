@@ -72,10 +72,10 @@ class Firebase {
         this.auth.currentUser.getIdToken(/* forceRefresh */ true)
         .then((token) =>{
           // Get User Info from members, degrees, and payments table
-          Promise.all([API.getUser(token), API.getUserDegrees(token),API.myPayments(token)])
+          Promise.all([API.getUser(token), API.getUserDegrees(token), API.myPayments(token), API.myEvents(token)])
           .then(result => {
             console.log(result)
-            let [members, degrees, payments] = result;
+            let [members, degrees, payments, events] = result;
               // add table data to authUser for use in myMSU and Events Pages.
               authUser = {
                 uid: authUser.uid,
@@ -85,6 +85,7 @@ class Firebase {
                 members: members.data || {},
                 degrees: degrees.data,
                 payments: payments.data,
+                events: events.data,
                 token
               };
               next(authUser);

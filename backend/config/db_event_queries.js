@@ -1,9 +1,10 @@
 const db = require("../models");
+const Op = db.Sequelize.Op;
 
 const eventQueries = {
   createEvent: function(reqBody) {
     let [request, fields] = this.formatRequest(reqBody);
-    return db.Event.create(request, fields);
+    return db.event.create(request, fields);
   },
 
   formatRequest: function(reqBody) {
@@ -34,7 +35,7 @@ const eventQueries = {
   },
 
   findEvent: function(eventId) {
-    return db.Event.findOne({ id: eventId });
+    return db.event.findOne({ id: eventId });
   },
 
   //   updateEvent: function(updateRequest, eventId) {
@@ -46,7 +47,67 @@ const eventQueries = {
   //   },
 
   getAllEvents: function() {
-    return db.Event.findAll({});
+    return db.event.findAll({});
+  },
+
+  getAllEventMembers: function(eventId) {
+    return db.event.findOne({ id: eventId }).then(function(result) {
+      return result.getMembers();
+    });
+  },
+
+  //get all events that member is attending
+  getAllMemberEvents: function() {
+    return db.event
+      .findAll({
+        include: [db.Member],
+        through: { where: { rsvp: "Yes" } }
+      })
+      .then(data => {
+        // console.log(data);
+      });
+  },
+
+  //when member clicks attending, add them to the event
+  addMemberToEvent: function(memberId, eventId, rsvp) {
+    return db.event
+      .findOne({ where: { id: eventId } })
+      .then(event => event.addMember(memberId, { through: { rsvp: rsvp } }));
+  },
+
+  /**
+   *
+   * @param {*} eventRSVP {MemberId, eventId, rsvp, uid}
+   */
+  addEventRSVP: function(eventRSVP) {
+    // console.log(eventRSVP)
+
+    return db.event_members.create({eventId: eventRSVP.eventId, MemberId: eventRSVP.MemberId, rsvp: eventRSVP.rsvp, uid: eventRSVP.uid})
+    .then((result) => {
+      console.log("Did it create?")
+      //console.log(result);
+      return result;
+    })
+    .catch(err => {
+      console.log(err);
+      throw err;
+    });
+  },
+
+  myEvents: function(uid) {
+    console.log("Get my events")
+    return db.event_members.findAll({attributes: ["eventId"], where: {uid: uid}})
+    .then((events)=>{
+      let eventIds = events.map(event => event.dataValues.eventId)
+      console.log(eventIds)
+      return db.event.findAll({
+        where: {
+          id: {
+            [Op.in]: eventIds
+          }
+        }
+      })
+    })
   }
 };
 

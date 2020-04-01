@@ -11,6 +11,7 @@ import API from "../utils/API";
 import "./style.css";
 import { AuthUserContext } from "../components/Session";
 import * as ROLES from "../constants/roles"
+import { decodeBase64 } from "bcryptjs";
 
 const Events = () => {
   const [state, dispatch] = useStoreContext();
@@ -50,7 +51,7 @@ const Events = () => {
     addressRef = value;
   };
 
-  const handleSubmit = e => {
+  const addNewEvent = e => {
     e.preventDefault();
     console.log("CLICKED SUBMIT");
 
@@ -70,6 +71,7 @@ const Events = () => {
       .then(result => {
         console.log("ADDING EVENT (RESULT BELOW)");
         console.log(result);
+
         dispatch({
           type: ADD_EVENT,
           event: result.data
@@ -105,6 +107,17 @@ const Events = () => {
     setModalState({ show: false });
   };
 
+  /**
+   *
+   * @param {*} newEventRSVP {memberId, eventId, RSVP}
+   */
+  const handleRSVP = (newEventRSVP) => {
+    console.log("Member RSVP")
+    console.log(newEventRSVP)
+    API.newEventRSVP(newEventRSVP, token);
+
+  };
+
   console.log(state.events);
 
   return (
@@ -125,28 +138,30 @@ const Events = () => {
           View Past Events
         </Button>
         <hr className="lineDivider" />
-
         <div className="row">
           <div className="col-md-12">
             <h4>Upcoming Events</h4>
-
-            {/* <ReactCalendar /> */}
           </div>
         </div>
         <div className="row">
           <div className="col-md-12">
-            {state.events.map(event => {
+            {state.events.map((event, index) => {
+              console.log(index);
               const newEvent = Object.assign({}, event);
-              console.log("EVENT TITLE BELOW!");
-              console.log(newEvent.title);
+              console.log(newEvent)
               return (
                 <Event
+                  key={index}
+                  index={index}
+                  id={newEvent.id}
                   title={newEvent.title}
                   start={newEvent.startDate}
                   end={newEvent.endDate}
                   type={newEvent.type}
                   venueName={newEvent.venueName}
                   address={newEvent.address}
+                  description={newEvent.description}
+                  handleRSVP={handleRSVP}
                   key={newEvent.id}
                 ></Event>
               );
@@ -227,8 +242,8 @@ const Events = () => {
                 defaultValue="Free"
               >
                 <option>Free</option>
-                <option>Paid</option>
-                <option>Donation</option>
+                <option>Available for Purchase </option>
+                <option>Donate</option>
               </select>
 
               <label htmlFor="message">Describe Your Event!</label>
@@ -243,7 +258,7 @@ const Events = () => {
                 <div className="col">
                   <Button
                     className="btn btn-primary submitEventBtn"
-                    onClick={handleSubmit}
+                    onClick={addNewEvent}
                   >
                     Save Event
                   </Button>
@@ -264,12 +279,15 @@ const Events = () => {
     </div>
   );
 };
-
+let token;
 const CreateEventButton = (props) => {
   console.log("Add Create event button")
   return (
     <AuthUserContext.Consumer>
       {authUser => {
+        {
+          token = authUser.token;
+        }
         return (
           (authUser && authUser.members.role === ROLES.ADMIN)
             ? (
