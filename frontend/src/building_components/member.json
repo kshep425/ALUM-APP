@@ -1,0 +1,51 @@
+[
+    {
+      "id": 1,
+      "position": "President",
+      "name": "Dr. Iantha Tucker",
+      "title": "DR",
+      "about": "some info here"
+     
+    },
+    {
+      "id": 1,
+      "position": "Vice President",
+      "name": "Paul Haley Sr.",
+      "title": "",
+      "about": "some info here"
+     
+    },
+    {
+      "id": 1,
+      "position": "Recording Secretary",
+      "name": "Janissa Davis",
+      "title": ""
+      
+     
+    },
+    {
+      "id": 1,
+      "position": "Corresponding Secretary",
+      "name": "Harriette Page",
+      "title": "",
+      "about": "some info here"
+     
+    },
+    {
+      "id": 1,
+      "position": "Financial Secretary",
+      "name": "Jackye Malloye-Jones",
+      "title": "",
+      "about": "some info here"
+     
+    },
+    {
+      "id": 1,
+      "position": "Treasurer",
+      "name": "Patricia Waddy",
+      "title": "",
+      "about": "some info here"
+     
+    }
+    
+]    
