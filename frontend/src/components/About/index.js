@@ -15,14 +15,18 @@ const About = () => {
     <div className="row">
       {/* <div className="col-sm-3"> */}
     {members.map((member) => 
-  (<Wrapper>
+    (<Wrapper>
     
     <Card
       position={member.position}
       name={member.name}
       about={member.about}
       />
-  </Wrapper>))}
+  </Wrapper>)
+  )}
+  
+  
+      
     </div>
     </div>
     // </div>
