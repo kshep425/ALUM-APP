@@ -8,7 +8,7 @@
      
     },
     {
-      "id": 1,
+      "id": 2,
       "position": "Vice President",
       "name": "Paul Haley Sr.",
       "title": "",
@@ -16,7 +16,7 @@
      
     },
     {
-      "id": 1,
+      "id": 3,
       "position": "Recording Secretary",
       "name": "Janissa Davis",
       "title": ""
@@ -24,7 +24,7 @@
      
     },
     {
-      "id": 1,
+      "id": 4,
       "position": "Corresponding Secretary",
       "name": "Harriette Page",
       "title": "",
@@ -32,7 +32,7 @@
      
     },
     {
-      "id": 1,
+      "id": 5,
       "position": "Financial Secretary",
       "name": "Jackye Malloye-Jones",
       "title": "",
@@ -40,12 +40,49 @@
      
     },
     {
-      "id": 1,
+      "id": 6,
       "position": "Treasurer",
       "name": "Patricia Waddy",
       "title": "",
       "about": "some info here"
      
+    },
+    {
+      "id": 7,
+      "position": "Membership and Outreach",
+      "name": "Clarence Jeffers"
+    },
+    {
+      "id": 8,
+      "position": "Fundraising",
+      "name": "De Lois Jeffers"
+    },
+    {
+      "id": 9,
+      "position": "Scholarship",
+      "name": "Rhea Wilson"
+    },
+    {
+      "id": 10,
+      "position": "Adopt A Road",
+      "name": "James Wilson"
+    },
+    {
+      "id": 11,
+      "position": "National Association",
+      "name": "Karen Wright"
+    },
+    {
+      "id": 12,
+      "position": "Historian",
+      "name": "Robert Sturtevant"
+    },
+    {
+      "id": 13,
+      "position": "Publications",
+      "name": "Dianne Oliver"
     }
-    
+
+
+  
 ]    
