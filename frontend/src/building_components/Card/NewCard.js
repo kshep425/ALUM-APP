@@ -1,6 +1,6 @@
 import React from "react";
 import "./card.css";
-import Memeber from "../../building_components/member.json"
+import Member from "../../building_components/member.json"
 
 function NewCard(props) {
 
@@ -38,6 +38,8 @@ function NewCard(props) {
 </div>
 </div>
   );
+
+  
 }
 
 export default NewCard;
