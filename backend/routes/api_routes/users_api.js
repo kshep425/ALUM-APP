@@ -1,4 +1,4 @@
-const db = require("../../config/db_queries");
+const db = require("../../config/db_member_queries");
 const {checkIfAuthenticated, checkIfAdmin} = require('../../config/middleware/auth-middleware');
 
 module.exports = function (app) {

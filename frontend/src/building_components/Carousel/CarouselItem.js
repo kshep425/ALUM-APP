@@ -1,22 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom"
 import "./style.css";
 
 const CarouselItem = props => {
   // console.log(props);
   return (
-    <div className="carouselItemDiv">
-      <div className="textBox">
-        <h4 className="carouselItemTitle">{props.title}</h4>
-        <p className="carouselItemDescription">{props.children}</p>
+    <Link to={props.route}>
+      <div className="carouselItemDiv">
+        <img
+          src={props.src}
+          alt={props.alt}
+          title={props.title}
+          className="carouselImg"
+        />
       </div>
-      <img
-        src={props.src}
-        alt={props.alt}
-        title={props.title}
-        width="100%"
-        className="carouselImg"
-      />
-    </div>
+    </Link>
   );
 };
 

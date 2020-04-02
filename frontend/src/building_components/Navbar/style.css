@@ -59,11 +59,12 @@
 }
 
 .logo {
-  height: 130px;
+  height: 100px;
+  margin-left: 1em;
 }
 
 .logoDiv {
-  margin: 0px;
+  margin: 2px;
 }
 
 .alumniText {
@@ -117,7 +118,10 @@
 }
 
 .navItemDiv {
-  margin: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: auto;
+  margin-bottom: auto;
   text-decoration: none;
 }
 
@@ -127,7 +131,8 @@
 
 .navRow {
   line-height: 0.5px;
-  justify-content: center;
+  justify-content: left;
+  margin-bottom: 1em;
 }
 
 .navPhoto {
@@ -162,4 +167,21 @@
 .signoutBtn:hover {
   text-decoration: none;
   color: #fe7f18;
+}
+
+.topNavBarText {
+  color: #fe7f18;
+  display: none;
+}
+
+@media screen and (min-width: 800px) {
+  .topNavBarText {
+    display: inline-flex;
+  }
+
+  .navRow {
+    display: inline-flex;
+
+  }
+
 }
