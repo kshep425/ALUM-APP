@@ -119,5 +119,23 @@ export default {
         authorization: `Bearer ${token}`
       }
     });
+  },
+
+    /**
+   * makeDonation - Make a donation towards scholarships
+   * @param {} data
+   *    {donationType,
+   *    memberId}
+   * @param {*} token
+   */
+  makeDonation: function (data, token) {
+    console.log("Make Donation")
+
+    return axios.post("/api/makeDonation", data, {
+//    return axios.post("/api/makeStripePayment", data, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
   }
 };

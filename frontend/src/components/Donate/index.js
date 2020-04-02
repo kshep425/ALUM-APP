@@ -1,8 +1,9 @@
 import React from 'react';
-
+import MakeDonation from './MakeDonation'
 const Donate = () => (
-  <div>
+  <div className="container">
     <h1>Donate</h1>
+    <MakeDonation />
   </div>
 );
 
