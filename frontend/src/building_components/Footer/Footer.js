@@ -6,7 +6,7 @@ const Footer = () => {
     <div className="footer">
       <div className="row">
         <div className="col">
-          <p>Terms & Conditions | Privacy Policy</p>
+          <p className="footerText">Terms & Conditions | Privacy Policy</p>
         </div>
       </div>
     </div>
