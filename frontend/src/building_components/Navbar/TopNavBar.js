@@ -78,6 +78,10 @@ const LogInOrOutBtn = () => (
               </Link>
             </div>
           </div>
+          <div>
+            <h1 className="alumniText topNavBarText">Morgan State University Howard County Alumni Chapter</h1>
+
+          </div>
         </>
       ) : (
         <Link to={ROUTES.SIGN_IN}>

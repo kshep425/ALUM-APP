@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="mainPage">
       <div className=" footer">
-        <p>Terms & Conditions | Privacy Policy</p>
+        <p>Alum App Group | Copyright © 2020</p>
       </div>
     </div>
   );

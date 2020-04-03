@@ -11,6 +11,8 @@
   padding: 0px;
 }
 
-.row {
+p.footerText {
   text-align: center;
+
+  line-height: 2;
 }

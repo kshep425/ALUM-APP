@@ -22,7 +22,7 @@ const PaymentHistory = (props) => {
           </thead>
           <tbody>
           {payments.map((payment) =>(
-            <tr>
+            <tr key={payment.id}>
               <td>{formatDate(payment.paymentDate)}</td>
               <td>{payment.description}</td>
               <td>${payment.amount}</td>

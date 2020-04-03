@@ -65,7 +65,7 @@
 }
 
 .logoDiv {
-  margin: 0px;
+  margin: 2px;
 }
 
 .navDropdown {
@@ -129,6 +129,10 @@
   /* /* margin: 30px; */
   padding-top: 90px;
   margin: 30px;
+  /* margin-left: 30px;
+  margin-right: 30px;
+  margin-top: auto;
+  margin-bottom: auto; */
   text-decoration: none;
 }
 
@@ -157,6 +161,8 @@
 
 .floatLeft {
   float: left;
+  justify-content: left;
+  margin-bottom: 1em;
 }
 
 .navPhoto {
@@ -209,5 +215,20 @@
   }
   .lowerNav {
     display: none;
+  }
+}
+
+.topNavBarText {
+  color: #fe7f18;
+  display: none;
+}
+
+@media screen and (min-width: 800px) {
+  .topNavBarText {
+    display: inline-flex;
+  }
+
+  .navRow {
+    display: inline-flex;
   }
 }

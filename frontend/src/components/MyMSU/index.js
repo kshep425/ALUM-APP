@@ -5,15 +5,17 @@ import "../../pages/style.css";
 import {
   AuthUserContext,
   withAuthorization,
-  withEmailVerification
-} from "../Session";
-import { withFirebase } from "../Firebase";
-import PasswordChangeForm from "../PasswordChange";
-import ContactInfo from "./ContactInfo";
-import MemberInfo from "./MemberInfo";
-import MemberType from "./MemberType.js";
-import PaymentHistory from "./PaymentHistory";
+  withEmailVerification,
+} from '../Session';
+import { withFirebase } from '../Firebase';
+import PasswordChangeForm from '../PasswordChange';
+import ContactInfo from './ContactInfo'
+import MemberInfo from './MemberInfo'
+import MemberType from './MemberType.js'
+import PaymentHistory from './PaymentHistory'
+import EventHistory from './EventHistory'
 import Footer from "../../building_components/Footer/Footer";
+
 
 const SIGN_IN_METHODS = [
   {
@@ -88,6 +90,7 @@ const MyMsuPage = () => (
 
             <div className="col-md-8">
               <PaymentHistory authUser={authUser} />
+              <EventHistory authUser={authUser} />
               <PasswordChangeForm />
             </div>
           </div>

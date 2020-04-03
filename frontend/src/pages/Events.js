@@ -49,7 +49,7 @@ const Events = () => {
     addressRef = value;
   };
 
-  const handleSubmit = e => {
+  const addNewEvent = e => {
     e.preventDefault();
     console.log("CLICKED SUBMIT");
 
@@ -105,9 +105,15 @@ const Events = () => {
     setModalState({ show: false });
   };
 
-  const handleRSVP = event => {
-    event.preventDefault();
-    console.log(event.target.value);
+  /**
+   *
+   * @param {*} newEventRSVP {memberId, eventId, RSVP}
+   */
+  const handleRSVP = (newEventRSVP) => {
+    console.log("Member RSVP")
+    console.log(newEventRSVP)
+    API.newEventRSVP(newEventRSVP, token);
+
   };
 
   console.log(state.events);
@@ -140,10 +146,12 @@ const Events = () => {
             {state.events.map((event, index) => {
               console.log(index);
               const newEvent = Object.assign({}, event);
+              console.log(newEvent)
               return (
                 <Event
                   key={index}
                   index={index}
+                  id={newEvent.id}
                   title={newEvent.title}
                   start={newEvent.startDate}
                   end={newEvent.endDate}
@@ -257,7 +265,7 @@ const Events = () => {
                 <div className="col">
                   <Button
                     className="btn btn-primary submitEventBtn"
-                    onClick={handleSubmit}
+                    onClick={addNewEvent}
                   >
                     Save Event
                   </Button>
@@ -276,20 +284,27 @@ const Events = () => {
     </div>
   );
 };
-
-const CreateEventButton = props => {
-  console.log("Add Create event button");
+let token;
+const CreateEventButton = (props) => {
+  console.log("Add Create event button")
   return (
     <AuthUserContext.Consumer>
       {authUser => {
-        return authUser && authUser.members.role === ROLES.ADMIN ? (
-          <Button
-            className="btn btn-primary addEventBtn"
-            onClick={props.onClick}
-          >
-            Create New Event
-          </Button>
-        ) : null;
+        {
+          token = "";
+        }
+        return (
+          (authUser && authUser.members.role === ROLES.ADMIN)
+            ? (
+              <Button
+                className="btn btn-primary addEventBtn"
+                onClick={props.onClick}
+              >
+                Create New Event
+              </Button>
+            )
+            : null
+        )
       }}
     </AuthUserContext.Consumer>
   );

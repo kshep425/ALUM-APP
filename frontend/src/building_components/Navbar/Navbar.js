@@ -5,7 +5,7 @@ import LowerNav from "./LowerNav";
 
 const Navbar = () => {
   let navbar = document.getElementsByClassName("navbar");
-  window.onscroll = function() {
+  window.onscroll = function () {
     let sticky = navbar.offsetTop;
     if (window.pageYOffset >= sticky) {
       navbar.classList.add("sticky");
@@ -15,7 +15,6 @@ const Navbar = () => {
   return (
     <div className="navbarDiv">
       <TopNavBar />
-
       <LowerNav />
     </div>
   );

@@ -6,6 +6,7 @@ import { EDIT } from "../../constants/routes";
 const ContactInfo = () => {
   return (
     <AuthUserContext.Consumer>
+<<<<<<< HEAD
       {authUser =>
         authUser.members ? (
           <div className="container-sm">
@@ -32,6 +33,69 @@ const ContactInfo = () => {
                 <br />
                 {!authUser.members.email ? null : authUser.members.email}
               </address>
+=======
+      {authUser => (
+        (authUser.members)
+          ? (
+            <div className='container-sm'>
+              <div className='card m-1 p-1'>
+                <EditLink />
+                <address>
+                  {
+                    (!!authUser.members.prefix || !!authUser.members.firstName || !!authUser.members.lastName || !!authUser.members.suffix)
+                    ? (<>
+                      <strong>{authUser.members.prefix} {authUser.members.firstName} {authUser.members.lastName} {authUser.members.suffix}</strong>
+                      <br />
+                    </>)
+                    : null
+                  }
+                  {(authUser.members.streetAddress1 || authUser.members.streetAddress2)
+                  ? (<>
+                      {authUser.members.streetAddress1}
+                      {authUser.members.streetAddress2 || null}
+                      <br />
+                    </>)
+                  : null
+                  }
+                  {(authUser.members.city)
+                    ?(<>
+                      {authUser.members.city},
+                      {" "}
+                    </>)
+                    : null
+                  }
+                  {(authUser.members.state)
+                  ? (<>
+                    {authUser.members.state}
+                    {" "}
+                  </>)
+                  : null
+                  }
+                  {(authUser.members.state)
+                  ? (<>
+                  {authUser.members.state}
+                  {" "}
+                  </>)
+                  : null}
+                  {(authUser.members.zip)
+                  ? (<>
+                  {authUser.members.zip}
+                  <br />
+                    </>)
+                  : null
+                  }
+
+                  {(authUser.members.phone)
+                    ? (<>
+                        {authUser.members.phone}
+                        <br />
+                      </>)
+                    : null
+                    }
+                  {authUser.members.email}
+                </address>
+              </div>
+>>>>>>> staging
             </div>
           </div>
         ) : null
