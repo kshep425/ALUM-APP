@@ -131,12 +131,12 @@ const AdminButtons = (props) =>{
     <AuthUserContext.Consumer>
       {authUser => {
         {
-          MemberId = authUser.members.id;
+          (authUser) ? MemberId = authUser.members.id : MemberId=null;
         }
-        return (authUser.members.role=== ROLES.ADMIN)
+        return (authUser && authUser.members.role=== ROLES.ADMIN)
       ? (
-        <>
-        <p>admin buttons</p>
+       q <>
+          <p>admin buttons</p>
           <UpdateEventButton />
           <CancelEventButton />
         </>

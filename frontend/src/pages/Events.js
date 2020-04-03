@@ -286,7 +286,8 @@ const CreateEventButton = (props) => {
     <AuthUserContext.Consumer>
       {authUser => {
         {
-          token = authUser.token;
+          (authUser) ? token = authUser.token: token = null;
+
         }
         return (
           (authUser && authUser.members.role === ROLES.ADMIN)
