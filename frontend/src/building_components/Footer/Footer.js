@@ -3,11 +3,9 @@ import "./style.css";
 
 const Footer = () => {
   return (
-    <div className="footer">
-      <div className="row">
-        <div className="col">
-          <p className="footerText">Terms & Conditions | Privacy Policy</p>
-        </div>
+    <div className="mainPage">
+      <div className=" footer">
+        <p>Alum App Group | Copyright © 2020</p>
       </div>
     </div>
   );

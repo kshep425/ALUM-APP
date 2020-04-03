@@ -16,10 +16,10 @@ import ShcolarshipPage from "./components/Scholarships";
 import AboutPage from "./components/About";
 import AdminPage from "./components/Admin";
 import AccountsPage from "./components/Accounts";
-import EditContactInfo from './components/MyMSU/EditContactInfo'
-import EditMemberInfo from './components/MyMSU/EditMemberInfo'
-import PayMembershipDues from './components/MyMSU/PayMembershipDues.js'
-
+import EditContactInfo from "./components/MyMSU/EditContactInfo";
+import EditMemberInfo from "./components/MyMSU/EditMemberInfo";
+import PayMembershipDues from "./components/MyMSU/PayMembershipDues.js";
+import Footer from "./building_components/Footer/Footer";
 import NAVBAR from "./building_components/Navbar/Navbar";
 import * as ROUTES from "./constants/routes";
 import { withAuthentication } from "./components/Session";
@@ -29,30 +29,24 @@ class App extends Component {
     return (
       <Router>
         <StoreProvider>
-          <NAVBAR></NAVBAR>
-          <div>
-            <Wrapper>
-              <Route exact path="/register" component={Registration} />
-              <Route exact path="/" component={HomePage}></Route>
-              <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-              <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-              <Route
-                path={ROUTES.PASSWORD_FORGET}
-                component={PasswordForgetPage}
-              />
-              <Route path={ROUTES.HOME} component={HomePage} />
-              <Route path={ROUTES.MYMSU} component={MyMsuPage} />
-              <Route path={ROUTES.ACCOUNTS} component={AccountsPage} />
-              <Route path={ROUTES.EVENTS} component={EventsPage} />
-              <Route path={ROUTES.ADMIN} component={AdminPage} />
-              <Route path={ROUTES.DONATE} component={DonatePage} />
-              <Route path={ROUTES.SCHOLARSHIPS} component={ShcolarshipPage} />
-              <Route path={ROUTES.ABOUT} component={AboutPage} />
-              <Route path={ROUTES.EDIT} component={EditContactInfo} />
-              <Route path={ROUTES.EDIT_MEMBER_INFO} component={EditMemberInfo} />
-              <Route path={ROUTES.PAY_DUES} component={PayMembershipDues} />
-            </Wrapper>
-          </div>
+          <NAVBAR />
+          <Route exact path="/register" component={Registration} />
+          <Route exact path="/" component={HomePage}></Route>
+          <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+          <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+          <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
+          <Route path={ROUTES.HOME} component={HomePage} />
+          <Route path={ROUTES.MYMSU} component={MyMsuPage} />
+          <Route path={ROUTES.ACCOUNTS} component={AccountsPage} />
+          <Route path={ROUTES.EVENTS} component={EventsPage} />
+          <Route path={ROUTES.ADMIN} component={AdminPage} />
+          <Route path={ROUTES.DONATE} component={DonatePage} />
+          <Route path={ROUTES.SCHOLARSHIPS} component={ShcolarshipPage} />
+          <Route path={ROUTES.ABOUT} component={AboutPage} />
+          <Route path={ROUTES.EDIT} component={EditContactInfo} />
+          <Route path={ROUTES.EDIT_MEMBER_INFO} component={EditMemberInfo} />
+          <Route path={ROUTES.PAY_DUES} component={PayMembershipDues} />
+          <Footer />
         </StoreProvider>
       </Router>
     );

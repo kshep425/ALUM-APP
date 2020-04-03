@@ -1,7 +1,7 @@
 import React from "react";
-import TopNavBar from "./TopNavBar"
-import Logo from '../Logo/index'
-import LowerNav from './LowerNav'
+import TopNavBar from "./TopNavBar";
+
+import LowerNav from "./LowerNav";
 
 const Navbar = () => {
   let navbar = document.getElementsByClassName("navbar");
@@ -13,11 +13,11 @@ const Navbar = () => {
   };
 
   return (
-    <div>
+    <div className="navbarDiv">
       <TopNavBar />
       <LowerNav />
     </div>
   );
-}
+};
 
 export default Navbar;

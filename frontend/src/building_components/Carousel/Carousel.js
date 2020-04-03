@@ -5,10 +5,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CarouselItem from "./CarouselItem";
 //import image from "../../images/carouselAnnouncements/"
-import scholarshipFlyer from "../../images/carouselAnnouncements/scholarshipFlyer.png"
-import * as ROUTES from "../../constants/routes"
-import eventFlyer from "../../images/carouselAnnouncements/eventsFlyer.png"
-import aboutFlyer from "../../images/carouselAnnouncements/aboutFlyer.png"
+import scholarshipFlyer from "../../images/carouselAnnouncements/scholarshipFlyer.png";
+import * as ROUTES from "../../constants/routes";
+import eventFlyer from "../../images/carouselAnnouncements/eventsFlyer.png";
+import aboutFlyer from "../../images/carouselAnnouncements/aboutFlyer.png";
 const photos = [
   // {
   //   key: '2',
@@ -32,51 +32,54 @@ const photos = [
   //   description: 'Holmes Hall'
   // },
   {
-    key: '5',
-    alt: 'Scholarship Announcements',
-    title: 'scholarship announcement',
+    key: "5",
+    alt: "Scholarship Announcements",
+    title: "scholarship announcement",
     src: scholarshipFlyer,
-    description: 'Scholarship Announcement',
+    description: "Scholarship Announcement",
     route: ROUTES.SCHOLARSHIPS
   },
   {
-    key: '6',
-    alt: 'Event Announcements',
-    title: 'Event announcement',
+    key: "6",
+    alt: "Event Announcements",
+    title: "Event announcement",
     src: eventFlyer,
-    description: 'Event Announcement',
+    description: "Event Announcement",
     route: ROUTES.EVENTS
   },
   {
-    key: '7',
-    alt: 'About Announcements',
-    title: 'About announcement',
+    key: "7",
+    alt: "About Announcements",
+    title: "About announcement",
     src: aboutFlyer,
-    description: 'About Announcement',
+    description: "About Announcement",
     route: ROUTES.ABOUT
-  },
-
-]
+  }
+];
 
 const Carousel = () => {
   return (
-    <div>
-      <Slider
-        speed={1000}
-        slidesToShow={1}
-        slidesToScroll={1}
-        infinite={true}
-        dots={false}
-        autoplay={true}
-        autoplaySpeed={5000}
-      >
-        {photos.map(photo =>
-        <CarouselItem key={photo.key} src={photo.src} title={photo.title} alt={photo.alt} route={photo.route}>
+    <Slider
+      speed={1000}
+      slidesToShow={1}
+      slidesToScroll={1}
+      infinite={true}
+      dots={false}
+      autoplay={true}
+      autoplaySpeed={5000}
+    >
+      {photos.map(photo => (
+        <CarouselItem
+          key={photo.key}
+          src={photo.src}
+          title={photo.title}
+          alt={photo.alt}
+          route={photo.route}
+        >
           Event Description 1
         </CarouselItem>
-        )}
-      </Slider>
-    </div>
+      ))}
+    </Slider>
   );
 };
 
