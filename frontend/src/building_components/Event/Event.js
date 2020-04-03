@@ -135,7 +135,7 @@ const AdminButtons = (props) =>{
         }
         return (authUser && authUser.members.role=== ROLES.ADMIN)
       ? (
-       q <>
+        <>
           <p>admin buttons</p>
           <UpdateEventButton />
           <CancelEventButton />
