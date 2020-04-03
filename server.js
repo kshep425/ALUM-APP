@@ -49,7 +49,7 @@ app.use(
 //const api_routes = require("./routes/api_routes")
 //app.use(api_routes);
 require("./backend/routes/api_routes/login_api_routes")(app);
-require("./backend/routes/api_routes/events")(app);
+require("./backend/routes/api_routes/events_api")(app);
 require("./backend/routes/api_routes/users_api")(app);
 require("./backend/routes/api_routes/payments_api")(app);
 app.use(routes)
