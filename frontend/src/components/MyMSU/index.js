@@ -5,17 +5,15 @@ import "../../pages/style.css";
 import {
   AuthUserContext,
   withAuthorization,
-  withEmailVerification,
-} from '../Session';
-import { withFirebase } from '../Firebase';
-import PasswordChangeForm from '../PasswordChange';
-import ContactInfo from './ContactInfo'
-import MemberInfo from './MemberInfo'
-import MemberType from './MemberType.js'
-import PaymentHistory from './PaymentHistory'
-import EventHistory from './EventHistory'
-import Footer from "../../building_components/Footer/Footer";
-
+  withEmailVerification
+} from "../Session";
+import { withFirebase } from "../Firebase";
+import PasswordChangeForm from "../PasswordChange";
+import ContactInfo from "./ContactInfo";
+import MemberInfo from "./MemberInfo";
+import MemberType from "./MemberType.js";
+import PaymentHistory from "./PaymentHistory";
+import EventHistory from "./EventHistory";
 
 const SIGN_IN_METHODS = [
   {
@@ -72,12 +70,12 @@ const MyMsuPage = () => (
               </h4>
               {!!authUser.providerData[0].Email && (
                 <h6>
-                  <i class="fa fa-envelope"> </i>
+                  <i className="fa fa-envelope"> </i>
                   {" " + authUser.providerData[0].Email}
                 </h6>
               )}
               <h6>
-                <i class="fa fa-envelope"> </i>
+                <i className="fa fa-envelope"> </i>
                 {" " + authUser.email}
               </h6>
               {!!authUser.providerData[0].phoneNumber && (
@@ -163,7 +161,7 @@ class LoginManagementBase extends Component {
           const isEnabled = activeSignInMethods.includes(signInMethod.id);
 
           return (
-            <p key={signInMethod.id} className="signInMethodsBtns">
+            <div key={signInMethod.id} className="signInMethodsBtns">
               {signInMethod.id === "password" ? (
                 <DefaultLoginToggle
                   onlyOneLeft={onlyOneLeft}
@@ -181,7 +179,7 @@ class LoginManagementBase extends Component {
                   onUnlink={this.onUnlink}
                 />
               )}
-            </p>
+            </div>
           );
         })}
         {error && error.message}
