@@ -3,11 +3,9 @@ import "./style.css";
 
 const Footer = () => {
   return (
-    <div className="footer">
-      <div className="row">
-        <div className="col">
-          <p>Terms & Conditions | Privacy Policy</p>
-        </div>
+    <div className="mainPage">
+      <div className=" footer">
+        <p>Terms & Conditions | Privacy Policy</p>
       </div>
     </div>
   );

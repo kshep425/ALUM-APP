@@ -1,4 +1,6 @@
 .modal {
+  font-family: "Abel", sans-serif;
+  color: rgb(18, 47, 94);
   position: fixed;
   overflow-y: auto;
   top: 0;
@@ -6,6 +8,11 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
+}
+
+.modalTitle {
+  font-family: "Abel", sans-serif;
+  padding: 15px 5px 10px 5px;
 }
 
 .modal-main {
@@ -41,7 +48,7 @@
 }
 
 .fa-times:hover {
-  color: #fe7f18;
+  color: #f76f00;
 }
 
 .display-block {

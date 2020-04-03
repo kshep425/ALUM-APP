@@ -1,11 +1,12 @@
-import React, {useRef} from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import RegistrationContactInfo from '../../form_components/RegistrationContactInfo';
-import Button from '../../building_components/Button';
-import API from '../../utils/API'
-import * as ROUTES from '../../constants/routes';
+import React, { useRef } from "react";
+import { Link, withRouter } from "react-router-dom";
+import RegistrationContactInfo from "../../form_components/RegistrationContactInfo";
+import Button from "../../building_components/Button";
+import API from "../../utils/API";
+import * as ROUTES from "../../constants/routes";
+import "../../pages/style.css";
 
-const EditContactInfo = (props) => {
+const EditContactInfo = props => {
   const uid = useRef();
   const token = useRef();
   const prefix = useRef();
@@ -35,16 +36,15 @@ const EditContactInfo = (props) => {
       streetAddress2: streetAddress2.current.value,
       city: city.current.value,
       state: state.current.value,
-      zip: zip.current.value,
+      zip: zip.current.value
     };
 
     API.updateUser(data, token.current.value);
-    props.history.push(ROUTES.MYMSU)
+    props.history.push(ROUTES.MYMSU);
   };
 
   return (
     <div>
-
       <h1>Edit Contact Info</h1>
       <RegistrationContactInfo
         uidRef={uid}
@@ -61,8 +61,12 @@ const EditContactInfo = (props) => {
         stateRef={state}
         zipRef={zip}
       />
-      <Link to={ROUTES.MYMSU}><Button>Cancel</Button></Link>
-      <Button onClick={handleSubmit}>Submit</Button>
+      <Link to={ROUTES.MYMSU} className="btn btn-primary cancelBtn">
+        <Button>Cancel</Button>
+      </Link>
+      <Button className="btn btn-primary submitEventBtn" onClick={handleSubmit}>
+        Submit
+      </Button>
     </div>
   );
 };

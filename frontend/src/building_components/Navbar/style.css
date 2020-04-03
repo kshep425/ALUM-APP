@@ -55,15 +55,24 @@
 /* lower nav section */
 .lowerNav {
   background-color: white;
-  text-align: center;
+  text-align: left;
 }
 
 .logo {
-  height: 130px;
+  height: 160px;
+  margin: 10px 0px;
+  padding-right: 450px;
 }
 
 .logoDiv {
   margin: 0px;
+}
+
+.navDropdown {
+  display: none;
+
+  color: #f76f00;
+  font-size: 30px;
 }
 
 .alumniText {
@@ -117,17 +126,37 @@
 }
 
 .navItemDiv {
+  /* /* margin: 30px; */
+  padding-top: 90px;
   margin: 30px;
   text-decoration: none;
+}
+
+.inline {
+  display: inline-block;
 }
 
 .navItemDiv:hover {
   text-decoration: none;
 }
 
+.loginBtnDiv {
+  margin-left: 13px;
+}
+
 .navRow {
   line-height: 0.5px;
-  justify-content: center;
+}
+
+.welcomeText {
+  color: white;
+  padding-top: 5px;
+  text-align: left;
+  font-family: "Abel", sans-serif;
+}
+
+.floatLeft {
+  float: left;
 }
 
 .navPhoto {
@@ -141,11 +170,16 @@
 .signoutBtn {
   font-family: "Abel", sans-serif;
   font-weight: bold;
-  color: #122f5e;
+  color: #f76f00;
   background-color: white;
   border: none;
   box-shadow: none;
   padding: 5px 10px;
+}
+
+.signoutBtn:hover {
+  text-decoration: none;
+  color: #db6300;
 }
 
 .myMSUlink {
@@ -156,10 +190,24 @@
   border: none;
   box-shadow: none;
   padding: 5px 10px;
+  margin: 0;
 }
 
-.myMSUlink:hover,
-.signoutBtn:hover {
+.dropdownLink:hover,
+.myMSUlink:hover {
   text-decoration: none;
-  color: #fe7f18;
+  color: #122f5ec4;
+}
+
+.navbarDiv {
+  width: 100vw !important;
+}
+
+@media only screen and (max-width: 720px) {
+  .navDropdown {
+    display: block;
+  }
+  .lowerNav {
+    display: none;
+  }
 }

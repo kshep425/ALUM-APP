@@ -1,21 +1,15 @@
+import React from "react";
+import logo from "../../images/NEW_logo.png";
+import { Link } from "react-router-dom";
+import { HOME } from "../../constants/routes";
+import "../Navbar/style.css";
 
-import React from 'react';
-import logo from "../../images/MSULNO1C.svg";
-import { Link } from "react-router-dom"
-import {HOME} from "../../constants/routes"
 const Logo = () => {
   return (
-    <div className="lowerNav">
-      <div className="row logoDiv">
-        <div className="col">
-          <Link to={HOME}>
-            <img src={logo} alt="MSU Logo" className="logo"></img>
-            <h2 className="alumniText">ALUMNI</h2>
-          </Link>
-        </div>
-      </div>
-    </div>
-  )
-}
+    <Link to={HOME}>
+      <img src={logo} alt="MSU Logo" className="logo"></img>
+    </Link>
+  );
+};
 
 export default Logo;

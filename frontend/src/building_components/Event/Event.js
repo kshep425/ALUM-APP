@@ -3,7 +3,7 @@ import "./style.css";
 import moment from "moment-timezone";
 import Button from "../Button";
 import { AuthUserContext } from "../../components/Session";
-import * as ROLES from "../../constants/roles"
+import * as ROLES from "../../constants/roles";
 
 const Event = props => {
   const [state, setState] = useState({ eventOpen: false });
@@ -14,7 +14,7 @@ const Event = props => {
 
   return (
     <div className="eventBox">
-      <h1>{props.title}</h1>
+      <h1 className="eventHeader">{props.title}</h1>
 
       <hr className="eventHr" />
       <h6>
@@ -82,33 +82,27 @@ const Event = props => {
 };
 
 const UpdateEventButton = () => {
-  return (
-    <Button>Update Event</Button>
-  )
-}
+  return <Button>Update Event</Button>;
+};
 const CancelEventButton = () => {
-  return (
-    <Button>Cancel Event</Button>
-  )
-}
+  return <Button>Cancel Event</Button>;
+};
 
-const AdminButtons = (props) =>{
-  console.log("render admin buttons")
+const AdminButtons = props => {
+  console.log("render admin buttons");
   return (
     <AuthUserContext.Consumer>
       {authUser => {
-        return (authUser.members.role=== ROLES.ADMIN)
-      ? (
-        <>
-        <p>admin buttons</p>
-          <UpdateEventButton />
-          <CancelEventButton />
-        </>
-      )
-      : null
-    }}
+        return authUser.members.role === ROLES.ADMIN ? (
+          <>
+            <p>admin buttons</p>
+            <UpdateEventButton />
+            <CancelEventButton />
+          </>
+        ) : null;
+      }}
     </AuthUserContext.Consumer>
-  )
-}
+  );
+};
 
 export default Event;
