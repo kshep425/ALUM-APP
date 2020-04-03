@@ -3,42 +3,42 @@ import "./style.css";
 import moment from "moment-timezone";
 import Button from "../Button";
 import { AuthUserContext } from "../../components/Session";
-import * as ROLES from "../../constants/roles"
+import * as ROLES from "../../constants/roles";
 
 const Event = props => {
-  console.log(props)
+  console.log(props);
   const [state, setState] = useState({ eventOpen: false });
-  const [rsvp, setRSVP] = useState("")
+  const [rsvp, setRSVP] = useState("");
 
   const viewDetails = () => {
     setState({ eventOpen: !state.eventOpen });
   };
 
-  function setNewRSVP(event){
-    console.log("setNewRSVP")
-    console.log(event.target.value)
-    setRSVP(event.target.value)
-    console.log(rsvp)
+  function setNewRSVP(event) {
+    console.log("setNewRSVP");
+    console.log(event.target.value);
+    setRSVP(event.target.value);
+    console.log(rsvp);
   }
 
-  useEffect(()=>{
-    console.log(rsvp)
-  },[rsvp])
+  useEffect(() => {
+    console.log(rsvp);
+  }, [rsvp]);
 
   function newEventRSVP(event) {
-    console.log("RSVP clicked")
+    console.log("RSVP clicked");
     const rsvpToEvent = {
       eventId: props.id,
       rsvp,
-      MemberId,
-    }
-    console.log(rsvp)
+      MemberId
+    };
+    console.log(rsvp);
     event.preventDefault();
     props.handleRSVP(rsvpToEvent);
   }
   return (
     <div className="eventBox">
-      <h1>{props.title}</h1>
+      <h1 className="eventHeader">{props.title}</h1>
 
       <hr className="eventHr" />
       <h6>
@@ -46,13 +46,21 @@ const Event = props => {
       </h6>
       <form className="rsvpForm" onSubmit={e => newEventRSVP(e)}>
         <label className="formTitle">RSVP:</label>
-        <input type="radio" id="yes" name={"rsvp" + props.index} value="yes"
+        <input
+          type="radio"
+          id="yes"
+          name={"rsvp" + props.index}
+          value="yes"
           checked={rsvp === "yes"}
           onChange={setNewRSVP}
         />
         <label>Yes</label>
 
-        <input type="radio" id="no" name={"rsvp" + props.index} value="no"
+        <input
+          type="radio"
+          id="no"
+          name={"rsvp" + props.index}
+          value="no"
           checked={rsvp === "no"}
           onChange={setNewRSVP}
         />
@@ -68,7 +76,11 @@ const Event = props => {
         />
         <label>Maybe</label>
 
-        <input className="open btn rsvpBtn" type="submit" value="Submit RSVP"></input>
+        <input
+          className="open btn rsvpBtn"
+          type="submit"
+          value="Submit RSVP"
+        ></input>
       </form>
       <button
         className={state.eventOpen ? "hidden" : "open btn detailsBtn"}
@@ -114,37 +126,31 @@ const Event = props => {
 };
 
 const UpdateEventButton = () => {
-  return (
-    <Button>Update Event</Button>
-  )
-}
+  return <Button>Update Event</Button>;
+};
 const CancelEventButton = () => {
-  return (
-    <Button>Cancel Event</Button>
-  )
-}
+  return <Button>Cancel Event</Button>;
+};
 
 let MemberId;
-const AdminButtons = (props) =>{
-  console.log("render admin buttons")
+const AdminButtons = props => {
+  console.log("render admin buttons");
   return (
     <AuthUserContext.Consumer>
       {authUser => {
         {
-          MemberId = authUser.members.id;
+          MemberId = "authUser.members.id";
         }
-        return (authUser.members.role=== ROLES.ADMIN)
-      ? (
-        <>
-        <p>admin buttons</p>
-          <UpdateEventButton />
-          <CancelEventButton />
-        </>
-      )
-      : null
-    }}
+        return authUser.members.role === ROLES.ADMIN ? (
+          <>
+            <p>admin buttons</p>
+            <UpdateEventButton />
+            <CancelEventButton />
+          </>
+        ) : null;
+      }}
     </AuthUserContext.Consumer>
-  )
-}
+  );
+};
 
 export default Event;

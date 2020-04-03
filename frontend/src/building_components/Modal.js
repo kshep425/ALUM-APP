@@ -12,7 +12,7 @@ const Modal = ({ handleClose, show, children, title }) => {
             <button onClick={handleClose} className="closeBtn">
               <i className="fa fa-times" aria-hidden="true"></i>
             </button>
-            <h1 className="title">{title}</h1>
+            <h1 className="modalTitle">{title}</h1>
           </div>
         </div>
         {children}
