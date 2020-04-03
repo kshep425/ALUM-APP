@@ -47,7 +47,7 @@ const AddressInput = props => {
 
               {suggestions.map(suggestion => {
                 const style = {
-                  backgroundColor: suggestion.active ? "#fe7f18" : "#fff"
+                  backgroundColor: suggestion.active ? "#f76f00" : "#fff"
                 };
                 return (
                   <div {...getSuggestionItemProps(suggestion, { style })}>

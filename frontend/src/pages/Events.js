@@ -4,14 +4,12 @@ import Footer from "../building_components/Footer/Footer";
 import Button from "../building_components/Button";
 import AddressInput from "../building_components/AddressInput";
 import Modal from "../building_components/Modal";
-import ReactCalendar from "../building_components/Calendar/Calendar";
 import { useStoreContext } from "../utils/GlobalState";
-import { ADD_EVENT, REMOVE_EVENT, UPDATE_EVENTS } from "../utils/actions";
+import { ADD_EVENT, UPDATE_EVENTS } from "../utils/actions";
 import API from "../utils/API";
 import "./style.css";
 import { AuthUserContext } from "../components/Session";
-import * as ROLES from "../constants/roles"
-import { decodeBase64 } from "bcryptjs";
+import * as ROLES from "../constants/roles";
 
 const Events = () => {
   const [state, dispatch] = useStoreContext();
@@ -187,7 +185,11 @@ const Events = () => {
                 defaultValue="Event Title"
               ></input>
 
-              <EventHost hostNameRef={hostNameRef} hostEmailRef={hostEmailRef} creatorIdRef={creatorIdRef} />
+              <EventHost
+                hostNameRef={hostNameRef}
+                hostEmailRef={hostEmailRef}
+                creatorIdRef={creatorIdRef}
+              />
               <div className="row">
                 <div className="col-md-6">
                   <label htmlFor="startTime">Start Time</label>
@@ -225,7 +227,12 @@ const Events = () => {
               <AddressInput onChange={handleAddressChange} />
 
               <label htmlFor="eventType">Event Type</label>
-              <select id="eventType" className="titleInput" ref={eventTypeRef} defaultValue="Meeting">
+              <select
+                id="eventType"
+                className="titleInput"
+                ref={eventTypeRef}
+                defaultValue="Meeting"
+              >
                 <option>Meeting</option>
                 <option>Party </option>
                 <option>Performance/Concert </option>
@@ -274,8 +281,6 @@ const Events = () => {
           </form>
         </div>
       </Modal>
-
-      <Footer />
     </div>
   );
 };
@@ -287,7 +292,6 @@ const CreateEventButton = (props) => {
       {authUser => {
         {
           (authUser) ? token = authUser.token: token = null;
-
         }
         return (
           (authUser && authUser.members.role === ROLES.ADMIN)
@@ -303,17 +307,16 @@ const CreateEventButton = (props) => {
         )
       }}
     </AuthUserContext.Consumer>
-  )
-}
+  );
+};
 
-const EventHost = (props) => {
+const EventHost = props => {
   return (
     <AuthUserContext.Consumer>
       {authUser => {
-        return (
-          (authUser)
-          ? (<>
-            <label htmlFor="hostName">HostName</label>
+        return authUser ? (
+          <>
+            <label htmlFor="hostName">Host Name</label>
             <input
               id="hostName"
               type="text"
@@ -322,7 +325,7 @@ const EventHost = (props) => {
               ref={props.hostNameRef}
               defaultValue={authUser.providerData[0].displayName}
             />
-            <label htmlFor="hostEmail">HostEmail</label>
+            <label htmlFor="hostEmail">Host Email</label>
             <input
               id="hostEmail"
               type="text"
@@ -331,10 +334,13 @@ const EventHost = (props) => {
               ref={props.hostEmailRef}
               defaultValue={authUser.email}
             />
-            <input ref={props.creatorIdRef} defaultValue={authUser.uid} hidden></input>
-          </>)
-          : null
-        )
+            <input
+              ref={props.creatorIdRef}
+              defaultValue={authUser.uid}
+              hidden
+            ></input>
+          </>
+        ) : null;
       }}
     </AuthUserContext.Consumer>
   );

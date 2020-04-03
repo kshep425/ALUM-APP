@@ -1,0 +1,19 @@
+.profPic {
+  border-radius: 50%;
+
+  margin: 0 0 13px 0;
+}
+
+.col-md-4 {
+  border: 1px solid rgba(128, 128, 128, 0.342);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.466);
+  border-radius: 5px;
+  background-color: white;
+  padding: 10px 0;
+}
+
+.signInMethodsBtns {
+  display: inline;
+  padding: 0px;
+  margin: 0px;
+}

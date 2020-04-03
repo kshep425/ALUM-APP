@@ -8,8 +8,9 @@ import * as ROUTES from "../../constants/routes";
 import { AuthUserContext } from "../../components/Session";
 
 const TopNavBar = () => (
-  <div className="navbar">
+  <div className="navbar mr-auto">
     <LogInOrOutBtn />
+
     <DonateBtn />
   </div>
 );
@@ -38,12 +39,42 @@ const LogInOrOutBtn = () => (
             </button>
 
             <div className="dropdown-menu">
+              <Link to={ROUTES.MYMSU} className="dropdownLink">
+                <p className="myMSUlink">My Msu</p>
+              </Link>
+              <Link to={ROUTES.MYMSU} className="dropdownLink">
+                <p className="myMSUlink">Change Password</p>
+              </Link>
               <Link to={ROUTES.HOME}>
                 <SignoutButton className="signoutBtn">LOGOUT</SignoutButton>
               </Link>
+            </div>
+          </div>
 
-              <Link to={ROUTES.MYMSU} className="myMSUlink">
-                <p className="myMSUlink">My Msu</p>
+          <div className="dropdown">
+            <button
+              className="btn dropdown-toggle navDropdown"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <i className="fa fa-bars"></i>
+            </button>
+
+            <div className="dropdown-menu ">
+              <Link to={ROUTES.HOME} className="dropdownLink">
+                <p className="myMSUlink">HOME</p>
+              </Link>
+              <Link to={ROUTES.SCHOLARSHIPS} className="dropdownLink">
+                <p className="myMSUlink">SCHOLARSHIPS</p>
+              </Link>
+              <Link to={ROUTES.EVENTS} className="dropdownLink">
+                <p className="myMSUlink">EVENTS</p>
+              </Link>
+              <Link to={ROUTES.ABOUT} className="dropdownLink">
+                <p className="myMSUlink">ABOUT</p>
               </Link>
             </div>
           </div>
