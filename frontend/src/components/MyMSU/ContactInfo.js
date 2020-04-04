@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { EDIT } from "../../constants/routes";
+import "./mymsupage.css";
 
 const ContactInfo = ({ authUser }) => {
   return (
-    <div className="container-sm">
+    <div className="container-sm contactInfoDiv">
       <div className="card m-1 p-1">
         <EditLink />
         <address>
@@ -36,16 +37,14 @@ const ContactInfo = ({ authUser }) => {
               <br />
             </>
           ) : null}
-
-          {authUser.members.phone ? (
-            <>
-              {authUser.members.phone}
-              <br />
-            </>
-          ) : null}
-          {authUser.members.email}
-        </address>
-      </div>
+        {authUser.members.phone ? (
+          <>
+            {authUser.members.phone}
+            <br />
+          </>
+        ) : null}
+        {authUser.members.email}
+      </address>
     </div>
   );
 };

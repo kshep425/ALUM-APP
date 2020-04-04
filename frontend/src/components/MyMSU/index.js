@@ -71,7 +71,7 @@ const MyMsuPage = () => {
           <LoginManagement authUser={authUser} />
           <hr className="lineDivider" />
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-4 profileDiv">
               {!!authUser.providerData[0].photoURL && (
                 <img
                   src={authUser.providerData[0].photoURL}
