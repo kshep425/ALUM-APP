@@ -1,18 +1,18 @@
 import React from "react";
 import "./mymsupage.css";
 
-const PaymentHistory = props => {
-  const payments = props.authUser.payments;
+
+const PaymentHistory = (props) => {
+
+  const payments = props.authUser.payments.reverse();
 
   function formatDate(date) {
     let d = new Date(date);
     return d.toLocaleDateString();
   }
 
-  console.log(payments);
-
   return (
-    <div className="container historyContainer">
+    <div className="container historyContainer" ref={props.paymentLength} value={payments.length}>
       <h1 className="card-title">Payment History</h1>
       <table className="table">
         <thead>

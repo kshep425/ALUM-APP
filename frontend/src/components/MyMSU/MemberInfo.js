@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { EDIT_MEMBER_INFO } from "../../constants/routes";
 import "./mymsupage.css";
 
-const MemberInfo = props => {
-  const [authUser, setAuthUser] = useState(props.authUser);
-  console.log(authUser);
+
+const MemberInfo = (props) => {
+  const [authUser, setAuthUser] = useState(props.authUser)
 
   useEffect(() => {
-    setAuthUser(authUser);
-  });
+    setAuthUser(authUser)
+  }, [authUser])
 
   const GetOccupation = () => {
     console.log("Get Occupation");
@@ -29,18 +29,15 @@ const MemberInfo = props => {
     return authUser.degrees && authUser.degrees != [] ? (
       <>
         {console.log(authUser.degrees)}
-        {authUser.degrees.map(degree => {
-          return (
-            <p>
-              {degree.year}: {degree.degree}
-            </p>
-          );
-        })}
-      </>
-    ) : (
-      <p>Add your Degrees</p>
-    );
-  };
+          {authUser.degrees.map(degree => {
+            return (
+            <p key={degree.id}>{degree.year}: {degree.degree}</p>
+            )
+          })}
+        </>)
+        : (<p>Add your Degrees</p>)
+    )
+  }
 
   return (
     <div className="container-sm contactInfoDiv">
