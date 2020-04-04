@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect, useRef } from "react";
 import { compose } from "recompose";
 import "./mymsupage.css";
 import "../../pages/style.css";
 import {
   AuthUserContext,
   withAuthorization,
-  withEmailVerification
+  withEmailVerification,
+  withAuthentication
 } from "../Session";
 import { withFirebase } from "../Firebase";
 import PasswordChangeForm from "../PasswordChange";
@@ -41,9 +42,24 @@ const SIGN_IN_METHODS = [
   }
 ];
 
-const MyMsuPage = () => (
+const MyMsuPage = () => {
+  let paymentLengthRef = useRef(0);
+  let eventsLengthRef = useRef(0)
+
+  useEffect(() => {
+    console.log(paymentLengthRef)
+  }, [paymentLengthRef])
+
+  useEffect(() => {
+    console.log(eventsLengthRef)
+  }, [eventsLengthRef])
+
+  return (
   <AuthUserContext.Consumer>
-    {authUser => (
+    {authUser => {
+
+      return (
+
       <div className="mainPage">
         <div className="eventPageDiv">
           <h1>
@@ -87,16 +103,16 @@ const MyMsuPage = () => (
             </div>
 
             <div className="col-md-8">
-              <PaymentHistory authUser={authUser} />
-              <EventHistory authUser={authUser} />
+              <PaymentHistory authUser={authUser} paymentLength={paymentLengthRef}/>
+              <EventHistory authUser={authUser} eventsLength={eventsLengthRef}/>
               <PasswordChangeForm />
             </div>
           </div>
         </div>
       </div>
-    )}
+    )}}
   </AuthUserContext.Consumer>
-);
+)};
 
 class LoginManagementBase extends Component {
   constructor(props) {
@@ -279,5 +295,6 @@ const condition = authUser => !!authUser;
 
 export default compose(
   withEmailVerification,
-  withAuthorization(condition)
+  withAuthorization(condition),
+  withAuthentication
 )(MyMsuPage);

@@ -9,24 +9,25 @@ const ContactInfo = ({ authUser }) => {
       <EditLink />
       <address>
         {!!authUser.members.prefix ||
-        !!authUser.members.firstName ||
-        !!authUser.members.lastName ||
-        !!authUser.members.suffix ? (
-          <>
-            <strong>
-              {authUser.members.prefix} {authUser.members.firstName}{" "}
-              {authUser.members.lastName} {authUser.members.suffix}
-            </strong>
-            <br />
-          </>
-        ) : null}
-        {authUser.members.streetAddress1 || authUser.members.streetAddress2 ? (
-          <>
-            {authUser.members.streetAddress1}
-            {authUser.members.streetAddress2 || null}
-            <br />
-          </>
-        ) : null}
+          !!authUser.members.firstName ||
+          !!authUser.members.lastName ||
+          !!authUser.members.suffix ? (
+            <>
+              <strong>
+                {authUser.members.prefix} {authUser.members.firstName}{" "}
+                {authUser.members.lastName} {authUser.members.suffix}
+              </strong>
+              <br />
+            </>
+          ) : null}
+        {authUser.members.streetAddress1 ||
+          authUser.members.streetAddress2 ? (
+            <>
+              {authUser.members.streetAddress1}
+              {authUser.members.streetAddress2 || null}
+              <br />
+            </>
+          ) : null}
         {authUser.members.city ? <>{authUser.members.city}, </> : null}
         {authUser.members.state ? <>{authUser.members.state} </> : null}
         {authUser.members.zip ? (
@@ -35,7 +36,6 @@ const ContactInfo = ({ authUser }) => {
             <br />
           </>
         ) : null}
-
         {authUser.members.phone ? (
           <>
             {authUser.members.phone}

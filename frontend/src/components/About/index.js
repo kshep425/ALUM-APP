@@ -25,6 +25,7 @@ const About = () => {
           {members.map(member => (
             <Wrapper>
               <Card
+                key={member.name}
                 position={member.position}
                 name={member.name}
                 about={member.about}

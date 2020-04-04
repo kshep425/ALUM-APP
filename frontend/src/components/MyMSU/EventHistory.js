@@ -11,7 +11,7 @@ const EventHistory = props => {
   }
   console.log(events);
   return (
-    <div className="container historyContainer">
+    <div className="container historyContainer" ref={props.eventsLength} value={events.length}>
       <h1 className="card-title">Event History</h1>
       <table className="table">
         <thead>
