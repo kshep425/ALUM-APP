@@ -4,13 +4,18 @@ import { Link } from "react-router-dom";
 import Button from "../Button";
 import SignoutButton from "../../components/SignOut";
 import * as ROUTES from "../../constants/routes";
-
+import MediaNavitem from "./MediaNavitem";
 import { AuthUserContext } from "../../components/Session";
 
 const TopNavBar = () => (
-  <div className="navbar mr-auto">
+  <div className="navbar">
     <LogInOrOutBtn />
-
+    <div className="testDiv">
+      <MediaNavitem href={ROUTES.HOME}>Home</MediaNavitem>
+      <MediaNavitem href={ROUTES.EVENTS}>Events</MediaNavitem>
+      <MediaNavitem href={ROUTES.SCHOLARSHIPS}>Scholarships</MediaNavitem>
+      <MediaNavitem href={ROUTES.ABOUT}>About</MediaNavitem>
+    </div>
     <DonateBtn />
   </div>
 );
@@ -51,36 +56,10 @@ const LogInOrOutBtn = () => (
             </div>
           </div>
 
-          <div className="dropdown">
-            <button
-              className="btn dropdown-toggle navDropdown"
-              type="button"
-              id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i className="fa fa-bars"></i>
-            </button>
-
-            <div className="dropdown-menu ">
-              <Link to={ROUTES.HOME} className="dropdownLink">
-                <p className="myMSUlink">HOME</p>
-              </Link>
-              <Link to={ROUTES.SCHOLARSHIPS} className="dropdownLink">
-                <p className="myMSUlink">SCHOLARSHIPS</p>
-              </Link>
-              <Link to={ROUTES.EVENTS} className="dropdownLink">
-                <p className="myMSUlink">EVENTS</p>
-              </Link>
-              <Link to={ROUTES.ABOUT} className="dropdownLink">
-                <p className="myMSUlink">ABOUT</p>
-              </Link>
-            </div>
-          </div>
           <div>
-            <h1 className="alumniText topNavBarText">Morgan State University Howard County Alumni Chapter</h1>
-
+            <h1 className="alumniText topNavBarText">
+              Morgan State University Howard County Alumni Chapter
+            </h1>
           </div>
         </>
       ) : (

@@ -43,6 +43,11 @@
   border: none;
 }
 
+.topNavBarText {
+  font-family: "Abel", sans-serif !important;
+  font-weight: bold;
+}
+
 .donateBtn {
   font-size: 20px;
   background-color: #fe7f18;
@@ -209,6 +214,31 @@
   width: 100vw !important;
 }
 
+.mediaNavlink {
+  color: white;
+  font-weight: bold;
+  font-family: "Abel", sans-serif;
+  padding: 0px 5px;
+
+  padding: 15px 5px;
+  background: linear-gradient(
+    to bottom,
+    var(--mainColor) 0%,
+    var(--mainColor) 100%
+  );
+  background-position: 0 100%;
+  background-repeat: repeat-x;
+  background-size: 4px 4px;
+  text-decoration: none;
+  transition: background-size 0.3s;
+}
+
+.mediaNavlink:hover {
+  text-decoration: none;
+  color: white;
+  background-size: 4px 50px;
+}
+
 @media only screen and (max-width: 720px) {
   .navDropdown {
     display: block;
@@ -223,6 +253,10 @@
   display: none;
 }
 
+.testDiv {
+  display: none;
+}
+
 @media screen and (min-width: 800px) {
   .topNavBarText {
     display: inline-flex;
@@ -230,5 +264,57 @@
 
   .navRow {
     display: inline-flex;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .testDiv {
+    display: block;
+    font-size: 20px;
+  }
+  .mediaNavlink {
+    padding: 11px 8px;
+    margin: 30px;
+  }
+  .alumniText {
+    display: none;
+  }
+  .navRow {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  .mediaNavlink {
+    padding: 11px 2px;
+    margin: 5px;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .testDiv {
+    font-size: 16px;
+  }
+  .mediaNavlink {
+    padding: 11px 2px;
+    margin: 5px;
+  }
+  .loginBtnDiv {
+    padding: 0;
+    margin: 0px;
+  }
+}
+
+@media only screen and (max-width: 405px) {
+  .testDiv {
+    font-size: 16px;
+  }
+  .mediaNavlink {
+    padding: 8px 2px;
+    margin: 2px;
+  }
+  .loginBtnDiv {
+    padding: 0;
+    margin: 0px;
   }
 }

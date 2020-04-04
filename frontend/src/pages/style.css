@@ -98,3 +98,9 @@ label {
   margin: 10px 3px 0px 0px;
   font-weight: bold;
 }
+
+@media only screen and (max-width: 720px) {
+  .eventPageDiv {
+    padding: 30px 35px;
+  }
+}

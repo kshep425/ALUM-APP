@@ -1,5 +1,4 @@
 import React from "react";
-import { AuthUserContext } from "../Session";
 import { Link } from "react-router-dom";
 import { EDIT } from "../../constants/routes";
 
