@@ -29,7 +29,6 @@ const ContactInfo = ({ authUser }) => {
         ) : null}
         {authUser.members.city ? <>{authUser.members.city}, </> : null}
         {authUser.members.state ? <>{authUser.members.state} </> : null}
-        {authUser.members.state ? <>{authUser.members.state} </> : null}
         {authUser.members.zip ? (
           <>
             {authUser.members.zip}
