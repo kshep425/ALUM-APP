@@ -102,9 +102,10 @@ module.exports = function (app) {
       const donationType = req.body.donationType
       const MemberId = req.body.memberId
       const uid = req.uid
+      const amount = getDonationAmount(donationType)
       const paymentObj = {
-          amount: getDonationAmount(donationType),
-          description: donationType,
+          amount: amount,
+          description: "Donated $" + amount + " for Scholarships",
           currency: 'usd',
           uid,
           MemberId,
@@ -163,6 +164,24 @@ module.exports = function (app) {
 
   })
 
-
+  app.post("/api/makeAnonymousDonation", function (req, res) {
+    console.log("Make Anonymous Donation")
+    // console.log(req.body)
+    const donationType = req.body.donationType
+    const MemberId = req.body.memberId
+    const uid = "Anonymous"
+    const amount = getDonationAmount(donationType)
+    const paymentObj = {
+        amount: amount,
+        description: "Donated $" + amount + " for Scholarships",
+        currency: 'usd',
+        uid,
+        MemberId,
+    }
+    return dbPayment.makePayment(paymentObj)
+    .then(function (result) {
+      res.status(200).json(result);
+  });
+})
 
 }

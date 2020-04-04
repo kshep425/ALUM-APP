@@ -37,7 +37,10 @@ const Event = props => {
     props.handleRSVP(rsvpToEvent);
   }
   return (
-    <div className="eventBox">
+    <div className="eventBox" onClick={viewDetails}>
+      <span className="displayDate">
+        {moment.tz(props.displayDate, "America/New_York").format("MMM DD")}
+      </span>
       <h1 className="eventHeader">{props.title}</h1>
 
       <hr className="eventHr" />
@@ -139,19 +142,16 @@ const AdminButtons = props => {
     <AuthUserContext.Consumer>
       {authUser => {
         {
-          (authUser) ? MemberId = authUser.members.id : MemberId=null;
+          authUser ? (MemberId = authUser.members.id) : (MemberId = null);
         }
-        return (authUser && authUser.members.role=== ROLES.ADMIN)
-      ? (
-        <>
-          <p>admin buttons</p>
-          <UpdateEventButton />
-          <CancelEventButton />
-        </>
-      )
-      : null
-    }}
-
+        return authUser && authUser.members.role === ROLES.ADMIN ? (
+          <>
+            <p>admin buttons</p>
+            <UpdateEventButton />
+            <CancelEventButton />
+          </>
+        ) : null;
+      }}
     </AuthUserContext.Consumer>
   );
 };
