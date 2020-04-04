@@ -60,13 +60,13 @@
 /* lower nav section */
 .lowerNav {
   background-color: white;
-  text-align: left;
+  text-align: center;
 }
 
 .logo {
   height: 160px;
   margin: 10px 0px;
-  padding-right: 450px;
+  padding-right: 40px;
 }
 
 .logoDiv {
@@ -259,7 +259,7 @@
 
 @media screen and (max-width: 1201px) {
   .logo {
-    padding-right: 250px;
+    padding-right: 30px;
   }
 }
 
