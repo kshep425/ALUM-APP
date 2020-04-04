@@ -257,6 +257,12 @@
   display: none;
 }
 
+@media screen and (max-width: 1201px) {
+  .logo {
+    padding-right: 250px;
+  }
+}
+
 @media screen and (min-width: 800px) {
   .topNavBarText {
     display: inline-flex;
