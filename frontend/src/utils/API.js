@@ -132,10 +132,17 @@ export default {
     console.log("Make Donation")
 
     return axios.post("/api/makeDonation", data, {
-//    return axios.post("/api/makeStripePayment", data, {
+    // return axios.post("/api/makeStripePayment", data, {
       headers: {
         authorization: `Bearer ${token}`
       }
     })
-  }
+  },
+
+  /**
+   * @param {} data object {donationType, memberId}
+   */
+  makeAnonymousDonation: function (data) {
+    return axios.post("/api/makeAnonymousDonation", data)
+  },
 };
