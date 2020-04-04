@@ -1,15 +1,17 @@
 import React from 'react';
 
 const PaymentHistory = (props) => {
-  const payments = props.authUser.payments
+
+  const payments = props.authUser.payments.reverse();
 
   function formatDate(date) {
     let d = new Date(date)
     return d.toLocaleDateString();
   }
+
   console.log(payments)
   return (
-    <div className="container">
+    <div className="container" ref={props.paymentLength} value={payments.length}>
       <div className="card">
         <h1 className="card-title">Payment History</h1>
         <table className="table">

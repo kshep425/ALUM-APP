@@ -4,11 +4,10 @@ import { EDIT_MEMBER_INFO } from '../../constants/routes'
 
 const MemberInfo = (props) => {
   const [authUser, setAuthUser] = useState(props.authUser)
-  console.log(authUser)
 
   useEffect(() => {
     setAuthUser(authUser)
-  })
+  }, [authUser])
 
   const GetOccupation = () => {
     console.log("Get Occupation")
@@ -31,7 +30,7 @@ const MemberInfo = (props) => {
         {console.log(authUser.degrees)}
           {authUser.degrees.map(degree => {
             return (
-            <p>{degree.year}: {degree.degree}</p>
+            <p key={degree.id}>{degree.year}: {degree.degree}</p>
             )
           })}
         </>)
