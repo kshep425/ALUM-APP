@@ -82,6 +82,8 @@
 
 .alumniText {
   font-size: 22px;
+  padding-top: 5px;
+  color: white !important;
 }
 
 :root {
