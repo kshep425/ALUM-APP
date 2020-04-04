@@ -8,7 +8,9 @@ const PaymentHistory = props => {
     let d = new Date(date);
     return d.toLocaleDateString();
   }
+
   console.log(payments);
+
   return (
     <div className="container historyContainer">
       <h1 className="card-title">Payment History</h1>
