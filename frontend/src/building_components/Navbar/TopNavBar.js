@@ -56,7 +56,7 @@ const LogInOrOutBtn = () => (
             </div>
           </div>
 
-          <div>
+          <div className="alumniTextDiv" >
             <h1 className="alumniText topNavBarText">
               Morgan State University Howard County Alumni Chapter
             </h1>
