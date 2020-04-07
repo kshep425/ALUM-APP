@@ -1,5 +1,5 @@
-const db = require("../../config/db_event_queries");
-const { checkIfAuthenticated } = require('../../config/middleware/auth-middleware');
+const db = require("../config/db_event_queries");
+const { checkIfAuthenticated } = require('../config/middleware/auth-middleware');
 
 module.exports = function(app) {
   app.post("/api/events", function(req, res) {

@@ -1,6 +1,6 @@
-const dbPayment = require("../../config/db_payment_queries");
-const dbMember = require("../../config/db_member_queries")
-const { checkIfAuthenticated } = require('../../config/middleware/auth-middleware');
+const dbPayment = require("../config/db_payment_queries");
+const dbMember = require("../config/db_member_queries")
+const { checkIfAuthenticated } = require('../config/middleware/auth-middleware');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
 
 function getMemberDueAmount(memberType) {

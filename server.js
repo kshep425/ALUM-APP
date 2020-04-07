@@ -2,13 +2,13 @@
 
 const express = require("express");
 const session = require("express-session");
+const admin = require('firebase-admin');
 const routes = require("./backend/routes");
-// Initialize the default app
-var admin = require('firebase-admin');
+const db = require("./backend/models");
+
 // Requiring dotenv for syncing variable
 require("dotenv").config();
 
-const fb_db_url = process.env.FIREBASE_DATABASE_URL
 // Initialize the Firebase Admin SDK
 // Added replace because of failures in heroku
 admin.initializeApp({
@@ -17,17 +17,11 @@ admin.initializeApp({
     "private_key": process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
     "client_email": process.env.FIREBASE_CLIENT_EMAIL,
   }),
-  databaseURL: fb_db_url,
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
 });
-
-// Sets up the Express App
-// =============================================================
 
 // Setting up port
 const PORT = process.env.PORT || 3001;
-
-// Requiring our models for syncing
-const db = require("./backend/models");
 
 // Creating express app and configuring middleware needed for authentication
 const app = express();
@@ -45,23 +39,18 @@ app.use(
 );
 
 // Routes
-// =============================================================
-//const api_routes = require("./routes/api_routes")
-//app.use(api_routes);
-require("./backend/routes/api_routes/login_api_routes")(app);
-require("./backend/routes/api_routes/events_api")(app);
-require("./backend/routes/api_routes/users_api")(app);
-require("./backend/routes/api_routes/payments_api")(app);
+require("./backend/routes/events_api")(app);
+require("./backend/routes/users_api")(app);
+require("./backend/routes/payments_api")(app);
 app.use(routes)
-// Syncing our sequelize models and then starting our Express app
-// =============================================================
 
+// Syncing our sequelize models and then starting our Express app
 const sync = !!JSON.parse(process.env.DB_SYNC);
-console.log(process.env.DB_SYNC, sync)
-db.sequelize.sync({ force: sync }).then(function() {
-  app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
+db.sequelize.sync({ force: sync })
+  .then(function() {
+    app.listen(PORT, function() {
+      console.log("App listening on PORT " + PORT);
+    });
   });
-});
 
 module.exports = app;

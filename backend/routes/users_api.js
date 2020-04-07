@@ -1,5 +1,5 @@
-const db = require("../../config/db_member_queries");
-const {checkIfAuthenticated, checkIfAdmin} = require('../../config/middleware/auth-middleware');
+const db = require("../config/db_member_queries");
+const {checkIfAuthenticated, checkIfAdmin} = require('../config/middleware/auth-middleware');
 
 module.exports = function (app) {
   app.post("/api/user", function (req, res) {
