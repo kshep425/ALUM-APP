@@ -42,6 +42,7 @@ app.use(
 require("./backend/routes/events_api")(app);
 require("./backend/routes/users_api")(app);
 require("./backend/routes/payments_api")(app);
+// Redirect any routes that are not in the previous files to the home page.
 app.use(routes)
 
 // Syncing our sequelize models and then starting our Express app
