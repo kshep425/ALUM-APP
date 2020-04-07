@@ -65,7 +65,7 @@ function getDonationAmount(type) {
 module.exports = function (app) {
     app.post("/api/payDues", checkIfAuthenticated, function (req, res) {
         console.log("Pay Dues")
-        // console.log(req.body)
+
         const memberType = req.body.memberType
         const MemberId = req.body.memberId
         const uid = req.uid
@@ -76,6 +76,7 @@ module.exports = function (app) {
             uid,
             MemberId,
         }
+
         return dbPayment.makePayment(paymentObj)
             .then(function (result1) {
                 // console.log(result1.dataValues)
@@ -84,15 +85,27 @@ module.exports = function (app) {
                         console.log(result2)
                         return res.status(200).json([result1, result2]);
                     })
-            });;
+                    .catch(err => {
+                      console.log(err);
+                      throw err;
+                    });
+            })
+            .catch(err => {
+              console.log(err);
+              throw err;
+            });
     })
 
     app.get("/api/myPayments", checkIfAuthenticated, function (req, res) {
         console.log("Get My Payment History")
+
         return dbPayment.getPayments(req.uid)
             .then(function (result) {
-                // console.log(result.dataValues)
-                res.status(200).json(result);
+              res.status(200).json(result);
+            })
+            .catch(err => {
+              console.log(err);
+              throw err;
             });
     })
 
@@ -111,9 +124,13 @@ module.exports = function (app) {
           MemberId,
       }
       return dbPayment.makePayment(paymentObj)
-      .then(function (result) {
-        res.status(200).json(result);
-    });
+        .then(function (result) {
+          res.status(200).json(result);
+        })
+        .catch(err => {
+          console.log(err);
+          throw err;
+        });
   })
 
   app.post("/api/makeStripePayment", checkIfAuthenticated, function (req, res) {
@@ -141,32 +158,30 @@ module.exports = function (app) {
       cancel_url: 'https://example.com/cancel',
     })
     .then(function (result) {
-      console.log(result)
       const dbPaymentObj = {
         ...paymentObj,
         uid,
         MemberId,
       }
-      console.log(dbPaymentObj)
+
       return dbPayment.makePayment(dbPaymentObj)
       .then(dbResult =>{
         console.log(dbResult);
         res.status(200).json(result);
       }).catch((err) => {
-        console.log(err)
+        console.log(err);
         throw err;
       })
     })
     .catch((err) => {
-      console.log(err)
-      throw err
+      console.log(err);
+      throw err;
     })
 
   })
 
   app.post("/api/makeAnonymousDonation", function (req, res) {
     console.log("Make Anonymous Donation")
-    // console.log(req.body)
     const donationType = req.body.donationType
     const MemberId = req.body.memberId
     const uid = "Anonymous"
@@ -179,9 +194,13 @@ module.exports = function (app) {
         MemberId,
     }
     return dbPayment.makePayment(paymentObj)
-    .then(function (result) {
-      res.status(200).json(result);
-  });
+      .then(function (result) {
+        res.status(200).json(result);
+      })
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
 })
 
 }

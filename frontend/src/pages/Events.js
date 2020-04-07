@@ -149,7 +149,7 @@ const Events = () => {
             return (
               <div className="col-md-6">
                 <Event
-                  key={index}
+                  key={newEvent.id}
                   index={index}
                   id={newEvent.id}
                   title={newEvent.title}
@@ -161,7 +161,6 @@ const Events = () => {
                   address={newEvent.address}
                   description={newEvent.description}
                   handleRSVP={handleRSVP}
-                  key={newEvent.id}
                 ></Event>
               </div>
             );

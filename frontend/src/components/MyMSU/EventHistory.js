@@ -26,7 +26,7 @@ const EventHistory = props => {
         </thead>
         <tbody>
           {events.map(event => (
-            <tr key={event.id}>
+            <tr key={event.eventId}>
               <td>{formatDate(event.start)}</td>
               <td>{event.title}</td>
               <td>{event.type}</td>

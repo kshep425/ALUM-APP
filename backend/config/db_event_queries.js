@@ -1,13 +1,12 @@
 const db = require("../models");
-const Op = db.Sequelize.Op;
 
 const eventQueries = {
-  createEvent: function(reqBody) {
+  createEvent: function (reqBody) {
     let [request, fields] = this.formatRequest(reqBody);
     return db.event.create(request, fields);
   },
 
-  formatRequest: function(reqBody) {
+  formatRequest: function (reqBody) {
     let fields = { options: { fields: [] } };
     let request = {
       title: reqBody.title,
@@ -34,80 +33,73 @@ const eventQueries = {
     return [request, fields];
   },
 
-  findEvent: function(eventId) {
-    return db.event.findOne({ id: eventId });
-  },
+  // findEvent: function(eventId) {
+  //   return db.event.findOne({ id: eventId });
+  // },
 
   //   updateEvent: function(updateRequest, eventId) {
-  //     return db.Event.update(request, { where: { id: eventId } });
+  //     return db.event.update(request, { where: { id: eventId } });
   //   },
 
   //   deleteEvent: function(eventId) {
-  //     return db.Event.destroy({ id: eventId });
+  //     return db.event.destroy({ id: eventId });
   //   },
 
-  getAllEvents: function() {
+  getAllEvents: function () {
     return db.event.findAll({});
   },
 
-  getAllEventMembers: function(eventId) {
-    return db.event.findOne({ id: eventId }).then(function(result) {
-      return result.getMembers();
-    });
-  },
-
-  //get all events that member is attending
-  getAllMemberEvents: function() {
-    return db.event
-      .findAll({
-        include: [db.Member],
-        through: { where: { rsvp: "Yes" } }
-      })
-      .then(data => {
-        // console.log(data);
+  getAllEventMembers: function (eventId) {
+    return db.event.findOne({ id: eventId })
+      .then(function (result) {
+        return result.getMembers();
       });
-  },
-
-  //when member clicks attending, add them to the event
-  addMemberToEvent: function(memberId, eventId, rsvp) {
-    return db.event
-      .findOne({ where: { id: eventId } })
-      .then(event => event.addMember(memberId, { through: { rsvp: rsvp } }));
   },
 
   /**
    *
    * @param {*} eventRSVP {MemberId, eventId, rsvp, uid}
    */
-  addEventRSVP: function(eventRSVP) {
-    // console.log(eventRSVP)
-
-    return db.event_members.create({eventId: eventRSVP.eventId, MemberId: eventRSVP.MemberId, rsvp: eventRSVP.rsvp, uid: eventRSVP.uid})
-    .then((result) => {
-      console.log("Did it create?")
-      //console.log(result);
-      return result;
-    })
-    .catch(err => {
-      console.log(err);
-      throw err;
-    });
+  addEventRSVP: function (eventRSVP) {
+    console.log("Add Event RSVP")
+    return db.event_members.create({ eventId: eventRSVP.eventId, MemberId: eventRSVP.MemberId, rsvp: eventRSVP.rsvp, uid: eventRSVP.uid })
+      .then((result) => {
+        //console.log(result);
+        return result;
+      })
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
   },
 
-  myEvents: function(uid) {
+  myEvents: function (uid) {
     console.log("Get my events")
-    return db.event_members.findAll({attributes: ["eventId"], where: {uid: uid}})
-    .then((events)=>{
-      let eventIds = events.map(event => event.dataValues.eventId)
-      console.log(eventIds)
-      return db.event.findAll({
-        where: {
-          id: {
-            [Op.in]: eventIds
-          }
-        }
-      })
+    return db.Member.findAll({
+      where: { uid: uid },
+      include: [{
+        model: db.event
+      }]
     })
+      .then((events) => {
+        const memberEventRSVPs = Object.assign([],
+          events[0].dataValues.events.map((e) => {
+            return {
+              eventId: e.dataValues.id,
+              title: e.dataValues.title,
+              description: e.dataValues.description,
+              startDate: e.dataValues.startDate,
+              endDate: e.dataValues.endDate,
+              type: e.dataValues.type,
+              address: e.dataValues.address,
+              venueName: e.dataValues.venueName,
+              ticketType: e.dataValues.ticketType,
+              rsvp: e.dataValues.event_members.rsvp
+            }
+          })
+        )
+        return memberEventRSVPs;
+      })
   }
 };
 
