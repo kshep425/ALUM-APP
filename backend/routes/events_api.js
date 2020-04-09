@@ -57,10 +57,10 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/myEvents", checkIfAuthenticated, function(req, res) {
-    console.log("Get My Events");
+  app.get("/api/getUserEvents", checkIfAuthenticated, function(req, res) {
+    console.log("Get User Events");
     // console.log(req.uid);
-    return db.myEvents(req.uid)
+    return db.getUserEvents(req.uid)
     .then(function(result) {
       res.status(200).json(result);
     })

@@ -73,7 +73,7 @@ const eventQueries = {
       });
   },
 
-  myEvents: function (uid) {
+  getUserEvents: function (uid) {
     console.log("Get my events")
     return db.Member.findAll({
       where: { uid: uid },
