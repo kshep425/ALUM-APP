@@ -112,14 +112,14 @@ const Scholarships = () => {
           <p>
             Click{" "}
             <a
-              target="_blank"
+              target="_blank" rel="noopener noreferrer"
               href="https://docs.google.com/forms/d/16OfOpbXHg8fElSNSJjTbvtlKqvo_U46-5M6p5CZLWyA/viewform?edit_requested=true"
             >
               Here for an online form
             </a>{" "}
             or print from{" "}
             <a
-              target="_blank"
+              target="_blank" rel="noopener noreferrer"
               href="https://docs.google.com/document/d/1j4AwqFuagIXkuLFhCWT1dBYnbpBRkTKl86Unvkm6iP4/edit?usp=sharing"
             >
               HERE

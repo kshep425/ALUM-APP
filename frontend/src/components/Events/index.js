@@ -1,3 +1,3 @@
-import Events from '../../pages/Events'
+import Events from './Events'
 
 export default Events;
