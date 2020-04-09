@@ -96,8 +96,8 @@ module.exports = function (app) {
             });
     })
 
-    app.get("/api/myPayments", checkIfAuthenticated, function (req, res) {
-        console.log("Get My Payment History")
+    app.get("/api/getUserPayments", checkIfAuthenticated, function (req, res) {
+        console.log("Get User Payment History")
 
         return dbPayment.getPayments(req.uid)
             .then(function (result) {
