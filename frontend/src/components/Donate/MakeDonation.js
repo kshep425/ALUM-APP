@@ -36,7 +36,7 @@ const MakeDonation = (props) => {
           alert("You have made a donation!");
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
           alert("There was an issue with your payment, please try again")
         })
 
@@ -57,7 +57,7 @@ const MakeDonation = (props) => {
           alert("Thank you for your donation!")
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
           alert("There was an issue with your payment, please try again")
         })
       })
