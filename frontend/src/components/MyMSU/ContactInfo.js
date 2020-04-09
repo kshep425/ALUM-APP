@@ -1,15 +1,14 @@
 import React from "react";
-import { AuthUserContext } from "../Session";
 import { Link } from "react-router-dom";
 import { EDIT } from "../../constants/routes";
+import "./mymsupage.css";
 
 const ContactInfo = ({ authUser }) => {
   return (
-    <div className="container-sm">
-      <div className="card m-1 p-1">
-        <EditLink />
-        <address>
-          {!!authUser.members.prefix ||
+    <div className="container-sm contactInfoDiv">
+      <EditLink />
+      <address>
+        {!!authUser.members.prefix ||
           !!authUser.members.firstName ||
           !!authUser.members.lastName ||
           !!authUser.members.suffix ? (
@@ -21,7 +20,7 @@ const ContactInfo = ({ authUser }) => {
               <br />
             </>
           ) : null}
-          {authUser.members.streetAddress1 ||
+        {authUser.members.streetAddress1 ||
           authUser.members.streetAddress2 ? (
             <>
               {authUser.members.streetAddress1}
@@ -29,25 +28,22 @@ const ContactInfo = ({ authUser }) => {
               <br />
             </>
           ) : null}
-          {authUser.members.city ? <>{authUser.members.city}, </> : null}
-          {authUser.members.state ? <>{authUser.members.state} </> : null}
-          {authUser.members.state ? <>{authUser.members.state} </> : null}
-          {authUser.members.zip ? (
-            <>
-              {authUser.members.zip}
-              <br />
-            </>
-          ) : null}
-
-          {authUser.members.phone ? (
-            <>
-              {authUser.members.phone}
-              <br />
-            </>
-          ) : null}
-          {authUser.members.email}
-        </address>
-      </div>
+        {authUser.members.city ? <>{authUser.members.city}, </> : null}
+        {authUser.members.state ? <>{authUser.members.state} </> : null}
+        {authUser.members.zip ? (
+          <>
+            {authUser.members.zip}
+            <br />
+          </>
+        ) : null}
+        {authUser.members.phone ? (
+          <>
+            {authUser.members.phone}
+            <br />
+          </>
+        ) : null}
+        {authUser.members.email}
+      </address>
     </div>
   );
 };

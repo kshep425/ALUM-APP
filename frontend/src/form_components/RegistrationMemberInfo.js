@@ -2,14 +2,14 @@ import React from 'react';
 import get from 'lodash/get'
 
 const RegistrationMemberInfo = (props) => {
-  console.log(props)
+
   const authUser = props.authUser
-  console.log(authUser)
+
   return (
     <div>
       <div className="form-group">
         <label htmlFor="inputOccupation">Occupation</label>
-        <input id="inputOccupation" type="text" className="form-control" defaultValue={get(authUser, 'db.occupation')} ref={props.occupationRef}></input>
+        <input id="inputOccupation" type="text" className="form-control" defaultValue={get(authUser, 'members.occupation')} ref={props.occupationRef}></input>
       </div>
       <div className="form-row">
 

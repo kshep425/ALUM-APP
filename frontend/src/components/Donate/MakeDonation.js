@@ -6,9 +6,11 @@ import Button from "../../building_components/Button"
 import { AuthUserContext } from "../Session";
 import API from "../../utils/API"
 import get from "lodash/get"
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from './CheckoutForm'
+import * as ROLES from "../../constants/roles"
+
 var stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC);
 
 const MakeDonation = (props) => {
@@ -25,15 +27,39 @@ const MakeDonation = (props) => {
       memberId
     }
     console.log(paymentObj)
-    if (paymentObj.donationType) {
+    console.log((!!paymentObj.donationType && !!token))
+    if (paymentObj.donationType && token) {
+      console.log("Make a donation with token")
       API.makeDonation(paymentObj, token)
-      .then((result) =>{
-        console.log(result)
-        alert("You have made a donation!")  ;
+        .then((result) => {
+          console.log(result)
+          alert("You have made a donation!");
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("There was an issue with your payment, please try again")
+        })
+
+    } else if (paymentObj.donationType) {
+      const anonymous = "Anonymous"
+      API.addNewUser({
+        uid: anonymous,
+        fullName: anonymous,
+        email: "kshep425@gmail.com",
+        role: ROLES.USER
       })
-      .catch((err) => {
-        console.log(err)
-        alert("There was an issue paying your dues, please try again")
+      .then(result => {
+        console.log(result)
+        paymentObj.memberId = get(result, "data.id") || 2
+        API.makeAnonymousDonation(paymentObj)
+        .then((result) => {
+          console.log(result);
+          alert("Thank you for your donation!")
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("There was an issue with your payment, please try again")
+        })
       })
 
     }
@@ -43,20 +69,20 @@ const MakeDonation = (props) => {
   }
   return (
     <Elements stripe={stripePromise}>
-    <AuthUserContext.Consumer>
-      {authUser => {
-        memberId = authUser.members.id
-        token = authUser.token
-        return (
-          <div>
-            <p>We raise scholarship money for new and continuing MSU students from Howard County</p>
-            <DonationType donationTypeRef={donationTypeRef}  />
-            <CheckoutForm />
-            <Link to={ROUTES.MYMSU}><Button>Cancel</Button></Link>
-            <Button onClick={handleSubmit}>Make Donation</Button>
-          </div>
-        )
-      }}
+      <AuthUserContext.Consumer>
+        {authUser => {
+          memberId = get(authUser, 'members.id')
+          token = get(authUser, 'token')
+          return (
+              <div>
+                <p>We raise scholarship money for new and continuing MSU students from Howard County</p>
+                <DonationType donationTypeRef={donationTypeRef} />
+                <CheckoutForm />
+                <Link to={ROUTES.MYMSU}><Button>Cancel</Button></Link>
+                <Button onClick={handleSubmit}>Make Donation</Button>
+              </div>
+          )
+        }}
     </AuthUserContext.Consumer>
     </Elements>
   );

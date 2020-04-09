@@ -1,6 +1,6 @@
-const dbPayment = require("../../config/db_payment_queries");
-const dbMember = require("../../config/db_member_queries")
-const { checkIfAuthenticated } = require('../../config/middleware/auth-middleware');
+const dbPayment = require("../config/db_payment_queries");
+const dbMember = require("../config/db_member_queries")
+const { checkIfAuthenticated } = require('../config/middleware/auth-middleware');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
 
 function getMemberDueAmount(memberType) {
@@ -65,7 +65,7 @@ function getDonationAmount(type) {
 module.exports = function (app) {
     app.post("/api/payDues", checkIfAuthenticated, function (req, res) {
         console.log("Pay Dues")
-        // console.log(req.body)
+
         const memberType = req.body.memberType
         const MemberId = req.body.memberId
         const uid = req.uid
@@ -76,6 +76,7 @@ module.exports = function (app) {
             uid,
             MemberId,
         }
+
         return dbPayment.makePayment(paymentObj)
             .then(function (result1) {
                 // console.log(result1.dataValues)
@@ -84,15 +85,27 @@ module.exports = function (app) {
                         console.log(result2)
                         return res.status(200).json([result1, result2]);
                     })
-            });;
+                    .catch(err => {
+                      console.log(err);
+                      throw err;
+                    });
+            })
+            .catch(err => {
+              console.log(err);
+              throw err;
+            });
     })
 
-    app.get("/api/myPayments", checkIfAuthenticated, function (req, res) {
-        console.log("Get My Payment History")
+    app.get("/api/getUserPayments", checkIfAuthenticated, function (req, res) {
+        console.log("Get User Payment History")
+
         return dbPayment.getPayments(req.uid)
             .then(function (result) {
-                // console.log(result.dataValues)
-                res.status(200).json(result);
+              res.status(200).json(result);
+            })
+            .catch(err => {
+              console.log(err);
+              throw err;
             });
     })
 
@@ -102,17 +115,22 @@ module.exports = function (app) {
       const donationType = req.body.donationType
       const MemberId = req.body.memberId
       const uid = req.uid
+      const amount = getDonationAmount(donationType)
       const paymentObj = {
-          amount: getDonationAmount(donationType),
-          description: donationType,
+          amount: amount,
+          description: "Donated $" + amount + " for Scholarships",
           currency: 'usd',
           uid,
           MemberId,
       }
       return dbPayment.makePayment(paymentObj)
-      .then(function (result) {
-        res.status(200).json(result);
-    });
+        .then(function (result) {
+          res.status(200).json(result);
+        })
+        .catch(err => {
+          console.log(err);
+          throw err;
+        });
   })
 
   app.post("/api/makeStripePayment", checkIfAuthenticated, function (req, res) {
@@ -140,29 +158,49 @@ module.exports = function (app) {
       cancel_url: 'https://example.com/cancel',
     })
     .then(function (result) {
-      console.log(result)
       const dbPaymentObj = {
         ...paymentObj,
         uid,
         MemberId,
       }
-      console.log(dbPaymentObj)
+
       return dbPayment.makePayment(dbPaymentObj)
       .then(dbResult =>{
         console.log(dbResult);
         res.status(200).json(result);
       }).catch((err) => {
-        console.log(err)
+        console.log(err);
         throw err;
       })
     })
     .catch((err) => {
-      console.log(err)
-      throw err
+      console.log(err);
+      throw err;
     })
 
   })
 
-
+  app.post("/api/makeAnonymousDonation", function (req, res) {
+    console.log("Make Anonymous Donation")
+    const donationType = req.body.donationType
+    const MemberId = req.body.memberId
+    const uid = "Anonymous"
+    const amount = getDonationAmount(donationType)
+    const paymentObj = {
+        amount: amount,
+        description: "Donated $" + amount + " for Scholarships",
+        currency: 'usd',
+        uid,
+        MemberId,
+    }
+    return dbPayment.makePayment(paymentObj)
+      .then(function (result) {
+        res.status(200).json(result);
+      })
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
+})
 
 }

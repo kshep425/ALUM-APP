@@ -1,14 +1,17 @@
-const db = require("../../config/db_member_queries");
-const {checkIfAuthenticated, checkIfAdmin} = require('../../config/middleware/auth-middleware');
+const db = require("../config/db_member_queries");
+const {checkIfAuthenticated, checkIfAdmin} = require('../config/middleware/auth-middleware');
 
 module.exports = function (app) {
   app.post("/api/user", function (req, res) {
+    console.log("Create new User");
+    console.log(req.body);
     return db
       .createMember(req.body)
       .then(function (result) {
-        res.status(200).json(result.dataValues);
+        res.status(200).json(result);
       })
       .catch(function (err) {
+        console.log(err);
         return err;
       });
   });
@@ -44,6 +47,9 @@ module.exports = function (app) {
     console.log("Set User Role")
     console.log(req.body);
     return db.updateMember(req.uid, {role: req.body.role})
+    .then(function (result) {
+      res.status(200).json(result);
+    });
   });
 
   app.get("/api/getUserDegreesWithUid", checkIfAuthenticated, function(req, res){
@@ -67,9 +73,13 @@ module.exports = function (app) {
       degrees[0]["MemberId"] = id
       degrees[0]["uid"] = uid
       return db.createOrUpdateMemberDegrees(degrees[0])
-      .then(function (result) {
-        res.status(200).json(result);
-      });
+        .then(function (result) {
+          res.status(200).json(result);
+        })
+        .catch(err => {
+          console.log(err);
+          throw err;
+        });;
     })
   })
 };

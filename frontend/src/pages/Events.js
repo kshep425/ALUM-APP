@@ -58,6 +58,7 @@ const Events = () => {
       description: eventDescriptionRef.current.value,
       startDate: startDateRef.current.value,
       endDate: endDateRef.current.value,
+      // displayDate: displayDate,
       type: eventTypeRef.current.value,
       address: addressRef,
       venueName: venueNameRef.current.value,
@@ -109,11 +110,10 @@ const Events = () => {
    *
    * @param {*} newEventRSVP {memberId, eventId, RSVP}
    */
-  const handleRSVP = (newEventRSVP) => {
-    console.log("Member RSVP")
-    console.log(newEventRSVP)
+  const handleRSVP = newEventRSVP => {
+    console.log("Member RSVP");
+    console.log(newEventRSVP);
     API.newEventRSVP(newEventRSVP, token);
-
   };
 
   console.log(state.events);
@@ -137,22 +137,23 @@ const Events = () => {
         </Button>
         <hr className="lineDivider" />
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-12" style={{ textAlign: "center" }}>
             <h4>Upcoming Events</h4>
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-12">
-            {state.events.map((event, index) => {
-              console.log(index);
-              const newEvent = Object.assign({}, event);
-              console.log(newEvent)
-              return (
+        <div className="row" style={{ textAlign: "center" }}>
+          {/* <div className="col-md-12"> */}
+          {state.events.map((event, index) => {
+            const newEvent = Object.assign({}, event);
+
+            return (
+              <div className="col-md-6">
                 <Event
-                  key={index}
+                  key={newEvent.id}
                   index={index}
                   id={newEvent.id}
                   title={newEvent.title}
+                  displayDate={newEvent.startDate}
                   start={newEvent.startDate}
                   end={newEvent.endDate}
                   type={newEvent.type}
@@ -160,11 +161,11 @@ const Events = () => {
                   address={newEvent.address}
                   description={newEvent.description}
                   handleRSVP={handleRSVP}
-                  key={newEvent.id}
                 ></Event>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
+          {/* </div> */}
         </div>
       </div>
 
@@ -285,26 +286,22 @@ const Events = () => {
   );
 };
 let token;
-const CreateEventButton = (props) => {
-  console.log("Add Create event button")
+const CreateEventButton = props => {
+  console.log("Add Create event button");
   return (
     <AuthUserContext.Consumer>
       {authUser => {
         {
-          (authUser) ? token = authUser.token: token = null;
+          authUser ? (token = authUser.token) : (token = null);
         }
-        return (
-          (authUser && authUser.members.role === ROLES.ADMIN)
-            ? (
-              <Button
-                className="btn btn-primary addEventBtn"
-                onClick={props.onClick}
-              >
-                Create New Event
-              </Button>
-            )
-            : null
-        )
+        return authUser && authUser.members.role === ROLES.ADMIN ? (
+          <Button
+            className="btn btn-primary addEventBtn"
+            onClick={props.onClick}
+          >
+            Create New Event
+          </Button>
+        ) : null;
       }}
     </AuthUserContext.Consumer>
   );

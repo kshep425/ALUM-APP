@@ -93,18 +93,18 @@ export default {
     })
   },
 
-  myPayments: function (token) {
-    console.log("myPayments")
-    return axios.get("/api/myPayments", {
+  getUserPayments: function (token) {
+    console.log("getUserPayments")
+    return axios.get("/api/getUserPayments", {
       headers: {
         authorization: `Bearer ${token}`
       }
     })
   },
 
-  myEvents: function (token) {
-    console.log("myEvents")
-    return axios.get("/api/myEvents", {
+  getUserEvents: function (token) {
+    console.log("getUserEvents")
+    return axios.get("/api/getUserEvents", {
       headers: {
         authorization: `Bearer ${token}`
       }
@@ -132,10 +132,17 @@ export default {
     console.log("Make Donation")
 
     return axios.post("/api/makeDonation", data, {
-//    return axios.post("/api/makeStripePayment", data, {
+    // return axios.post("/api/makeStripePayment", data, {
       headers: {
         authorization: `Bearer ${token}`
       }
     })
-  }
+  },
+
+  /**
+   * @param {} data object {donationType, memberId}
+   */
+  makeAnonymousDonation: function (data) {
+    return axios.post("/api/makeAnonymousDonation", data)
+  },
 };

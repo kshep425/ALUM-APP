@@ -1,47 +1,50 @@
-const db = require("../../config/db_event_queries");
-const { checkIfAuthenticated } = require('../../config/middleware/auth-middleware');
+// Throwing errors based off of expressjs.com Error Handling information:
+// https://expressjs.com/en/guide/error-handling.html
+
+const db = require("../config/db_event_queries");
+const { checkIfAuthenticated } = require('../config/middleware/auth-middleware');
 
 module.exports = function(app) {
   app.post("/api/events", function(req, res) {
-    console.log("REQ BODY IS BELOW FOR EVENTS************");
-    //console.log(req.body);
+    console.log("Create New Event");
     return db
       .createEvent(req.body)
       .then(function(result) {
-        console.log("EVENTS RES.DATAVALUES BELOW!  /api/events post");
-        // console.log(result.dataValues);
         res.status(200).json(result.dataValues);
       })
       .catch(function(err) {
-        return err;
+        console.log(err);
+        throw err;
       });
   });
 
   app.get("/api/events", function(req, res) {
+    console.log("Get All Events");
     return db.getAllEvents().then(function(dbPost) {
-      console.log("DBPOST BELOW!! for /api/events");
-      console.log(dbPost.dataValues);
-      res.json(dbPost);
+      res.status(200).json(dbPost);
+    })
+    .catch(function(err) {
+      console.log(err);
+      throw err;
     });
   });
 
   app.get("/api/event/:id/members", function(req, res) {
+    console.log("Get all event members");
     eventId = req.params.id;
     return db
       .getAllEventMembers(eventId)
       .then(function(result) {
-        console.log("EVENTS RES BELOW! for /api/event/:id/members");
-        //console.log(result);
         res.status(200).json(result);
       })
       .catch(function(err) {
-        return err;
+        console.log(err);
+        throw err;
       });
   });
 
   app.post("/api/newEventRSVP", checkIfAuthenticated, function(req, res) {
     console.log("Add Member to Event with RSVP")
-    // console.log(req.body)
     req.body["uid"] = req.uid
     return db.addEventRSVP(req.body)
     .then(function(result) {
@@ -49,19 +52,21 @@ module.exports = function(app) {
       res.status(200).json(result);
     })
     .catch(function(err) {
-      return err;
-    });;
+      console.log(err);
+      throw err;
+    });
   });
 
-  app.get("/api/myEvents", checkIfAuthenticated, function(req, res) {
-    console.log("Get My Events");
+  app.get("/api/getUserEvents", checkIfAuthenticated, function(req, res) {
+    console.log("Get User Events");
     // console.log(req.uid);
-    return db.myEvents(req.uid)
+    return db.getUserEvents(req.uid)
     .then(function(result) {
       res.status(200).json(result);
     })
     .catch(function(err) {
-      return err;
+      console.log(err);
+      throw err;
     });
 
   })
