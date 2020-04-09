@@ -1,15 +1,15 @@
 import React, { useRef, useEffect, useState } from "react";
-import Event from "../building_components/Event/Event";
-import Footer from "../building_components/Footer/Footer";
-import Button from "../building_components/Button";
-import AddressInput from "../building_components/AddressInput";
-import Modal from "../building_components/Modal";
-import { useStoreContext } from "../utils/GlobalState";
-import { ADD_EVENT, UPDATE_EVENTS } from "../utils/actions";
-import API from "../utils/API";
+import Event from "../../building_components/Event/Event";
+import Footer from "../../building_components/Footer/Footer";
+import Button from "../../building_components/Button";
+import AddressInput from "../../building_components/AddressInput";
+import Modal from "../../building_components/Modal";
+import { useStoreContext } from "../../utils/GlobalState";
+import { ADD_EVENT, UPDATE_EVENTS } from "../../utils/actions";
+import API from "../../utils/API";
 import "./style.css";
-import { AuthUserContext } from "../components/Session";
-import * as ROLES from "../constants/roles";
+import { AuthUserContext } from "../Session";
+import * as ROLES from "../../constants/roles";
 
 const Events = () => {
   const [state, dispatch] = useStoreContext();

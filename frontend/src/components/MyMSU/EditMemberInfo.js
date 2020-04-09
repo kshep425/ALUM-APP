@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Link, withRouter } from "react-router-dom";
-import RegistrationMemberInfo from "../../form_components/RegistrationMemberInfo"
+import { MemberInfoForm } from "../FormComponents"
 import * as ROUTES from "../../constants/routes";
 import Button from "../../building_components/Button";
 import API from "../../utils/API"
@@ -57,7 +57,7 @@ const EditMemberInfo = (props) => {
           <div className="container">
             <h1>Edit Member Info</h1>
             <div className="container">
-              <RegistrationMemberInfo
+              <MemberInfoForm
                 authUser={authUser}
                 occupationRef={occupationRef}
                 gradMajor1Ref={gradMajor1Ref}

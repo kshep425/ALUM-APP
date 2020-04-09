@@ -1,0 +1,107 @@
+.mainPage {
+  width: 100vw;
+  min-height: 100%;
+}
+
+.eventPageDiv {
+  font-family: "Abel", sans-serif;
+  width: 100vw;
+  min-height: 60vh;
+  padding: 50px 90px;
+  background-color: rgb(221, 221, 221);
+  color: #122f5e;
+}
+
+.lineDivider {
+  margin-bottom: 40px;
+}
+
+.eventList {
+  text-align: center;
+  width: 100%;
+}
+
+.addEventBtn {
+  height: initial !important;
+  margin: 3px 5px;
+  border-radius: 3px !important;
+  background-color: #f76f00;
+  border: none;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.281);
+  font-family: "Abel", sans-serif;
+}
+
+.addEventBtn:hover {
+  background-color: #122f5e;
+}
+
+.viewPastEventBtn {
+  height: initial !important;
+  margin: 3px 5px;
+  border-radius: 3px !important;
+  background-color: grey;
+  color: white;
+  border: none;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.281);
+  font-family: "Abel", sans-serif;
+}
+
+.viewPastEventBtn:hover {
+  background-color: #122f5e;
+}
+
+.calendarDiv {
+  text-align: center;
+}
+
+.titleInput,
+.descriptionInput {
+  width: 95%;
+  margin: 5px;
+  border-radius: 3px;
+  padding: 5px;
+  border: 1px solid rgb(202, 202, 202);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.075);
+}
+
+.submitEventBtn,
+.cancelBtn {
+  float: right;
+  font-weight: bold;
+  height: 40px !important;
+  margin: 10px;
+  border-radius: 3px !important;
+  color: white;
+  background-color: #f76f00;
+  border: none;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.281);
+}
+
+.cancelBtn {
+  background-color: transparent;
+  color: #122f5e;
+  border: 1px solid rgb(194, 194, 194);
+}
+
+.cancelBtn:hover {
+  background-color: #122f5e;
+}
+
+.submitEventBtn:hover {
+  background-color: #122f5e;
+}
+
+/* .createEventDiv {
+  display: none;
+} */
+
+label {
+  margin: 10px 3px 0px 0px;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 720px) {
+  .eventPageDiv {
+    padding: 30px 35px;
+  }
+}

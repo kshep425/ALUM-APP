@@ -1,10 +1,9 @@
 import React, { useRef } from "react";
 import { Link, withRouter } from "react-router-dom";
-import RegistrationContactInfo from "../../form_components/RegistrationContactInfo";
+import { ContactInfoForm } from "../FormComponents";
 import Button from "../../building_components/Button";
 import API from "../../utils/API";
 import * as ROUTES from "../../constants/routes";
-import "../../pages/style.css";
 
 const EditContactInfo = props => {
   const uid = useRef();
@@ -46,7 +45,7 @@ const EditContactInfo = props => {
   return (
     <div>
       <h1>Edit Contact Info</h1>
-      <RegistrationContactInfo
+      <ContactInfoForm
         uidRef={uid}
         tokenRef={token}
         prefixRef={prefix}
