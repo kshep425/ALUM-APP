@@ -26,7 +26,7 @@ const MemberInfo = (props) => {
 
   const GetDegrees = () => {
     console.log("Get Degrees");
-    return authUser.degrees && authUser.degrees != []
+    return authUser.degrees && authUser.degrees !== []
       ? (<>
           {console.log(authUser.degrees)}
             {authUser.degrees.map(degree => {

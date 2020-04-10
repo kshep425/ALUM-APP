@@ -28,7 +28,7 @@ const AdminPage = () => {
     console.log("Display Users");
     return (
       users.users.map((user) =>
-        (!!user.uid && user.uid != "Anonymous")
+        (!!user.uid && user.uid !== "Anonymous")
         ? <li key={user.uid}>
             {user.uid}: {user.username}, {user.firstName} {user.lastName} {user.role}
             <input

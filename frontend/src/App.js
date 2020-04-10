@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 // TODO: Move files in pages to components.
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Wrapper from "./building_components/Wrapper/Wrapper";
 import { StoreProvider } from "./utils/GlobalState";
 
 import SignUpPage from "./components/SignUp";
