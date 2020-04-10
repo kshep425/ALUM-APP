@@ -46,7 +46,7 @@ module.exports = function (app) {
   app.post("/api/setUserRole", checkIfAdmin, function(req,res){
     console.log("Set User Role")
     console.log(req.body);
-    return db.updateMember(req.uid, {role: req.body.role})
+    return db.updateMember(req.body.uid, {role: req.body.role})
     .then(function (result) {
       res.status(200).json(result);
     });
