@@ -12,7 +12,7 @@ import MyMsuPage from "./components/MyMSU";
 import EventsPage from "./components/Events";
 import DonatePage from "./components/Donate";
 import ShcolarshipPage from "./components/Scholarships";
-import AboutPage from "./components/About";
+import About from "./components/About";
 import AdminPage from "./components/Admin";
 import EditContactInfo from "./components/MyMSU/EditContactInfo";
 import EditMemberInfo from "./components/MyMSU/EditMemberInfo";
@@ -37,7 +37,7 @@ class App extends Component {
           <Route path={ROUTES.ADMIN} component={AdminPage} />
           <Route path={ROUTES.DONATE} component={DonatePage} />
           <Route path={ROUTES.SCHOLARSHIPS} component={ShcolarshipPage} />
-          <Route path={ROUTES.ABOUT} component={AboutPage} />
+          <Route path={ROUTES.ABOUT} component={About} />
           <Route path={ROUTES.EDIT} component={EditContactInfo} />
           <Route path={ROUTES.EDIT_MEMBER_INFO} component={EditMemberInfo} />
           <Route path={ROUTES.PAY_DUES} component={PayMembershipDues} />
