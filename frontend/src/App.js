@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-// TODO: Move files in pages to components.
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { StoreProvider } from "./utils/GlobalState";
-
 import SignUpPage from "./components/SignUp";
 import SignInPage from "./components/SignIn";
 import PasswordForgetPage from "./components/PasswordForget";
