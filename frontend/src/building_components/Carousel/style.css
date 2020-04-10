@@ -17,7 +17,6 @@
   /* width: 100%; */
   position: relative;
   object-fit: cover !important;
-
   height: 100vh;
 }
 
@@ -31,14 +30,14 @@
 }
 
 .carouselImg {
-  /* width: 100%; */
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 @media screen and (min-width: 700px) {
   .carouselImg {
     width: 700px;
     height: 300px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
