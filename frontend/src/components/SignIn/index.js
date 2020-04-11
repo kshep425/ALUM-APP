@@ -38,9 +38,10 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
 class SignInFormBase extends Component {
   constructor(props) {
     super(props);
-
+    console.log(this.props);
     this.state = { ...INITIAL_STATE };
   }
+
 
   onSubmit = event => {
     const { email, password } = this.state;
@@ -53,7 +54,9 @@ class SignInFormBase extends Component {
 
         this.setState({ ...INITIAL_STATE });
         // console.log(INITIAL_STATE)
-        this.props.history.push(ROUTES.HOME);
+        console.log(this.props.history);
+        //this.props.history.push(ROUTES.HOME);
+        this.props.history.goBack();
       })
       .catch(error => {
         this.setState({ error });

@@ -5,10 +5,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CarouselItem from "./CarouselItem";
 //import image from "../../images/carouselAnnouncements/"
-import scholarshipFlyer from "../../images/carouselAnnouncements/scholarshipFlyer.png";
-import * as ROUTES from "../../constants/routes";
-import eventFlyer from "../../images/carouselAnnouncements/eventsFlyer.png";
-import aboutFlyer from "../../images/carouselAnnouncements/aboutFlyer.png";
+import scholarshipFlyer from "../../../images/carouselAnnouncements/scholarshipFlyer.png";
+import * as ROUTES from "../../../constants/routes";
+import eventFlyer from "../../../images/carouselAnnouncements/eventsFlyer.png";
+import aboutFlyer from "../../../images/carouselAnnouncements/aboutFlyer.png";
 const photos = [
   // {
   //   key: '2',

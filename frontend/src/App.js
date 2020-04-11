@@ -14,7 +14,7 @@ import AdminPage from "./components/Admin";
 import EditContactInfo from "./components/MyMSU/EditContactInfo";
 import EditMemberInfo from "./components/MyMSU/EditMemberInfo";
 import PayMembershipDues from "./components/MyMSU/PayMembershipDues.js";
-import NAVBAR from "./building_components/Navbar/Navbar";
+import NAVBAR from "./components/BuildingComponents/Navbar";
 import * as ROUTES from "./constants/routes";
 import { withAuthentication } from "./components/Session";
 

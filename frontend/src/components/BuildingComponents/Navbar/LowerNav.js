@@ -1,9 +1,8 @@
 import React from "react";
 import Navitem from "./NavItem";
-import * as ROUTES from "../../constants/routes";
-import Logo from "../Logo/index";
-
-import { AuthUserContext } from "../../components/Session";
+import * as ROUTES from "../../../constants/routes";
+import Logo from "../Logo";
+import { AuthUserContext } from "../../Session";
 
 const LowerNav = () => (
   <div className="container lowerNav">
@@ -22,7 +21,6 @@ const LowerNav = () => (
 const MyMsuLink = () => (
   <AuthUserContext.Consumer>
     {authUser => {
-      // console.log(authUser)
       return authUser ? <Navitem href={ROUTES.MYMSU}>my msu</Navitem> : <></>;
     }}
   </AuthUserContext.Consumer>

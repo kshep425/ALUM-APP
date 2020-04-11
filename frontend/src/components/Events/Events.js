@@ -1,37 +1,37 @@
 import React, { useRef, useEffect, useState } from "react";
-import Event from "../../building_components/Event/Event";
-import Footer from "../../building_components/Footer/Footer";
-import Button from "../../building_components/Button";
-import AddressInput from "../../building_components/AddressInput";
-import Modal from "../../building_components/Modal";
+import Event from "../BuildingComponents/Event";
+import Button from "../BuildingComponents/Button";
+import {GoogleAddressForm} from "../FormComponents";
+import Modal from "../BuildingComponents/Modal";
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_EVENT, UPDATE_EVENTS } from "../../utils/actions";
 import API from "../../utils/API";
 import "./style.css";
 import { AuthUserContext } from "../Session";
 import * as ROLES from "../../constants/roles";
+import * as ROUTES from "../../constants/routes";
 
-const Events = () => {
+const Events = (props) => {
   const [state, dispatch] = useStoreContext();
-
-  const getEvents = () => {
-    API.getEvents()
-      .then(results => {
-        console.log("GETTING EVENTS (RESULTS.DATA BELOW)");
-        console.log(results.data);
-        if (results.data.length > 0) {
-          dispatch({
-            type: UPDATE_EVENTS,
-            events: results.data
-          });
-        }
-      })
-      .catch(err => console.log(err));
-  };
+  const [eventLength, setEventLength] = useState(state.events.length)
 
   useEffect(() => {
+    const getEvents = () => {
+      API.getEvents()
+        .then(results => {
+          if (results.data.length > 0) {
+            dispatch({
+              type: UPDATE_EVENTS,
+              events: results.data
+            });
+            setEventLength(results.data.length)
+          }
+        })
+        .catch(err => console.log(err));
+    };
+
     getEvents();
-  }, []);
+  }, [eventLength, dispatch]);
 
   const eventTitleRef = useRef();
   const eventDescriptionRef = useRef();
@@ -51,7 +51,6 @@ const Events = () => {
 
   const addNewEvent = e => {
     e.preventDefault();
-    console.log("CLICKED SUBMIT");
 
     API.addEvent({
       title: eventTitleRef.current.value,
@@ -68,14 +67,11 @@ const Events = () => {
       creatorId: creatorIdRef.current.value
     })
       .then(result => {
-        console.log("ADDING EVENT (RESULT BELOW)");
-        console.log(result);
-
         dispatch({
           type: ADD_EVENT,
           event: result.data
         });
-        getEvents();
+        // getEvents();
       })
       .catch(err => console.log(err));
 
@@ -111,12 +107,12 @@ const Events = () => {
    * @param {*} newEventRSVP {memberId, eventId, RSVP}
    */
   const handleRSVP = newEventRSVP => {
-    console.log("Member RSVP");
-    console.log(newEventRSVP);
-    API.newEventRSVP(newEventRSVP, token);
+    if (token) {
+      API.newEventRSVP(newEventRSVP, token);
+    } else {
+      props.history.push(ROUTES.SIGN_IN);
+    }
   };
-
-  console.log(state.events);
 
   return (
     <div className="mainPage">
@@ -142,30 +138,27 @@ const Events = () => {
           </div>
         </div>
         <div className="row" style={{ textAlign: "center" }}>
-          {/* <div className="col-md-12"> */}
           {state.events.map((event, index) => {
-            const newEvent = Object.assign({}, event);
 
             return (
-              <div className="col-md-6">
+              <div key={event.id} className="col-md-6">
                 <Event
-                  key={newEvent.id}
+                  key={event.id}
                   index={index}
-                  id={newEvent.id}
-                  title={newEvent.title}
-                  displayDate={newEvent.startDate}
-                  start={newEvent.startDate}
-                  end={newEvent.endDate}
-                  type={newEvent.type}
-                  venueName={newEvent.venueName}
-                  address={newEvent.address}
-                  description={newEvent.description}
+                  id={event.id}
+                  title={event.title}
+                  displayDate={event.startDate}
+                  start={event.startDate}
+                  end={event.endDate}
+                  type={event.type}
+                  venueName={event.venueName}
+                  address={event.address}
+                  description={event.description}
                   handleRSVP={handleRSVP}
-                ></Event>
+                />
               </div>
             );
           })}
-          {/* </div> */}
         </div>
       </div>
 
@@ -225,7 +218,7 @@ const Events = () => {
               ></input>
 
               <label htmlFor="address">Address</label>
-              <AddressInput onChange={handleAddressChange} />
+              <GoogleAddressForm onChange={handleAddressChange} />
 
               <label htmlFor="eventType">Event Type</label>
               <select
@@ -287,13 +280,10 @@ const Events = () => {
 };
 let token;
 const CreateEventButton = props => {
-  console.log("Add Create event button");
   return (
     <AuthUserContext.Consumer>
       {authUser => {
-        {
-          authUser ? (token = authUser.token) : (token = null);
-        }
+        authUser ? (token = authUser.token) : (token = null);
         return authUser && authUser.members.role === ROLES.ADMIN ? (
           <Button
             className="btn btn-primary addEventBtn"

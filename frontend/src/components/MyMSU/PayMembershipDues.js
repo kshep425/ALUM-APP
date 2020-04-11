@@ -4,7 +4,7 @@ import { AuthUserContext } from "../Session";
 import { MemberTypeForm } from "../FormComponents";
 import * as ROUTES from "../../constants/routes"
 import API from "../../utils/API"
-import Button from "../../building_components/Button"
+import Button from "../BuildingComponents/Button"
 import get from "lodash/get"
 
 const PayMembershipDues = (props) => {

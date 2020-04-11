@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../building_components/Button";
+import Button from "../BuildingComponents/Button";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 

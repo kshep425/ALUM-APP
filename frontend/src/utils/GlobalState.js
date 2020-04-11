@@ -5,7 +5,6 @@ const StoreContext = createContext();
 const { Provider } = StoreContext;
 
 const reducer = (state, action) => {
-  console.log(state.events);
 
   switch (action.type) {
     case UPDATE_EVENTS:
