@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { MemberInfoForm } from "../FormComponents"
 import * as ROUTES from "../../constants/routes";
-import Button from "../../building_components/Button";
+import Button from "../BuildingComponents/Button";
 import API from "../../utils/API"
 import { AuthUserContext } from "../Session";
 import get from 'lodash/get'

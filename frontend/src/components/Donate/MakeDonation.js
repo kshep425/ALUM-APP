@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import DonationType from "./DonationType";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes"
-import Button from "../../building_components/Button"
+import Button from "../BuildingComponents/Button"
 import { AuthUserContext } from "../Session";
 import API from "../../utils/API"
 import get from "lodash/get"

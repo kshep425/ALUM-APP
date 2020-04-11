@@ -1,5 +1,4 @@
 import React from "react";
-import "../../building_components/Navbar/style.css";
 import { withFirebase } from "../Firebase";
 
 const SignOutButton = ({ firebase }) => (

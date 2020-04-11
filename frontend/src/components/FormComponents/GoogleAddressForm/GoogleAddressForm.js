@@ -5,19 +5,14 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import "./address.css";
 
-const AddressInput = props => {
+const GoogleAddressForm = props => {
   const [address, setAddress] = useState("");
-  const [coordinates, setCoordinates] = useState({
-    lat: null,
-    lng: null
-  });
 
   const handleSelect = value => {
     geocodeByAddress(value)
       .then(results => getLatLng(results[0]))
-      .then(latLng => {
-        console.log("success", latLng);
-        setCoordinates(latLng);
+      .then(result => {
+        console.log("success", result);
       })
       .catch(error => console.log("Error", error));
 
@@ -63,4 +58,4 @@ const AddressInput = props => {
   );
 };
 
-export default AddressInput;
+export default GoogleAddressForm;
