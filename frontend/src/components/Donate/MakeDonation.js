@@ -8,7 +8,7 @@ import API from "../../utils/API"
 import get from "lodash/get"
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import CheckoutForm from './CheckoutForm'
+import { CheckoutForm } from '../FormComponents'
 import * as ROLES from "../../constants/roles"
 
 var stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC);

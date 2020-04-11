@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
-import RegistrationMemberType from "../../form_components/RegistrationMemberType";
 import { Link } from "react-router-dom";
-import * as ROUTES from "../../constants/routes"
-import Button from "../../building_components/Button"
 import { AuthUserContext } from "../Session";
+import { MemberTypeForm } from "../FormComponents";
+import * as ROUTES from "../../constants/routes"
 import API from "../../utils/API"
+import Button from "../../building_components/Button"
 import get from "lodash/get"
 
 const PayMembershipDues = (props) => {
@@ -44,7 +44,7 @@ const PayMembershipDues = (props) => {
         return (
           <div>
             <h1>Pay Membership Dues</h1>
-            <RegistrationMemberType memberTypeRef={memberTypeRef} />
+            <MemberTypeForm memberTypeRef={memberTypeRef} />
             <Link to={ROUTES.MYMSU}><Button>Cancel</Button></Link>
             <Button onClick={handleSubmit}>MakePayment</Button>
           </div>

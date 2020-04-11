@@ -74,7 +74,7 @@ const LogInOrOutBtn = () => (
 const DonateBtn = () => {
   return (
     <Link to={ROUTES.DONATE}>
-      <button className="btn btn-success donateBtn">GIVE</button>
+      <button className="btn btn-success donateBtn">DONATE</button>
     </Link>
   );
 };

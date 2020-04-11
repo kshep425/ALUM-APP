@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function RegistrationMemberType(props) {
+function MemberTypeForm(props) {
   const [memberType, setmemberType] = useState();
   console.log(props)
   console.log(memberType)
@@ -106,4 +106,4 @@ function RegistrationMemberType(props) {
   )
 }
 
-export default RegistrationMemberType;
+export default MemberTypeForm;

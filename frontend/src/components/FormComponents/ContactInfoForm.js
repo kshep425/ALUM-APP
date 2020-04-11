@@ -1,8 +1,8 @@
 import React from 'react';
-import { AuthUserContext } from '../components/Session';
+import { AuthUserContext } from '../Session';
 import get from 'lodash/get'
 
-function RegistrationContactInfo(props) {
+function ContactInfoForm(props) {
   return (
     <AuthUserContext.Consumer>
       {authUser =>
@@ -124,4 +124,4 @@ function RegistrationContactInfo(props) {
 
 }
 
-export default RegistrationContactInfo;
+export default ContactInfoForm;
