@@ -1,9 +1,10 @@
-import AddressForm from "./AddressForm";
-import ContactInfoForm from "./ContactInfoForm";
-import MemberInfoForm from "./MemberInfoForm";
-import MemberTypeForm from "./MemberTypeForm";
-import CheckoutForm from "./CheckoutForm";
-import PasswordChangeForm from "./PasswordChangeForm";
+import AddressForm from './AddressForm';
+import ContactInfoForm from './ContactInfoForm';
+import MemberInfoForm from './MemberInfoForm';
+import MemberTypeForm from './MemberTypeForm';
+import CheckoutForm from './CheckoutForm';
+import PasswordChangeForm from './PasswordChangeForm';
+import GoogleAddressForm from './GoogleAddressForm/GoogleAddressForm'
 
 export default ContactInfoForm;
 
@@ -14,4 +15,5 @@ export {
   MemberInfoForm,
   MemberTypeForm,
   PasswordChangeForm,
+  GoogleAddressForm
 }

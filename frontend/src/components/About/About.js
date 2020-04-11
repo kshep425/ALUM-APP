@@ -1,8 +1,7 @@
 import React from "react";
-import Card from "../../building_components/Card/NewCard";
-import Wrapper from "../../building_components/Wrapper/Wrapper";
-import members from "../../building_components/member.json";
-import "../../building_components/Card/card.css";
+import Card from "../BuildingComponents/Card";
+import Wrapper from "../BuildingComponents/Wrapper";
+import members from "../BuildingComponents/member.json";
 import "./style.css";
 
 // ReactDom.render(<Card />,document.getElementById("root"));
@@ -22,9 +21,9 @@ const About = () => {
         <hr className="lineDivider" />
         <div className="row">
           {members.map(member => (
-            <Wrapper>
+            <Wrapper key={member.id}>
               <Card
-                key={member.name}
+                key={member.id}
                 position={member.position}
                 name={member.name}
                 about={member.about}

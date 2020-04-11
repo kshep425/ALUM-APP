@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./style.css";
 import moment from "moment-timezone";
 import Button from "../Button";
-import { AuthUserContext } from "../../components/Session";
-import * as ROLES from "../../constants/roles";
+import { AuthUserContext } from "../../Session";
+import * as ROLES from "../../../constants/roles";
 
 const Event = props => {
-  console.log(props);
   const [state, setState] = useState({ eventOpen: false });
   const [rsvp, setRSVP] = useState("");
 
@@ -15,27 +14,22 @@ const Event = props => {
   };
 
   function setNewRSVP(event) {
-    console.log("setNewRSVP");
-    console.log(event.target.value);
     setRSVP(event.target.value);
-    console.log(rsvp);
   }
 
   useEffect(() => {
-    console.log(rsvp);
   }, [rsvp]);
 
   function newEventRSVP(event) {
-    console.log("RSVP clicked");
     const rsvpToEvent = {
       eventId: props.id,
       rsvp,
       MemberId
     };
-    console.log(rsvp);
     event.preventDefault();
     props.handleRSVP(rsvpToEvent);
   }
+
   return (
     <div className="eventBox" onClick={viewDetails}>
       <span className="displayDate">
@@ -137,13 +131,12 @@ const CancelEventButton = () => {
 
 let MemberId;
 const AdminButtons = props => {
-  console.log("render admin buttons");
   return (
     <AuthUserContext.Consumer>
       {authUser => {
-        {
-          authUser ? (MemberId = authUser.members.id) : (MemberId = null);
-        }
+
+        authUser ? (MemberId = authUser.members.id) : (MemberId = null);
+
         return authUser && authUser.members.role === ROLES.ADMIN ? (
           <>
             <p>admin buttons</p>

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { ContactInfoForm } from "../FormComponents";
-import Button from "../../building_components/Button";
+import Button from "../BuildingComponents/Button";
 import API from "../../utils/API";
 import * as ROUTES from "../../constants/routes";
 

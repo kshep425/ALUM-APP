@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Button from "../Button";
-import SignoutButton from "../../components/SignOut";
-import * as ROUTES from "../../constants/routes";
+import SignoutButton from "../../SignOut";
+import * as ROUTES from "../../../constants/routes";
 import MediaNavitem from "./MediaNavitem";
-import { AuthUserContext } from "../../components/Session";
+import { AuthUserContext } from "../../Session";
 
 const TopNavBar = () => (
   <div className="navbar">

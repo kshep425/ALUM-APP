@@ -1,7 +1,7 @@
 import React from "react";
-import logo from "../../images/NEW_logo.png";
+import logo from "../../../images/NEW_logo.png";
 import { Link } from "react-router-dom";
-import { HOME } from "../../constants/routes";
+import { HOME } from "../../../constants/routes";
 import "../Navbar/style.css";
 
 const Logo = () => {
