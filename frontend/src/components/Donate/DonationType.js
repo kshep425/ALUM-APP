@@ -3,8 +3,6 @@ import "./style.css"
 
 function DonationType(props) {
   const [donationType, setdonationType] = useState();
-  console.log(props)
-  console.log(donationType)
 
   function handleChange(event) {
     setdonationType(event.target.value)
@@ -46,7 +44,6 @@ function DonationType(props) {
         <input
           className="form-check-input"
           type="radio"
-          name="donationType"
           name="donationType"
           id="donation50"
           value="donation50"

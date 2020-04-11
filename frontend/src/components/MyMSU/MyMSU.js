@@ -8,7 +8,7 @@ import {
   withEmailVerification,
   withAuthentication
 } from "../Session";
-import PasswordChangeForm from "../PasswordChange";
+import { PasswordChangeForm } from "../FormComponents";
 import ContactInfo from "./ContactInfo";
 import MemberInfo from "./MemberInfo";
 import MemberType from "./MemberType.js";

@@ -1,8 +1,6 @@
 import React from 'react';
-
 import AuthUserContext from './context';
 import { withFirebase } from '../Firebase';
-import API from '../../utils/API';
 
 // any component can simply use React's Context to consume the authenticated user
 const withAuthentication = Component => {

@@ -4,7 +4,7 @@ import {
   useElements,
   useStripe
 } from '@stripe/react-stripe-js';
-import "./style.css"
+import "./stripeStyle.css"
 
 // Setup Stripe.js and the Elements provider
 // const stripePromise = loadStripe('pk_test_OMoRPh239WO3DJhOnsVZJDN800XLgiAK4Y');

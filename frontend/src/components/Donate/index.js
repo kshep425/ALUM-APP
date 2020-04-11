@@ -1,10 +1,3 @@
-import React from 'react';
-import MakeDonation from './MakeDonation'
-const Donate = () => (
-  <div className="container">
-    <h1>Donate</h1>
-    <MakeDonation />
-  </div>
-);
+import Donate from './Donate';
 
 export default Donate;
