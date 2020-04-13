@@ -1,7 +1,7 @@
 {
-  "name": "notetaker",
+  "name": "AlumApp",
   "version": "1.0.0",
-  "description": "Note Taker",
+  "description": "Alum App - Website used by Morgan State Howard County Alumni Chapter",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -11,14 +11,15 @@
     "install": "cd frontend && npm install",
     "build": "cd frontend && npm run build",
     "heroku-postbuild": "npm run build",
-    "test": "jest --watch --coverage"
+    "cypress:open": "cypress open"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^4.1.2",
-    "nodemon": "^1.19.4",
-    "jest": "^25.1.0"
+    "cypress": "^4.3.0",
+    "eslint-plugin-cypress": "^2.10.3",
+    "nodemon": "^1.19.4"
   },
   "dependencies": {
     "@phuocng/react-pdf-viewer": "^1.4.0",
@@ -35,7 +36,6 @@
     "firebase-service": "^4.0.221",
     "http2": "^3.3.7",
     "if-env": "^1.0.4",
-    "jest": "^25.1.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
