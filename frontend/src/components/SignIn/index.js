@@ -6,9 +6,12 @@ import { SignUpLink } from '../SignUp';
 import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import Button from '../BuildingComponents/Button'
+import SIGN_IN_METHODS from '../../constants/signInMethods'
 
 const SignInPage = () => (
-  <div>
+  <div className="divPage mainPage">
+    <div className="container">
     <h1>SignIn</h1>
     <SignInForm />
     <SignInGoogle />
@@ -16,6 +19,7 @@ const SignInPage = () => (
     <SignInTwitter />
     <PasswordForgetLink />
     <SignUpLink />
+    </div>
   </div>
 );
 
@@ -76,23 +80,33 @@ class SignInFormBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="password"
-          value={password}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <button disabled={isInvalid} type="submit">
+        <div className="form-group">
+          <label for="emailInput">Email Address</label>
+          <input
+            id="emailInput"
+            className="form-control"
+            name="email"
+            value={email}
+            onChange={this.onChange}
+            type="email"
+            placeholder="Email Address"
+          />
+        </div>
+        <div class="form-group">
+          <label for="passwordInput">Password</label>
+          <input
+            id="passwordInput"
+            className="form-control"
+            name="password"
+            value={password}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Password"
+          />
+        </div>
+        <Button className="btn btn-primary addEventBtn" disabled={isInvalid} type="submit">
           Sign In
-        </button>
+        </Button>
 
         {error && <p>{error.message}</p>}
       </form>
@@ -139,7 +153,9 @@ class SignInGoogleBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Google</button>
+        <Button className="btn btn-primary addEventBtn" type="submit">Sign In with Google
+        <i className={SIGN_IN_METHODS.GOOGLE.icon} />
+        </Button>
 
         {error && <p>{error.message}</p>}
       </form>
@@ -185,7 +201,10 @@ class SignInFacebookBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Facebook</button>
+        <Button className="btn btn-primary addEventBtn" type="submit">
+          Sign In with Facebook
+          <i className={SIGN_IN_METHODS.FACEBOOK.icon} />
+        </Button>
 
         {error && <p>{error.message}</p>}
       </form>
@@ -231,7 +250,10 @@ class SignInTwitterBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Twitter</button>
+        <Button className="btn btn-primary addEventBtn" type="submit">
+          Sign In with Twitter
+          <i className={SIGN_IN_METHODS.TWITTER.icon} />
+      </Button>
 
         {error && <p>{error.message}</p>}
       </form>
