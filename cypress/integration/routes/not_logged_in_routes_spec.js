@@ -10,10 +10,40 @@ const routes = {
   donate: '/donate'
 }
 
+const noRoute = {
+  admin: '/admin',
+  mymsu: '/mymsu',
+  edit: '/edit',
+  editMemberInfo: '/editMemberInfo',
+  payMembershipDues: '/payMembershipDues',
+}
+
+const unknownPath = '/unknownPath';
+
 const routesArr = Object.values(routes)
+const noRouteArr = Object.values(noRoute)
 const home = routes.home.substring(1)
 
 describe('Not Logged In Routes Spec', () => {
+
+  it(`${unknownPath} - redirects to home`, () => {
+    cy.visit(unknownPath)
+    cy.location('pathname').should('include', unknownPath)
+    cy.get('.navItemDiv').should('contain', 'Home')
+    cy.get('.navItemDiv').should('contain', 'Events')
+    cy.get('.navItemDiv').should('contain', 'Scholarships')
+    cy.get('.navItemDiv').should('contain', 'About')
+    cy.get('.navItemDiv').should('not.contain', 'My MSU')
+    cy.get('.slick-slider')
+  })
+
+  noRouteArr.forEach(route => {
+    it(`${route} - redirects to home`, () => {
+      cy.visit(route)
+      cy.location('pathname').should('include', home)
+    })
+  })
+
   it(`${routes.home} - .click() - click on a DOM element`, () => {
     // https://on.cypress.io/click
     cy.visit(routes.default)
@@ -21,6 +51,8 @@ describe('Not Logged In Routes Spec', () => {
     cy.get('.navItemDiv').should('contain', 'Events')
     cy.get('.navItemDiv').should('contain', 'Scholarships')
     cy.get('.navItemDiv').should('contain', 'About')
+    cy.get('.navItemDiv').should('not.contain', 'My MSU')
+    cy.get('.slick-slider')
 
     cy.get('.navItemDiv').contains('Home').click()
     cy.location('pathname').should('include', home)
@@ -92,10 +124,5 @@ describe('Not Logged In Routes Spec', () => {
       // reload the page without using the cache
       cy.reload(true)
     })
-
-
-
   })
-
-
 })

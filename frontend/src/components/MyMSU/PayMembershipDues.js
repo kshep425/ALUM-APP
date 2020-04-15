@@ -1,11 +1,13 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import { AuthUserContext } from "../Session";
+import { AuthUserContext, withAuthorization } from "../Session";
 import { MemberTypeForm } from "../FormComponents";
-import * as ROUTES from "../../constants/routes"
-import API from "../../utils/API"
-import Button from "../BuildingComponents/Button"
-import get from "lodash/get"
+import * as ROUTES from "../../constants/routes";
+import API from "../../utils/API";
+import Button from "../BuildingComponents/Button";
+import get from "lodash/get";
+import { compose } from "recompose";
+
 
 const PayMembershipDues = (props) => {
   console.log(props)
@@ -52,6 +54,10 @@ const PayMembershipDues = (props) => {
       }}
     </AuthUserContext.Consumer>
   );
-};
+}
 
-export default PayMembershipDues;
+const condition = authUser => !!authUser;
+
+export default compose(
+  withAuthorization(condition)
+    (PayMembershipDues));

@@ -4,8 +4,9 @@ import { MemberInfoForm } from "../FormComponents"
 import * as ROUTES from "../../constants/routes";
 import Button from "../BuildingComponents/Button";
 import API from "../../utils/API"
-import { AuthUserContext } from "../Session";
+import { AuthUserContext, withAuthorization } from "../Session";
 import get from 'lodash/get'
+import { compose } from 'recompose'
 
 const EditMemberInfo = (props) => {
   console.log(props);
@@ -22,7 +23,7 @@ const EditMemberInfo = (props) => {
   const handleSubmit = async () => {
     const occupation = occupationRef.current.value
     console.log(occupation)
-    API.updateUser({occupation}, token);
+    API.updateUser({ occupation }, token);
     const degrees = [
       {
         year: gradYear1Ref.current.value,
@@ -43,14 +44,14 @@ const EditMemberInfo = (props) => {
 
 
     console.log(degrees)
-    const degreeResult = await API.updateDegreeInfo({degrees}, token);
+    const degreeResult = await API.updateDegreeInfo({ degrees }, token);
     console.log(degreeResult)
     props.history.push(ROUTES.MYMSU)
   }
   console.log(props)
   return (
     <AuthUserContext.Consumer>
-      {authUser =>{
+      {authUser => {
         token = authUser.token;
         authUserDegrees = authUser.degrees;
         return (
@@ -71,9 +72,14 @@ const EditMemberInfo = (props) => {
               <Button onClick={handleSubmit}>Submit</Button>
             </div>
           </div>
-        )}}
+        )
+      }}
     </AuthUserContext.Consumer>
   );
 };
 
-export default withRouter(EditMemberInfo);
+const condition = authUser => !!authUser;
+
+export default compose(
+  withAuthorization(condition)
+    (EditMemberInfo));
