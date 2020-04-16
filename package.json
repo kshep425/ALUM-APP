@@ -17,7 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^4.1.2",
-    "cypress": "^4.3.0",
+    "cypress": "^4.4.0",
     "eslint-plugin-cypress": "^2.10.3",
     "nodemon": "^1.19.4"
   },
