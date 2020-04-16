@@ -1,13 +1,9 @@
-.scholarshipsDiv {
-  font-family: "Abel", sans-serif;
-  width: 100vw;
-  min-height: 60vh;
-  padding: 50px 90px;
-  background-color: rgb(221, 221, 221);
-  color: #122f5e;
+.mainContainer {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 750px;
 }
 
-.mainPage {
-  width: 100vw;
-  min-height: 100%;
+.scholarshipBtnDiv {
+  text-align: center;
 }
