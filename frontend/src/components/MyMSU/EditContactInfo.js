@@ -4,6 +4,8 @@ import { ContactInfoForm } from "../FormComponents";
 import Button from "../BuildingComponents/Button";
 import API from "../../utils/API";
 import * as ROUTES from "../../constants/routes";
+import { withAuthorization } from '../Session';
+import { compose } from "recompose";
 
 const EditContactInfo = props => {
   const uid = useRef();
@@ -69,5 +71,7 @@ const EditContactInfo = props => {
     </div>
   );
 };
+const condition = authUser => !!authUser;
 
-export default withRouter(EditContactInfo);
+export default compose(
+  withAuthorization(condition)(EditContactInfo));

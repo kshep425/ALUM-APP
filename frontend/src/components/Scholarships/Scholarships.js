@@ -1,18 +1,29 @@
 import React from "react";
 import "./scholarships.css";
-// import { Document } from 'react-pdf'
-// import Viewer from '@phuocng/react-pdf-viewer';
+import Button from "../BuildingComponents/Button";
 
 const Scholarships = () => {
   return (
-    <div className="mainPage">
+    <div className="mainContainer">
       <div className="scholarshipsDiv">
         <h2>
           <strong>
-            Howard County Chapter Bear Pride Scholarship Application
+            Bear Pride Scholarship Application
           </strong>
         </h2>
         <hr />
+        <div className="scholarshipBtnDiv">
+          <a
+            target="_blank" rel="noopener noreferrer"
+            href="https://docs.google.com/forms/d/16OfOpbXHg8fElSNSJjTbvtlKqvo_U46-5M6p5CZLWyA/viewform?edit_requested=true">
+          <Button className="openButton mr-2">Apply Online</Button>
+          </a>
+          <a
+            target="_blank" rel="noopener noreferrer"
+            href="https://docs.google.com/document/d/1j4AwqFuagIXkuLFhCWT1dBYnbpBRkTKl86Unvkm6iP4/edit?usp=sharing">
+            <Button className="openButton ml-2">Print PDF</Button>
+          </a>
+        </div>
         <br />
         <h3>For New Students</h3>
         <br />
@@ -120,8 +131,7 @@ const Scholarships = () => {
             or print from{" "}
             <a
               target="_blank" rel="noopener noreferrer"
-              href="https://docs.google.com/document/d/1j4AwqFuagIXkuLFhCWT1dBYnbpBRkTKl86Unvkm6iP4/edit?usp=sharing"
-            >
+              href="https://docs.google.com/document/d/1j4AwqFuagIXkuLFhCWT1dBYnbpBRkTKl86Unvkm6iP4/edit?usp=sharing">
               HERE
             </a>
             .

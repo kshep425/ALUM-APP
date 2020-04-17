@@ -1,0 +1,10 @@
+.openButton {
+  margin: 3px 5px;
+  border-radius: 3px !important;
+  background-color: #f76f00;
+  color: blue;
+  border: none;
+  font-weight: bolder;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.281);
+  padding: .4em;
+}
