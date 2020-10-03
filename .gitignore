@@ -25,3 +25,4 @@ yarn-error.log*
 
 /frontend/node_modules
 .env
+.env_template
