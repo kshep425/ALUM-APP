@@ -112,13 +112,4 @@ describe('Logged In Routes Spec', () => {
     })
   })
 
-  //   it(`${route} - cy.reload() - reload the page`, () => {
-  //     // https://on.cypress.io/reload
-  //     cy.visit(route)
-  //     cy.reload()
-
-  //     // reload the page without using the cache
-  //     cy.reload(true)
-  //   })
-  // })
 })
