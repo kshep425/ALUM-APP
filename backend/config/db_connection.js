@@ -1,3 +1,4 @@
+// The database is controlled using sequelize queries
 const Sequelize = require('sequelize');
 
 function initialize_db(db_obj){
