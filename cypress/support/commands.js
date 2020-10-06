@@ -13,6 +13,9 @@ import routes from '../fixtures/constants'
 // -- This is a parent command --
 Cypress.Commands.add('login', (email, password) => {
   cy.log(email, password);
+  cy.log("Password: ")
+  cy.log(password)
+  cy.log(Cypress.env('password'))
   cy.request('POST', '/api/test/user', {email, password})
   cy.visit(routes.home)
   cy.visit(routes.signin)
