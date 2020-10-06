@@ -8,6 +8,7 @@ The program was bootstrapped with [Create React App](https://github.com/facebook
 ## Table of Contents
 * [Requirements](#Requirements)
 * [Install for development](#Install)
+* [Set up Dev Environment](#Setup)
 * [Available NPM Scripts](#Available-Scripts)
 * [Test](#Test)
 * [Deployment Steps](#Deployment-Steps)
@@ -32,10 +33,14 @@ The high level requirements for the site are
     `git clone <repo-url`
 1.  Install Dependencies
     `npm install`
+
+## Setup
+### Setup Dev Environment
 1.  Create a .env file in the top level directory.  Get the .env template file from a contributing developer
     `code .env` if using VS Code
     `touch .env`
-1.
+1.  Create a cypress.env.json file in /cypress/fixtures directory.  Add a password to the file to use with login tests:
+     `{"password": "[input a password]"}`
 
 
 
@@ -48,6 +53,8 @@ First start the test server:
 
 To run test run:
 '''npx cypress open'''
+
+
 
 ## Deployment-Steps
 
