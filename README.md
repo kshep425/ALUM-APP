@@ -42,17 +42,20 @@ The high level requirements for the site are
 1.  Create a cypress.env.json file in /cypress/fixtures directory.  Add a password to the file to use with login tests:
      `{"password": "[input a password]"}`
 
+1.  To run this project you need a Paypal Developer account.
+You can sign up [here](https://developer.paypal.com/). Afterwards you will need to plug your keys into a .env file that needs to be created as well.
 
+// backend/.env
 
 ## Available-Scripts
 
 
 ## Test
 First start the test server:
-'''npm start'''
+`npm start`
 
 To run test run:
-'''npx cypress open'''
+`npx cypress open`
 
 
 
