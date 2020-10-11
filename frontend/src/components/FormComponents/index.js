@@ -2,18 +2,18 @@ import AddressForm from './AddressForm';
 import ContactInfoForm from './ContactInfoForm';
 import MemberInfoForm from './MemberInfoForm';
 import MemberTypeForm from './MemberTypeForm';
-import CheckoutForm from './CheckoutForm';
 import PasswordChangeForm from './PasswordChangeForm';
-import GoogleAddressForm from './GoogleAddressForm/GoogleAddressForm'
+import GoogleAddressForm from './GoogleAddressForm/GoogleAddressForm';
+import Paypal from './Paypal';
 
 export default ContactInfoForm;
 
 export {
   AddressForm,
-  CheckoutForm,
   ContactInfoForm,
   MemberInfoForm,
   MemberTypeForm,
   PasswordChangeForm,
-  GoogleAddressForm
+  GoogleAddressForm,
+  Paypal,
 }
