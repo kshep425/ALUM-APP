@@ -59,7 +59,7 @@ class SignInFormBase extends Component {
         this.setState({ ...INITIAL_STATE });
         // console.log(INITIAL_STATE)
         console.log(this.props.history);
-        //this.props.history.push(ROUTES.HOME);
+        // this.props.history.push(ROUTES.HOME);
         this.props.history.goBack();
       })
       .catch(error => {
@@ -81,7 +81,7 @@ class SignInFormBase extends Component {
     return (
       <form onSubmit={this.onSubmit}>
         <div className="form-group">
-          <label for="emailInput">Email Address</label>
+          <label htmlFor="emailInput">Email Address</label>
           <input
             id="emailInput"
             className="form-control"
@@ -93,7 +93,7 @@ class SignInFormBase extends Component {
           />
         </div>
         <div class="form-group">
-          <label for="passwordInput">Password</label>
+          <label htmlFor="passwordInput">Password</label>
           <input
             id="passwordInput"
             className="form-control"

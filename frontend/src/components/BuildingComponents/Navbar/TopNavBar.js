@@ -45,7 +45,7 @@ const LogInOrOutBtn = () => (
 
             <div className="dropdown-menu">
               <Link to={ROUTES.MYMSU} className="dropdownLink">
-                <p className="myMSUlink">My Msu</p>
+                <p className="myMSUlink">My MSU</p>
               </Link>
               <Link to={ROUTES.MYMSU} className="dropdownLink">
                 <p className="myMSUlink">Change Password</p>

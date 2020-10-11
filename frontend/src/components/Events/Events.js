@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import Event from "../BuildingComponents/Event";
 import Button from "../BuildingComponents/Button";
-import {GoogleAddressForm} from "../FormComponents";
+import {GoogleAddressForm, AddressForm} from "../FormComponents";
 import Modal from "../BuildingComponents/Modal";
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_EVENT, UPDATE_EVENTS } from "../../utils/actions";
@@ -217,8 +217,9 @@ const Events = (props) => {
                 defaultValue="Kahler Hall"
               ></input>
 
-              <label htmlFor="address">Address</label>
-              <GoogleAddressForm onChange={handleAddressChange} />
+              {/* <label htmlFor="address">Address</label> */}
+              {/* <GoogleAddressForm onChange={handleAddressChange} /> */}
+              <AddressForm />
 
               <label htmlFor="eventType">Event Type</label>
               <select

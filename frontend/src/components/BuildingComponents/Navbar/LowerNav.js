@@ -21,7 +21,7 @@ const LowerNav = () => (
 const MyMsuLink = () => (
   <AuthUserContext.Consumer>
     {authUser => {
-      return authUser ? <Navitem href={ROUTES.MYMSU}>my msu</Navitem> : <></>;
+      return authUser ? <Navitem href={ROUTES.MYMSU}>My MSU</Navitem> : <></>;
     }}
   </AuthUserContext.Consumer>
 );

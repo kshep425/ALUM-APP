@@ -81,6 +81,7 @@ let token;
 const condition = authUser => {
   token = get(authUser, 'token')
   const role = get(authUser, 'members.role')
+  console.log(role === ROLES.ADMIN)
   return authUser && role === ROLES.ADMIN;
 }
 

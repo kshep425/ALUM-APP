@@ -1,3 +1,7 @@
+/**
+ * Initialize the database with Sequelize
+ */
+
 "use strict";
 
 const fs = require("fs");
