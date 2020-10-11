@@ -6,7 +6,6 @@ function DonationType(props) {
 
   function handleChange(event) {
     setdonationType(event.target.value)
-    console.log(donationType)
   }
 
   return (
