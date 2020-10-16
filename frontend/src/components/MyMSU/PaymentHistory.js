@@ -27,7 +27,7 @@ const PaymentHistory = (props) => {
             <tr key={payment.id}>
               <td>{formatDate(payment.paymentDate)}</td>
               <td>{payment.description}</td>
-              <td>${payment.amount}</td>
+              <td>${payment.amount.toFixed(2)}</td>
             </tr>
           ))}
         </tbody>

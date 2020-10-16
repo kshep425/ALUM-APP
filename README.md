@@ -50,7 +50,10 @@ You can sign up [here](https://developer.paypal.com/). Afterwards you will need 
 # How to add PayPal checkout to your React App
 1. Create a Paypal Sandbox business and personal account for testing
 1. Update the client id for paypal script on public/index.html page.
-1. Use the youtube video to easily get started: https://www.youtube.com/watch?v=IXxEdhA7fig&t=917s
+1. Use the youtube video to easily get started:
+* [Integrate Paypal](https://www.youtube.com/watch?v=IXxEdhA7fig&t=917s)
+* [How To Integrate Paypal in ReactJS](https://www.youtube.com/watch?v=IXxEdhA7fig&list=PLtOcTIK0P0rxAwWWr73jltr_inNI8UC9K&index=14)
+
 1. From the Donate page:
    1. Select Donation Type/Amount
    1. Select Make Donation

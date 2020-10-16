@@ -32,36 +32,12 @@ function getMemberDueAmount(memberType) {
 
 function getDonationAmount(type) {
   let amount;
-  switch (type) {
-    case "donation15":
-      amount = 15.00;
-      break;
-    case "donation25":
-      amount = 25.00;
-      break;
-    case "donation50":
-      amount = 50.00;
-      break;
-    case "donation100":
-      amount = 100.00;
-      break;
-    case "donation200":
-      amount = 250.00;
-      break;
-    case "donation250":
-      amount = 250.00;
-      break;
-    case "donation500":
-      amount = 500.00;
-      break;
-    case "donation1000":
-      amount = 1000;
-      break;
-    default:
-      throw Error("Invalid Donation Amout")
+  if (type.includes("donation")) {
+    amount = parseFloat(type.replace(/^\D+/g, ''))
+    return amount;
+  } else {
+    throw Error("Invalid Donation Amout")
   }
-  console.log(type, amount)
-  return amount;
 }
 
 module.exports = function (app) {
@@ -120,7 +96,7 @@ module.exports = function (app) {
     const amount = getDonationAmount(donationType)
     const paymentObj = {
       amount: amount,
-      description: "Donated $" + amount + " for Scholarships",
+      description: "Donated $" + amount.toFixed(2) + " for Scholarships",
       currency: 'usd',
       uid,
       MemberId,
@@ -143,7 +119,7 @@ module.exports = function (app) {
     const amount = getDonationAmount(donationType)
     const paymentObj = {
       amount: amount,
-      description: "Donated $" + amount + " for Scholarships",
+      description: "Donated $" + amount.toFixed(2) + " for Scholarships",
       currency: 'usd',
       uid,
       MemberId,

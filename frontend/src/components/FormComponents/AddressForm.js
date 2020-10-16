@@ -3,23 +3,23 @@ import React from 'react'
 function Address () {
   return (
     <>
-      <div class="form-group">
+      <div className="form-group">
         <label for="inputAddress">Address</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"></input>
+        <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St"></input>
       </div>
-      <div class="form-group">
+      <div className="form-group">
         <label for="inputAddress2">Address 2</label>
-        <input type="text" class="form-control" id="inputAddress2"
+        <input type="text" className="form-control" id="inputAddress2"
           placeholder="Apartment, studio, or floor"></input>
       </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
+      <div className="form-row">
+        <div className="form-group col-md-6">
           <label for="inputCity">City</label>
-          <input type="text" class="form-control" id="inputCity"></input>
+          <input type="text" className="form-control" id="inputCity"></input>
         </div>
-        <div class="form-group col-md-4">
+        <div className="form-group col-md-4">
           <label for="inputState">State</label>
-          <select id="inputState" class="form-control">
+          <select id="inputState" className="form-control">
             <option selected>Choose...</option>
             <option value="AL">Alabama (AL)</option>
             <option value="AK">Alaska (AK)</option>
@@ -74,9 +74,9 @@ function Address () {
             <option value="WY">Wyoming (WY)</option>
           </select>
         </div>
-        <div class="form-group col-md-2">
+        <div className="form-group col-md-2">
           <label for="inputZip">Zip</label>
-          <input type="text" class="form-control" id="inputZip"></input>
+          <input type="text" className="form-control" id="inputZip"></input>
         </div>
       </div>
     </>

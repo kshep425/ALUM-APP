@@ -44,6 +44,26 @@ export const DONATIONS = {
     description: "$500.00 Scholarship Donation",
     amount: 500.00
   },
+  donation600: {
+    type: "Donation",
+    description: "$600.00 Scholarship Donation",
+    amount: 600.00
+  },
+  donation700: {
+    type: "Donation",
+    description: "$700.00 Scholarship Donation",
+    amount: 700.00
+  },
+  donation800: {
+    type: "Donation",
+    description: "$800.00 Scholarship Donation",
+    amount: 800.00
+  },
+  donation900: {
+    type: "Donation",
+    description: "$900.00 Scholarship Donation",
+    amount: 900.00
+  },
   donation1000: {
     type: "Donation",
     description: "$1000.00 Scholarship Donation",
