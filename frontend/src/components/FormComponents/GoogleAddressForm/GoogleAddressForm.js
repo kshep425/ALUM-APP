@@ -12,7 +12,7 @@ const GoogleAddressForm = props => {
     geocodeByAddress(value)
       .then(results => getLatLng(results[0]))
       .then(result => {
-        console.log("success", result);
+        //console.log("success", result);
       })
       .catch(error => console.log("Error", error));
 

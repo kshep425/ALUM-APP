@@ -74,7 +74,6 @@ class Firebase {
           // Get User Info from members, degrees, and payments table
           Promise.all([API.getUser(token), API.getUserDegrees(token), API.getUserPayments(token), API.getUserEvents(token)])
           .then(result => {
-            console.log(result)
             let [members, degrees, payments, events] = result;
               // add table data to authUser for use in myMSU and Events Pages.
               authUser = {

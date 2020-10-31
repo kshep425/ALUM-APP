@@ -12,7 +12,6 @@ const MemberInfo = (props) => {
   }, [authUser])
 
   const GetOccupation = () => {
-    console.log("Get Occupation");
     return authUser.members && !!authUser.members.occupation ? (
       <>
         <p>
@@ -20,21 +19,19 @@ const MemberInfo = (props) => {
         </p>
       </>
     ) : (
-      <p>Add your Occupation</p>
-    );
+        <p>Add your Occupation</p>
+      );
   };
 
   const GetDegrees = () => {
-    console.log("Get Degrees");
     return authUser.degrees && authUser.degrees !== []
       ? (<>
-          {console.log(authUser.degrees)}
-            {authUser.degrees.map(degree => {
-              return (
-              <p key={degree.id}>{degree.year}: {degree.degree}</p>
-              )
-            })}
-        </>)
+        {authUser.degrees.map(degree => {
+          return (
+            <p key={degree.id}>{degree.year}: {degree.degree}</p>
+          )
+        })}
+      </>)
       : (<p>Add your Degrees</p>)
   }
 

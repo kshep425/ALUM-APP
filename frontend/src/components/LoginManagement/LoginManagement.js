@@ -86,7 +86,6 @@ class LoginManagementBase extends Component {
           <strong>Change Login Methods:</strong>
         </h6>
         {SIGN_IN_METHODS.map(signInMethod => {
-          console.log(signInMethod);
           const onlyOneLeft = activeSignInMethods.length === 1;
           const isEnabled = activeSignInMethods.includes(signInMethod.id);
 

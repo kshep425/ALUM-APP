@@ -2,14 +2,13 @@ import React from "react";
 import "./mymsupage.css";
 
 const EventHistory = props => {
-  console.log(props);
   const events = props.authUser.events || [];
 
   function formatDate(date) {
     let d = new Date(date);
     return d.toLocaleDateString();
   }
-  console.log(events);
+
   return (
     <div className="container historyContainer" ref={props.eventsLength} value={events.length}>
       <h1 className="card-title">Event History</h1>

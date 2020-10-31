@@ -42,7 +42,7 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
 class SignInFormBase extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+    // console.log(this.props);
     this.state = { ...INITIAL_STATE };
   }
 
@@ -58,7 +58,7 @@ class SignInFormBase extends Component {
 
         this.setState({ ...INITIAL_STATE });
         // console.log(INITIAL_STATE)
-        console.log(this.props.history);
+        // console.log(this.props.history);
         // this.props.history.push(ROUTES.HOME);
         this.props.history.goBack();
       })
@@ -127,7 +127,7 @@ class SignInGoogleBase extends Component {
       .doSignInWithGoogle()
       .then(socialAuthUser => {
         // Create a user in your Firebase Realtime Database too
-        console.log(socialAuthUser)
+        // console.log(socialAuthUser)
         // return this.props.firebase.user(socialAuthUser.user.uid).set({
         //   username: socialAuthUser.user.displayName,
         //   email: socialAuthUser.user.email,
@@ -175,7 +175,7 @@ class SignInFacebookBase extends Component {
       .doSignInWithFacebook()
       .then(socialAuthUser => {
         // Create a user in your Firebase Realtime Database too
-        console.log(socialAuthUser)
+        // console.log(socialAuthUser)
         // return this.props.firebase.user(socialAuthUser.user.uid).set({
         //   username: socialAuthUser.additionalUserInfo.profile.name,
         //   email: socialAuthUser.additionalUserInfo.profile.email,
@@ -224,7 +224,7 @@ class SignInTwitterBase extends Component {
       .doSignInWithTwitter()
       .then(socialAuthUser => {
         // Create a user in your Firebase Realtime Database too
-        console.log(socialAuthUser)
+        // console.log(socialAuthUser)
         // return this.props.firebase.user(socialAuthUser.user.uid).set({
         //   username: socialAuthUser.additionalUserInfo.profile.name,
         //   email: socialAuthUser.additionalUserInfo.profile.email,

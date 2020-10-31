@@ -9,7 +9,7 @@ const AdminPage = () => {
   const [users, setUsers] = useState({ users: [] })
 
   const getAllUsers = async () => {
-    console.log("Get all users")
+    // console.log("Get all users")
     API.getAllUsers()
       .then((result) => {
         setUsers({ users: result.data })
@@ -25,7 +25,7 @@ const AdminPage = () => {
   }
 
   const displayUsers = (users) => {
-    console.log("Display Users");
+    // console.log("Display Users");
     return (
       users.users.map((user) =>
         (!!user.uid && user.uid !== "Anonymous")
@@ -81,7 +81,7 @@ let token;
 const condition = authUser => {
   token = get(authUser, 'token')
   const role = get(authUser, 'members.role')
-  console.log(role === ROLES.ADMIN)
+  // console.log(role === ROLES.ADMIN)
   return authUser && role === ROLES.ADMIN;
 }
 

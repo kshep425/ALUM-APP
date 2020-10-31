@@ -22,11 +22,11 @@ const MyMsuPage = () => {
   let eventsLengthRef = useRef(0)
 
   useEffect(() => {
-    console.log(paymentLengthRef)
+   // console.log(paymentLengthRef)
   }, [paymentLengthRef])
 
   useEffect(() => {
-    console.log(eventsLengthRef)
+   // console.log(eventsLengthRef)
   }, [eventsLengthRef])
 
   return (

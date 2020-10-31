@@ -9,7 +9,6 @@ import get from 'lodash/get'
 import { compose } from 'recompose'
 
 const EditMemberInfo = (props) => {
-  console.log(props);
   const occupationRef = useRef();
   const gradYear1Ref = useRef();
   const gradYear2Ref = useRef();
@@ -22,7 +21,6 @@ const EditMemberInfo = (props) => {
 
   const handleSubmit = async () => {
     const occupation = occupationRef.current.value
-    console.log(occupation)
     API.updateUser({ occupation }, token);
     const degrees = [
       {
@@ -42,13 +40,10 @@ const EditMemberInfo = (props) => {
       // }
     ]
 
-
-    console.log(degrees)
     const degreeResult = await API.updateDegreeInfo({ degrees }, token);
-    console.log(degreeResult)
     props.history.push(ROUTES.MYMSU)
   }
-  console.log(props)
+
   return (
     <AuthUserContext.Consumer>
       {authUser => {
