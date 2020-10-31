@@ -83,7 +83,7 @@ const eventQueries = {
     })
       .then((events) => {
         const memberEventRSVPs = Object.assign([],
-          events[0].dataValues.events.map((e) => {
+          (events[0])? events[0].dataValues.events.map((e) => {
             return {
               eventId: e.dataValues.id,
               title: e.dataValues.title,
@@ -97,6 +97,7 @@ const eventQueries = {
               rsvp: e.dataValues.event_members.rsvp
             }
           })
+          : []
         )
         return memberEventRSVPs;
       })

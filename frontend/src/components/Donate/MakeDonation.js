@@ -1,86 +1,64 @@
 import React, { useRef, useState } from "react";
 import DonationType from "./DonationType";
 import { Link } from "react-router-dom";
-import * as ROUTES from "../../constants/routes"
-import Button from "../BuildingComponents/Button"
+import * as ROUTES from "../../constants/routes";
+import Button from "../BuildingComponents/Button";
 import { AuthUserContext } from "../Session";
-import API from "../../utils/API"
-import get from "lodash/get"
-
-import * as ROLES from "../../constants/roles"
+import API from "../../utils/API";
+import get from "lodash/get";
+import * as ROLES from "../../constants/roles";
 import Paypal from "../FormComponents/Paypal";
-import { DONATIONS } from "../../constants/donations";
 
 const MakeDonation = (props) => {
-  const donationTypeRef = useRef();
+  const donationInfoRef = useRef();
   const [checkout, setCheckout] = useState(false);
-  const [payPalObj, setPayPalObj] = useState({});
-  const [anonymous, setAnonymous] = useState(false)
-
+  const [dbPayment, setDbPayment] = useState();
   let memberId;
   let token;
 
+  /**
+   * handleSubmit - takes the entered donation and opens the paypal buttons page to process payment for the donation
+   * @param {*} event
+   */
   function handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
 
-    const paymentObj = {
-      donationType: get(donationTypeRef, "current.attributes.value.value"),
-      memberId
-    }
+    const comment = get(donationInfoRef, "current.attributes.donationcomment.value")
+    const type = get(donationInfoRef, "current.attributes.donationtype.value")
+    const categoryId = get(donationInfoRef, "current.attributes.donationcategoryid.value")
 
-    if (paymentObj.donationType && token) {
-      const amount = DONATIONS[paymentObj.donationType].amount;
-      const type = DONATIONS[paymentObj.donationType].type;
-      setPayPalObj({
+    if (!!type & !!categoryId & !!token) {
+      setDbPayment({
+        categoryId,
         type,
-        amount,
-        description: "Donated $" + amount + " for Scholarships",
-        currency: 'usd',
+        comment,
+        memberId,
       })
-      setCheckout(true)
-      API.makeDonation(paymentObj, token)
-        .then(() => {
-
-        })
-        .catch((err) => {
-          // console.log(err);
-          alert("There was an issue with your payment, please try again")
-        })
-
-    } else if (paymentObj.donationType) {
-      const anonymousUID = "Anonymous"
+      setCheckout(true);
+    } else if (!!type & !!categoryId) {
+      const anonymousUID = "Anonymous";
 
       API.addNewUser({
         uid: anonymousUID,
-        fullName: anonymous,
+        fullName: "Anonymous Donor",
         email: "kshep425@gmail.com",
         role: ROLES.USER
       })
         .then(result => {
-          paymentObj.memberId = get(result, "data.id") || 2
-          const amount = DONATIONS[paymentObj.donationType].amount;
-          const type = DONATIONS[paymentObj.donationType].type;
-          setAnonymous(true);
-          setPayPalObj({
+          memberId = get(result, "data.id") || 2
+          console.log("anonymous memberId: ", memberId)
+          setDbPayment({
+            categoryId,
             type,
-            amount,
-            description: "Donated $" + amount + " for Scholarships",
-            currency: 'usd',
+            comment,
+            memberId,
           })
-          setCheckout(true)
-          API.makeAnonymousDonation(paymentObj)
-            .then(() => {
-              // alert("Thank you for your donation!")
-            })
-            .catch((err) => {
-              // console.log(err);
-              alert("There was an issue with your payment, please try again")
-            })
+          setCheckout(true);
         })
 
     }
     else {
-      alert("Please select a payment type")
+      alert("Please select donation campaign and donation amount.");
     }
   }
   return (
@@ -91,10 +69,10 @@ const MakeDonation = (props) => {
         return (
           <div>
             {checkout
-              ? <Paypal payment={payPalObj} anonymous={anonymous}/>
+              ? <Paypal dbPayment={dbPayment} memberId={memberId} token={token} />
               : <>
-                <p>We raise scholarship money for new and continuing MSU students from Howard County</p>
-                <DonationType donationTypeRef={donationTypeRef} />
+                <p className="donateHeader blueText">We provide scholarships for Howard County's new and current <span className="orangeText">MSU students</span></p>
+                <DonationType donationInfoRef={donationInfoRef} />
                 <Button onClick={handleSubmit}>Make Donation</Button>
                 <Link to={ROUTES.MYMSU}><Button>Cancel</Button></Link>
               </>

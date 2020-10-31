@@ -43,10 +43,16 @@ module.exports = function (sequelize, DataTypes) {
     zip: DataTypes.INTEGER(5),
 
     occupation: DataTypes.STRING,
+
     memberType: DataTypes.STRING,
     memberMaritalStatus: DataTypes.STRING,
+    spouseName: DataTypes.STRING,
+    spouseEmail: DataTypes.STRING,
+    spouseMemberId: DataTypes.INTEGER,
+
     googleToken: DataTypes.STRING,
     imageUrl: DataTypes.STRING,
+
     uid: DataTypes.STRING,
     role: DataTypes.STRING,
   });
