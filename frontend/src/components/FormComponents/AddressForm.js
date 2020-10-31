@@ -4,23 +4,23 @@ function Address () {
   return (
     <>
       <div className="form-group">
-        <label for="inputAddress">Address</label>
+        <label htmlFor="inputAddress">Address</label>
         <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St"></input>
       </div>
       <div className="form-group">
-        <label for="inputAddress2">Address 2</label>
+        <label htmlFor="inputAddress2">Address 2</label>
         <input type="text" className="form-control" id="inputAddress2"
           placeholder="Apartment, studio, or floor"></input>
       </div>
       <div className="form-row">
         <div className="form-group col-md-6">
-          <label for="inputCity">City</label>
+          <label htmlFor="inputCity">City</label>
           <input type="text" className="form-control" id="inputCity"></input>
         </div>
         <div className="form-group col-md-4">
-          <label for="inputState">State</label>
+          <label htmlFor="inputState">State</label>
           <select id="inputState" className="form-control">
-            <option selected>Choose...</option>
+            <option defaultValue>Choose...</option>
             <option value="AL">Alabama (AL)</option>
             <option value="AK">Alaska (AK)</option>
             <option value="AZ">Arizona (AZ)</option>
@@ -75,7 +75,7 @@ function Address () {
           </select>
         </div>
         <div className="form-group col-md-2">
-          <label for="inputZip">Zip</label>
+          <label htmlFor="inputZip">Zip</label>
           <input type="text" className="form-control" id="inputZip"></input>
         </div>
       </div>

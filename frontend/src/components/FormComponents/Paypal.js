@@ -1,23 +1,49 @@
 import { get } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { DONATIONCATEGORIES } from '../../constants/donationCategories';
+import { MEMBERSHIPS } from '../../constants/memberships';
 import * as ROUTES from "../../constants/routes";
 import API from "../../utils/API"
 
+/** Create a payment object based on type that returns amount, fee, totalAmount, and description
+ * @params type can be a donationType example: donation200 for $200 or a membership type that we can get the amount and description from the MEMBERSHIPS
+ * */
+function Payment(type, categoryId=null) {
+  if (type.includes("donation")) {
+    this.amount = type.replace(/^\D+/g, '')
+    this.description = `$${this.amount} Donation for ${DONATIONCATEGORIES.find(x => x.id === categoryId).categoryName}`
+  } else {
+    this.amount = MEMBERSHIPS[type].amount;
+    this.description = MEMBERSHIPS[type].description;
+  }
+  // fees only apply to less than $500 or if the category Id is membership
+  const applyFee = (this.amount < 500) || categoryId === "membership"
+  this.totalAmount =  (applyFee) ? ((parseFloat(this.amount) + .3) / .971).toFixed(2) : this.amount;
+  this.fee = (applyFee) ? (this.totalAmount - this.amount).toFixed(2) : 0;
+}
+
 /**Paypal
  * This will open the payal interface and allow a user to make a payment based on the information submitted in the payment and paymentObj objects.
- * props contains
- * token {string} used for accessing the database and submitting a payment for the user
- * paymentObj {{donationType, memberId}} Contains the donation type ex 'donation100' is a $100.00 donation used when making a submission to the database
- * payment {description, amount} includes the description of the payment and the amount of the payment for example description could be '$100 Scholarship Donation'
- * anonymous {boolean} set true when a user has not logged in
- * memberId {string} memberId of logged in user used for the database.
+ * @params props contains
+ * @params token {string} used for accessing the database and submitting a payment for the user
+ * @params type  Contains the donation type ex 'donation100' is a $100.00 donation used when making a submission to the database or membership type from MEMBERSHIPS constant to get amount and description
+ * @params dbPayment {object} contains
+ *    memberId {string} memberId of logged in user used for the database
+ *    categoryId {string} This will say what donation campaign the payment is for, or if it's a membership
+ *    type {string} type of donation or membership
+ *    comment {string} comment entered by user
+ *    otherUserName {string} the member's name the payment is linked to
+ *    otherUserEmail {string} the member's email the payment is linked to
  */
 function Paypal(props) {
-  const { payment, anonymous, token, memberId, paymentObj } = props
+  const { dbPayment, token } = props
   const [success, setSuccess] = useState(false);
   const paypal = useRef();
-  const amount = parseFloat(get(payment, "amount")).toFixed(2)
+  const payment = new Payment(dbPayment.type, dbPayment.categoryId);
+  const paypalDescriptionLength = 127;
+  const description = `${payment.description} ${dbPayment.comment || ""} ${dbPayment.otherMemberName || ""} ${dbPayment.otherMemberEmail || ""}`;
+  const paypalDescription = (description.length > 123) ? description.substring(0,paypalDescriptionLength) + "..." : description;
 
   useEffect(() => {
     window.paypal
@@ -28,10 +54,10 @@ function Paypal(props) {
             intent: "CAPTURE",
             purchase_units: [
               {
-                description: payment.description,
+                description: paypalDescription,
                 amount: {
+                  value: payment.totalAmount,
                   currency_code: "USD",
-                  value: amount,
                 },
               },
             ],
@@ -40,28 +66,17 @@ function Paypal(props) {
         onApprove: async (data, actions) => {
           await actions.order.capture();
           // add donation to database
-          const orderId = data.orderID;
-          const payerId = data.payerID;
-          if (anonymous) {
-            // console.log("Make anonymous donation")
-            API.makeAnonymousDonation(paymentObj)
-              .then((result) => {
-                setSuccess(true)
-              })
-              .catch((err) => {
-                // console.log(err);
-                alert("There was an issue with your payment, please try again")
-              })
-          } else {
-            API.makeDonation(paymentObj, token)
-              .then(() => {
-                setSuccess(true)
-              })
-              .catch((err) => {
-                // console.log(err);
-                alert("There was an issue with your payment, please try again")
-              })
-          }
+          dbPayment["paypalOrderId"] = data.orderID
+          dbPayment["paypalPayerId"] = data.payerID
+
+          API.makePayment(dbPayment, token)
+            .then((result) => {
+              setSuccess(true)
+            })
+            .catch((err) => {
+              // console.log(err);
+              alert("There was an issue with your payment, please try again")
+            })
         },
         onError: (err) => {
           // console.log(err);
@@ -69,21 +84,23 @@ function Paypal(props) {
         },
       })
       .render(paypal.current);
-  }, [payment.amount, payment.description, paymentObj, token]);
+  }, []);
 
   return (
     <div>
       {success
         ? <div>
-          <p>Thank you for your ${amount} {get(payment, "type").toLowerCase() || "payment"}! </p>
-          {anonymous
-            ? null
-            : <p>Go to <Link to={ROUTES.MYMSU}>My MSU Page</Link> to view payment history.</p>
+          <p>Thank you for your {get(payment, "description")} payment!</p>
+          {!!token
+            ? <p>Go to <Link to={ROUTES.MYMSU}>My MSU Page</Link> to view payment history.</p>
+            : null
           }
-
         </div>
         : <div>
-          <p>Please complete your ${amount} {get(payment, "type").toLowerCase() || "payment"} using PayPal</p>
+          {(get(dbPayment, "type").includes("donation"))
+            ? <p>Please complete your {get(payment, "description")} + ${get(payment, "fee")} fee for a total of ${get(payment, "totalAmount")} using PayPal</p>
+            : <p>Please complete your ${get(payment, "amount")} payment for {get(payment, "description")} + ${get(payment, "fee")} fee using PayPal</p>
+          }
           <div ref={paypal}></div>
         </div>
       }

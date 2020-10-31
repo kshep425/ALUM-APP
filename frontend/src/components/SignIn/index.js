@@ -92,7 +92,7 @@ class SignInFormBase extends Component {
             placeholder="Email Address"
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <label htmlFor="passwordInput">Password</label>
           <input
             id="passwordInput"

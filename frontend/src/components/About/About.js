@@ -1,7 +1,8 @@
 import React from "react";
+import { EXECUTIVE_BOARD } from "../../constants/executiveBoard";
 import Card from "../BuildingComponents/Card";
 import Wrapper from "../BuildingComponents/Wrapper";
-import members from "../BuildingComponents/member.json";
+
 import "./style.css";
 
 // ReactDom.render(<Card />,document.getElementById("root"));
@@ -20,10 +21,9 @@ const About = () => {
         </p>
         <hr className="lineDivider" />
         <div className="row">
-          {members.map(member => (
-            <Wrapper key={member.id}>
+          {EXECUTIVE_BOARD.map(member => (
+            <Wrapper key={member.position}>
               <Card
-                key={member.id}
                 position={member.position}
                 name={member.name}
                 about={member.about}

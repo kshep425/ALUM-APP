@@ -1,6 +1,7 @@
 const dbPayment = require("../config/db_payment_queries");
 const dbMember = require("../config/db_member_queries")
 const { checkIfAuthenticated } = require('../config/middleware/auth-middleware');
+const DONATIONCATEGORIES = require("../constants/donationCategories");
 
 function getMemberDueAmount(memberType) {
   let amount;
@@ -23,10 +24,18 @@ function getMemberDueAmount(memberType) {
     case "Married Couple Life Membership Installment":
       amount = 220.00;
       break;
+    case "Individual Life Membership Full Payment":
+      amount = 500.00;
+      break;
+    case "Married Couple Life Membership Full Payment":
+      amount =700.00;
+      break;
+    case "Friend of Morgan Membership":
+      amount = 25.00;
+      break;
     default:
       throw Error("Invalid Member Type")
   }
-  console.log("member type: ", memberType, amount)
   return amount;
 }
 
@@ -40,27 +49,45 @@ function getDonationAmount(type) {
   }
 }
 
+function getFee(amount, type) {
+  return (amount < 500) || (type === "membership") ? parseFloat((((parseFloat(amount) + .3) / .971) - amount).toFixed(2)) : 0;
+}
+
 module.exports = function (app) {
   app.post("/api/payDues", checkIfAuthenticated, function (req, res) {
     console.log("Pay Dues")
-
-    const memberType = req.body.memberType
+    const memberType = req.body.type
     const MemberId = req.body.memberId
     const uid = req.uid
+    const categoryId = req.body.categoryId;
+    const amount = getMemberDueAmount(memberType)
+    const fee = getFee(amount, categoryId)
+    const paypalOrderId = req.body.paypalOrderId;
+    const paypalPayerId = req.body.paypalPayerId;
+    const otherMemberName = req.body.otherMemberName;
+    const otherMemberEmail = req.body.otherMemberEmail;
+
     const paymentObj = {
-      amount: getMemberDueAmount(memberType),
+      amount,
       description: memberType,
       currency: 'usd',
       uid,
       MemberId,
+      fee,
+      paypalPayerId,
+      paypalOrderId,
+      otherMemberName,
+      otherMemberEmail,
+      categoryId,
     }
+
+    console.log("paymentObj: ", paymentObj)
 
     return dbPayment.makePayment(paymentObj)
       .then(function (result1) {
         // console.log(result1.dataValues)
-        dbMember.updateMember(uid, { memberType })
+        dbMember.updateMember(uid, { memberType, spouseName: otherMemberName, spouseEmail: otherMemberEmail })
           .then(function (result2) {
-            console.log(result2)
             return res.status(200).json([result1, result2]);
           })
           .catch(err => {
@@ -89,18 +116,30 @@ module.exports = function (app) {
 
   app.post("/api/makeDonation", checkIfAuthenticated, function (req, res) {
     console.log("Make Donation")
-    // console.log(req.body)
-    const donationType = req.body.donationType
+
+    const donationType = req.body.type
     const MemberId = req.body.memberId
     const uid = req.uid
+    const categoryId = req.body.categoryId;
     const amount = getDonationAmount(donationType)
+    const fee = getFee(amount, categoryId)
+    const comment = req.body.comment;
+    const paypalOrderId = req.body.paypalOrderId;
+    const paypalPayerId = req.body.paypalPayerId;
+
     const paymentObj = {
       amount: amount,
-      description: "Donated $" + amount.toFixed(2) + " for Scholarships",
       currency: 'usd',
+      description: `$${amount.toFixed(2)} Donation for ${DONATIONCATEGORIES.find(x => x.id === categoryId).categoryName}`,
       uid,
+      comment,
+      paypalPayerId,
+      paypalOrderId,
       MemberId,
+      fee,
+      categoryId,
     }
+
     return dbPayment.makePayment(paymentObj)
       .then(function (result) {
         res.status(200).json(result);
@@ -113,16 +152,26 @@ module.exports = function (app) {
 
   app.post("/api/makeAnonymousDonation", function (req, res) {
     console.log("Make Anonymous Donation")
-    const donationType = req.body.donationType
+    const donationType = req.body.type
     const MemberId = req.body.memberId
     const uid = "Anonymous"
+    const categoryId = req.body.categoryId;
     const amount = getDonationAmount(donationType)
+    const fee = getFee(amount, categoryId)
+    const comment = req.body.comment;
+    const paypalOrderId = req.body.paypalOrderId;
+    const paypalPayerId = req.body.paypalPayerId;
     const paymentObj = {
       amount: amount,
-      description: "Donated $" + amount.toFixed(2) + " for Scholarships",
+      description: `$${amount} Donation for ${DONATIONCATEGORIES.find(x => x.id === categoryId).categoryName}`,
       currency: 'usd',
       uid,
+      comment,
+      paypalPayerId,
+      paypalOrderId,
       MemberId,
+      fee,
+      categoryId,
     }
     return dbPayment.makePayment(paymentObj)
       .then(function (result) {
