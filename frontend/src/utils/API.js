@@ -27,7 +27,6 @@ export default {
   },
 
   getAllUsersWithToken: async function (token) {
-    console.log(token)
     return axios.get("/api/users", {
       headers: {
         authorization: `Bearer ${token}`

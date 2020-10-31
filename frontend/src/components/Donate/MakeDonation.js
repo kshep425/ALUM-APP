@@ -46,7 +46,6 @@ const MakeDonation = (props) => {
       })
         .then(result => {
           memberId = get(result, "data.id") || 2
-          console.log("anonymous memberId: ", memberId)
           setDbPayment({
             categoryId,
             type,

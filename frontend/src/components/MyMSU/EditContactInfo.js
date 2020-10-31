@@ -24,7 +24,6 @@ const EditContactInfo = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log("Clicked Submit");
 
     const data = {
       prefix: prefix.current.value,
