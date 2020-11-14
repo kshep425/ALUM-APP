@@ -17,3 +17,96 @@
   width: 100vw;
   min-height: 100%;
 }
+
+.donateContainer {
+  font-family: 'Times New Roman', Times, serif;
+  padding: 1em;
+  color: midnightblue;
+}
+
+.donateHeader {
+  font-weight: bolder;
+}
+
+.orangeText {
+  color: orange;
+}
+
+.donationOptionsContainer {
+  font-family: "Abel", sans-serif;
+}
+
+.donationOtherAmount {
+  padding: 0px;
+}
+
+.donationButton {
+  margin: 6px 3px;
+  color: midnightblue;
+  border: solid 2px midnightblue;
+  background-color: white;
+  border-radius: 4px;
+  font-size: large;
+  font-weight: bolder;
+  padding: .5em 1em;
+}
+
+.donationButton:hover {
+  background-color: lightsalmon;
+  color: midnightblue;
+}
+
+.donationButton.toggle {
+  background-color: darkorange;
+  color: white;
+}
+
+.donationOther {
+  color: midnightblue;
+  font-size: larger;
+  font-weight: bolder;
+  border: none;
+  border-bottom: 2px solid gray;
+  background: transparent;
+}
+
+.donationOtherInput {
+  border: none;
+  background: transparent;
+}
+
+.donationLeft {
+  float: left;
+}
+
+.donationRight {
+  float: right;
+}
+
+.donationCommentBox {
+  width: 100%;
+  height: 100px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.donationSubmitButton {
+  padding: 0.3em 2em;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s;
+  background-color: darkorange;
+  color: white;
+  font-family: "Abel", sans-serif;
+  font-weight: bolder;
+  float: right;
+}
+
+.donationSubmitButton:hover {
+  background-color: lightsalmon;
+  color: midnightblue;
+}

@@ -66,14 +66,18 @@ const MakeDonation = (props) => {
         memberId = get(authUser, 'members.id')
         token = get(authUser, 'token')
         return (
-          <div>
+          <div className="donateContainer">
             {checkout
-              ? <Paypal dbPayment={dbPayment} memberId={memberId} token={token} />
+              ? <Paypal
+                dbPayment={dbPayment}
+                memberId={memberId}
+                token={token}
+              />
               : <>
-                <p className="donateHeader blueText">We provide scholarships for Howard County's new and current <span className="orangeText">MSU students</span></p>
+                <h1 className="donateHeader blueText">Providing scholarships for Howard County's new and current <span className="orangeText">MSU students</span></h1>
                 <DonationType donationInfoRef={donationInfoRef} />
-                <Button onClick={handleSubmit}>Make Donation</Button>
-                <Link to={ROUTES.MYMSU}><Button>Cancel</Button></Link>
+                <Button className="donationSubmitButton" onClick={handleSubmit}>Donate</Button>
+                {/* <Link className="donationCancelButton" to={ROUTES.MYMSU}><Button>Cancel</Button></Link> */}
               </>
             }
           </div>

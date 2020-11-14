@@ -10,8 +10,6 @@ const donationAmounts = [
   "donation500",
   "donation600",
   "donation700",
-  "donation800",
-  "donation900",
 ]
 
 function displayDonationCampaign(startDate = null, endDate = null) {
@@ -61,24 +59,18 @@ function displayDonationCampaign(startDate = null, endDate = null) {
 function DonationType(props) {
   const [donationAmount, setDonationAmount] = useState("");
   const [valid, setValid] = useState(true);
-  const [otherDonation, setOtherDonation] = useState(false);
   const [donationCategoryId, setDonationCategoryId] = useState();
   const [donationComment, setDonationComment] = useState("");
 
-  function handleChange(event) {
-    if (event.target.name === "other") {
-      setOtherDonation(true);
-      if (isValid(event.target.value)) {
-        setDonationAmount("donation" + event.target.value);
-      }
-    } else {
-      setOtherDonation(false);
-      setDonationAmount(event.target.value);
+  function handleDonationAmountChange(event) {
+    event.preventDefault()
+    if (isValid(event.target.value)) {
+      setDonationAmount("donation" + event.target.value);
     }
   }
 
   function handleDonationAmountClick(event) {
-    setOtherDonation(false);
+    event.preventDefault()
     setDonationAmount(event.target.value);
   }
 
@@ -88,6 +80,7 @@ function DonationType(props) {
   }
 
   function handleCommentChange(event) {
+    event.preventDefault()
     setDonationComment(event.target.value)
   }
 
@@ -101,8 +94,8 @@ function DonationType(props) {
   }
 
   return (
-    <div className="container" ref={props.donationInfoRef} donationcategoryid={donationCategoryId} donationcomment={donationComment} donationtype={donationAmount} >
-      <div>
+    <div className="donationOptionsContainer" ref={props.donationInfoRef} donationcategoryid={donationCategoryId} donationcomment={donationComment} donationtype={donationAmount} >
+      <div >
         <label>
           <h2>
             Select a Donation Campaign
@@ -132,7 +125,7 @@ function DonationType(props) {
           {
             donationAmounts.map((da) => {
               return (
-              <button
+                <button
                   className={`donationButton mr-2 ${(donationAmount === da) ? "toggle" : ""}`}
                   key={da}
                   value={da}
@@ -141,7 +134,6 @@ function DonationType(props) {
                   ${DONATIONS[da].amount}
                 </button>
               )
-
             })
           }
         </label>
@@ -153,18 +145,36 @@ function DonationType(props) {
           ? null
           : <p className="warn">Please enter a number {'>'} 0</p>
       }
-      <div className="form-check">
-
+      <div className="form-check donationOtherAmount">
         <label className="form-check-label instructions odInstructions" htmlFor="other">
-          Enter amount <br></br>
-          <span>$<input className="donationOther" type="text" name="other" onChange={handleChange} value={donationAmount.replace("donation", "")}/>USD</span>
+          <h2>Enter Amount</h2>
+          <div className="donationOther">
+            <h4>
+              <span className="donationLeft">$</span>
+              <input
+                className="donationOtherInput"
+                type="text"
+                name="other"
+                onChange={handleDonationAmountChange}
+                value={donationAmount.replace("donation", "")}
+                >
+              </input>
+              <span className="donationRight">USD</span>
+            </h4>
+          </div>
         </label>
-        <br></br>
-        <label className="donationCommentLabel" htmlFor="comment">
-          Comment:
-          <br></br>
-          <textarea id="comment" name="donationComment" className="donationCommentBox" value={donationComment} onChange={handleCommentChange}></textarea>
-        </label>
+        <br />
+        <br />
+        <h5>Enter Commment</h5>
+        <textarea
+          id="comment"
+          name="donationComment"
+          className="donationCommentBox"
+          value={donationComment}
+          onChange={handleCommentChange}
+          onfocus="if(this.defaultValue=='Add Comment'){ this.value=''; this.style.color='#000';}"
+        >
+        </textarea>
       </div>
     </div>
   )
