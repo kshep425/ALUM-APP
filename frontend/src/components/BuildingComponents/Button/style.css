@@ -9,28 +9,3 @@
   padding: .4em;
 }
 
-.donationButton {
-  margin: 6px 3px;
-  color: darkslateblue;
-  border: solid 2px darkslateblue;
-  background-color: white;
-  border-radius: 4px;
-  font-size: large;
-  font-weight: bolder;
-}
-
-.donationButton.toggle {
-  background-color: darkorange;
-  color: white;
-  border: solid 2px darkorange;;
-}
-
-.donationOther {
-  color: darkslateblue;
-  font-size: larger;
-  font-weight: bolder;
-  width: 90%;
-  border: none;
-  border-bottom: 2px solid gray;
-  background: transparent
-}
