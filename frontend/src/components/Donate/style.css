@@ -22,6 +22,7 @@
   font-family: 'Times New Roman', Times, serif;
   padding: 1em;
   color: midnightblue;
+  min-width: min-content;
 }
 
 .donateHeader {
@@ -68,11 +69,14 @@
   border: none;
   border-bottom: 2px solid gray;
   background: transparent;
+  width: 100%;
 }
 
 .donationOtherInput {
   border: none;
   background: transparent;
+  width: 45%;
+  display: inline-block;
 }
 
 .donationLeft {
@@ -109,4 +113,10 @@
 .donationSubmitButton:hover {
   background-color: lightsalmon;
   color: midnightblue;
+}
+
+@media screen and (min-width: 315px) {
+  .donationOtherInput {
+    width: 80%;
+  }
 }
