@@ -10,6 +10,9 @@ const donationAmounts = [
   "donation500",
   "donation600",
   "donation700",
+  "donation800",
+  "donation900",
+  "donation1000",
 ]
 
 function displayDonationCampaign(startDate = null, endDate = null) {
