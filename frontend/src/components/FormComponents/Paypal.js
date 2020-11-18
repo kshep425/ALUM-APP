@@ -46,7 +46,7 @@ function Paypal(props) {
   const paypal = useRef();
 
   const paypalDescriptionLength = 127;
-  const description = `${payment.description} ${dbPayment.comment || ""} ${dbPayment.otherMemberName || ""} ${dbPayment.otherMemberEmail || ""}`;
+  const description = `${payment.description} ${dbPayment.comment || ""} ${dbPayment.otherMemberName || ""} ${dbPayment.otherMemberEmail || ""} id=${dbPayment.memberId || ""}`;
   const paypalDescription = (description.length > 123) ? description.substring(0,paypalDescriptionLength) + "..." : description;
 
   useEffect(() => {
