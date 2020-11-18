@@ -76,8 +76,8 @@ const MakeDonation = (props) => {
               : <>
                 <h1 className="donateHeader blueText">Providing scholarships for Howard County's new and current <span className="orangeText">MSU students</span></h1>
                 <DonationType donationInfoRef={donationInfoRef} />
-                <Button className="donationSubmitButton" onClick={handleSubmit}>Donate</Button>
-                {/* <Link className="donationCancelButton" to={ROUTES.MYMSU}><Button>Cancel</Button></Link> */}
+                <Button className="submitButton" onClick={handleSubmit}>Donate</Button>
+                <Link to={ROUTES.MYMSU}><Button className="cancelButton">Cancel</Button></Link>
               </>
             }
           </div>
