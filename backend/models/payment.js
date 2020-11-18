@@ -25,6 +25,38 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING
         },
 
+        comment: {
+          type: DataTypes.STRING
+        },
+
+        paypalPayerId: {
+          type: DataTypes.STRING
+        },
+
+        paypalOrderId: {
+          type: DataTypes.STRING
+        },
+
+        categoryId: {
+          type: DataTypes.STRING
+        },
+
+        otherMemberName: {
+          type: DataTypes.STRING
+        },
+
+        otherMemberEmail: {
+          type: DataTypes.STRING
+        },
+
+        otherMemberId: {
+          type: DataTypes.INTEGER
+        },
+
+        fee: {
+          type: DataTypes.DOUBLE
+        }
+
     });
 
     // This allows progress id to be a foreign key in the Payment table.

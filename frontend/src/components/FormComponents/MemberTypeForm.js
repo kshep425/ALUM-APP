@@ -1,107 +1,112 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { MEMBERSHIPS } from '../../constants/memberships';
+
+const membership_types = Object.keys(MEMBERSHIPS)
 
 function MemberTypeForm(props) {
-  const [memberType, setmemberType] = useState();
-  console.log(props)
-  console.log(memberType)
-  function handleChange(event) {
-    setmemberType(event.target.value)
-    console.log(memberType)
+  const [memberType, setMemberType] = useState();
+  const [isMarried, setIsMarried] = useState(false)
+  const [spouseName, setSpouseName] = useState()
+  const [spouseEmail, setSpouseEmail] = useState("")
+  const [isValidEmail, setIsValidEmail] = useState(true)
+
+  useEffect(()=>{
+    if (memberType && memberType.includes("Married")) {
+      setIsMarried(true)
+    } else {
+      setIsMarried(false)
+    }
+  }, [memberType])
+
+  useEffect(()=>{
+    if (spouseEmail.length <= 5){
+      setIsValidEmail(true)
+      return
+    }
+
+    if (isValid(spouseEmail)) {
+      setIsValidEmail(true)
+    } else {
+
+      setIsValidEmail(false)
+    }
+  }, [spouseEmail])
+
+  function isValid(email) {
+    var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+
+    if (!pattern.test(email)) {
+      return false;
+    }
+    return true
+  }
+
+  function handleClick(event) {
+    event.preventDefault();
+    setMemberType(event.target.value)
+  }
+
+  function handleSpouseNameChange(event) {
+    setSpouseName(event.target.value)
+  }
+
+  function handleSpouseEmailChange(event) {
+    setSpouseEmail(event.target.value)
   }
 
   return (
-    <div className="container" ref={props.memberTypeRef} value={memberType}>
-      <h5>Member Registration Type</h5>
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="radio"
-          name="memberType"
-          id="inputCurrentLifeMemberIndividual"
-          value="Current Life Member Individual"
-          data-marital_status="individual"
-          checked={memberType === "Current Life Member Individual"}
-          onChange={handleChange}
-        />
-        <label className="form-check-label" htmlFor="inputCurrentLifeMemberIndividual">
-          Current Life Member Individual $25
-        </label>
-      </div>
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="radio"
-          name="memberType"
-          id="inputCurrentLifeMemberMarried"
-          value="Current Life Member Married Couple"
-          data-marital_status="married"
-          checked={memberType === "Current Life Member Married Couple"}
-          onChange={handleChange}
-        />
-        <label className="form-check-label" htmlFor="inputCurrentLifeMemberMarried">
-          Current Life Member Married Couple $45
-        </label>
-      </div>
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="radio"
-          name="memberType"
-          id="inputNonLifeMemberIndividual"
-          value="Regular Non-Life Membership Individual"
-          data-marital_status="individual"
-          checked={memberType === "Regular Non-Life Membership Individual"}
-          onChange={handleChange}
-        />
-        <label className="form-check-label" htmlFor="inputNonLifeMemberIndividual">
-          Regular Non-Life Membership Individual $60
-        </label>
-      </div>
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="radio"
-          name="memberType"
-          id="inputNonLifeMemberMarried"
-          value="Regular Non-Life Membership Married Couple"
-          data-marital_status="married"
-          checked={memberType === "Regular Non-Life Membership Individual"}
-          onChange={handleChange}
-        />
-        <label className="form-check-label" htmlFor="inputNonLifeMemberMarried">
-          Regular Non-Life Membership Married Couple $115
-        </label>
-      </div>
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="radio"
-          name="memberType"
-          id="inputIndividualLifeMemberInstallment"
-          value="Individual Life Membership Installment"
-          data-marital_status="individual"
-          checked={memberType === "Individual Life Membership Installment"}
-          onChange={handleChange}
-        />
-        <label className="form-check-label" htmlFor="inputIndividualLifeMemberInstallment">
-          Individual Life Membership Installment $150
-        </label>
-      </div>
-      <div className="form-check">
-        <input
-          className="form-check-input"
-          type="radio"
-          name="memberType"
-          id="inputMarriedLifeMemberInstallment"
-          value="Married Couple Life Membership Installment"
-          data-marital_status="married"
-          checked={memberType === "Married Couple Life Membership Installment"}
-          onChange={handleChange}
-        />
-        <label className="form-check-label" htmlFor="inputMarriedLifeMemberInstallment">
-          Married Couple Life Membership Installment $220
-        </label>
-      </div>
+    <div className="col donationOptionsContainer" ref={props.memberTypeRef} value={memberType} spousename={spouseName} spouseemail={spouseEmail} isvalidemail={isValidEmail.toString()}>
+      <h1>Select Member Registration Type</h1>
+      {membership_types.map((mt)=>{
+        return (
+          <button
+            className={`row donationButton mr-2 ${(memberType === mt) ? "toggle" : ""}`}
+            key={MEMBERSHIPS[mt].id}
+            id={MEMBERSHIPS[mt].id}
+            value={mt}
+            checked={memberType === mt}
+            onClick={handleClick}
+          >
+            {MEMBERSHIPS[mt].description}
+          </button>
+
+      )})}
+      {(isMarried)
+        ? <div className="spouseDiv">
+          <p>Please enter your spouse's name and email address.</p>
+          <div className="membershipInputDiv">
+            <label htmlFor="spouseName">
+              Spouse Name
+            <input
+              className="membershipInput"
+              type="text"
+              name="memberType"
+              id="spouseName"
+              data-marital_status="married"
+              onChange={handleSpouseNameChange}
+              required={isMarried}
+            />
+            </label>
+          </div>
+          <div className="membershipInputDiv">
+            <label htmlFor="spouseEmail">
+              Spouse Email
+          {
+          (isValidEmail) ? null : <p className="warn">Please enter a valid email</p>}
+            <input
+              className={`membershipInput ${(isValidEmail) ? "" : "invalid"}`}
+              type="email"
+              name="memberType"
+              id="spouseEmail"
+              data-marital_status="married"
+              onChange={handleSpouseEmailChange}
+              required={isMarried}
+            />
+            </label>
+          </div>
+        </div>
+        : null
+      }
     </div>
   )
 }

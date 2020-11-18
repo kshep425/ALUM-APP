@@ -54,7 +54,7 @@ module.exports = function (app) {
 
   app.get("/api/getUserDegreesWithUid", checkIfAuthenticated, function(req, res){
     console.log("GetUserDegrees")
-    return db.findMemberDegreeswWithUid(req.uid)
+    return db.findMemberDegreesWithUid(req.uid)
     .then(function (result) {
       res.status(200).json(result);
     });

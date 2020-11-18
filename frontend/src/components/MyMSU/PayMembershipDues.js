@@ -1,59 +1,85 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthUserContext, withAuthorization } from "../Session";
 import { MemberTypeForm } from "../FormComponents";
 import * as ROUTES from "../../constants/routes";
-import API from "../../utils/API";
 import Button from "../BuildingComponents/Button";
 import get from "lodash/get";
 import { compose } from "recompose";
+import Paypal from "../FormComponents/Paypal";
 
-
-const PayMembershipDues = (props) => {
-  console.log(props)
+const PayMembershipDues = () => {
   const memberTypeRef = useRef();
+  const [checkout, setCheckout] = useState(false);
+  const [dbPayment, setDbPayment] = useState("");
   let memberId;
   let token;
 
   function handleSubmit(event) {
-    event.preventDefault()
-    console.log("Make Payment")
-    console.log(memberTypeRef)
-    const paymentObj = {
-      memberType: get(memberTypeRef, "current.attributes.value.value"),
-      memberId
+    event.preventDefault();
+    const memberType = get(memberTypeRef, "current.attributes.value.value");
+    let spouseName;
+    let spouseEmail;
+    let emailIsValid;
+
+    if(!memberType){
+      setCheckout(false);
+      alert("Please select a membership type");
+      return;
     }
-    console.log(paymentObj)
-    if (paymentObj.memberType) {
-      API.payDues(paymentObj, token)
-        .then((result) => {
-          alert("You have paid your dues!")
-          props.history.push(ROUTES.MYMSU)
-        })
-        .catch((err) => {
-          alert("There was an issue paying your dues, please try again")
-        })
+
+    if(memberType.includes("Married")) {
+      spouseName = get(memberTypeRef, "current.attributes.spousename.value");
+      spouseEmail = get(memberTypeRef, "current.attributes.spouseemail.value");
+      emailIsValid = get(memberTypeRef, "current.attributes.isvalidemail.value");
+
+      // if spouseName or spouseEmail are null alert
+      if (!spouseName || !spouseEmail) {
+        alert("Please enter spouse name and email");
+        return;
+      };
+
+      if (emailIsValid === "false" || spouseEmail.length <= 5) {
+        alert("Please enter a valid email");
+        return;
+      }
     }
-    else {
-      alert("Please select a payment type")
+
+    setDbPayment({
+      memberId,
+      categoryId: "membership",
+      type: memberType,
+      otherMemberName: spouseName,
+      otherMemberEmail: spouseEmail,
+    })
+
+    if (memberType) {
+      setCheckout(true);
     }
   }
+
   return (
     <AuthUserContext.Consumer>
       {authUser => {
         memberId = authUser.members.id
         token = authUser.token
         return (
-          <div>
+          <div className="membershipDuesContainer">
             <h1>Pay Membership Dues</h1>
-            <MemberTypeForm memberTypeRef={memberTypeRef} />
-            <Link to={ROUTES.MYMSU}><Button>Cancel</Button></Link>
-            <Button onClick={handleSubmit}>MakePayment</Button>
+            {checkout
+            ? <Paypal dbPayment={dbPayment} token={token} />
+            : <div>
+              <MemberTypeForm memberTypeRef={memberTypeRef} />
+              <Button className="submitButton" onClick={handleSubmit}>Make Payment</Button>
+              <Link to={ROUTES.MYMSU}><Button className="cancelButton">Cancel</Button></Link>
+
+            </div>
+          }
           </div>
         )
       }}
     </AuthUserContext.Consumer>
-  );
+  )
 }
 
 const condition = authUser => !!authUser;

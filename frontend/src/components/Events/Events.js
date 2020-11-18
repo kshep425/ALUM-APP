@@ -6,7 +6,6 @@ import Modal from "../BuildingComponents/Modal";
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_EVENT, UPDATE_EVENTS } from "../../utils/actions";
 import API from "../../utils/API";
-import "./style.css";
 import { AuthUserContext } from "../Session";
 import * as ROLES from "../../constants/roles";
 import * as ROUTES from "../../constants/routes";

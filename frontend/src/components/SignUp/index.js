@@ -41,7 +41,6 @@ class SignUpFormBase extends Component {
 
   onSubmit = event => {
     const { fullName, email, passwordOne } = this.state;
-    console.log(fullName)
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
@@ -49,17 +48,17 @@ class SignUpFormBase extends Component {
 
         API.addNewUser({uid: authUser.user.uid, fullName, email, role: ROLES.USER})
           .then(result => {
-            console.log(result)
+            // console.log(result)
           })
           .catch(err => {
-            console.log(err);
+            // console.log(err);
             throw(err);
           })
 
         // Create a user in your Firebase realtime database
       })
       .then(() => {
-        console.log("Send Email Verification")
+        // console.log("Send Email Verification")
         return this.props.firebase.doSendEmailVerification();
       })
       .then(() => {

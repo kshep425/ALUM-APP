@@ -1,10 +1,8 @@
 import React from "react";
-import Button from "../BuildingComponents/Button";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 
 const MemberType = props => {
-  console.log(props);
 
   function getMemberType() {
     if (props.authUser.members.memberType) {
@@ -13,7 +11,7 @@ const MemberType = props => {
       return (
         <div>
           <Link to={ROUTES.PAY_DUES}>
-            <Button>Pay Membership Dues</Button>
+            <button className="submitButton">Pay Membership Dues</button>
           </Link>
         </div>
       );

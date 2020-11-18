@@ -29,7 +29,7 @@ const withAuthorization = condition => Component => {
     }
 
     componentWillUnmount() {
-      console.log(this.listener)
+      // console.log(this.listener)
       if(typeof this.listener === "function"){
         this.listener();
       }

@@ -16,7 +16,7 @@ const db_queries = {
         return db.Member.update(request, {where: {uid}})
     },
 
-    delete_member: function(member_id){
+    deleteMember: function(member_id){
         return db.Member.destroy({uid: member_id})
     },
 
@@ -64,20 +64,20 @@ const db_queries = {
      * Add a degree
      * @param {*} reqBody Should be a object {memberId: val, degree: val, year: val}
      */
-    add_degree: function(reqBody){
+    addDegree: function(reqBody){
         console.log(reqBody)
         return db.Degree.create(reqBody)
     },
 
-    all_degrees: function(){
+    allDegrees: function(){
         return db.Degree.find();
     },
 
-    find_member_degrees: function(member_id){
+    findMemberDegrees: function(member_id){
         return db.Degree.findOne({where: {MemberId: member_id}})
     },
 
-    findMemberDegreeswWithUid: function(uid){
+    findMemberDegreesWithUid: function(uid){
         return db.Degree.findAll({where: {uid}})
     },
     /**
@@ -85,11 +85,11 @@ const db_queries = {
      * @param {*} degree_id
      * @param {*} degree_info {degree: val, year: val, MemberId: val}
      */
-    update_member_degree: function(degree_id, degree_info){
+    updateMemberDegree: function(degree_id, degree_info){
         return db.Degree.update(degree_info, {where: {id: degree_id}})
     },
 
-    delete_member_degree: function(degree_id){
+    deleteMemberDegree: function(degree_id){
         return db.Degree.destroy({where: {id: degree_id}})
     },
 

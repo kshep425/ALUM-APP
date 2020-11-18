@@ -27,7 +27,6 @@ export default {
   },
 
   getAllUsersWithToken: async function (token) {
-    console.log(token)
     return axios.get("/api/users", {
       headers: {
         authorization: `Bearer ${token}`
@@ -60,7 +59,7 @@ export default {
   },
 
   getUserDegrees: function (token) {
-    console.log("getUserDegrees")
+    // console.log("getUserDegrees")
     return axios.get('/api/getUserDegreesWithUid', {
       headers: {
         authorization: `Bearer ${token}`
@@ -69,7 +68,7 @@ export default {
   },
 
   updateDegreeInfo: function (data, token) {
-    console.log("updateDegreeInfo: ", data)
+    // console.log("updateDegreeInfo: ", data)
     return axios.post('/api/updateDegreeInfo/', data, {
       headers: {
         authorization: `Bearer ${token}`
@@ -85,7 +84,7 @@ export default {
    * @param {*} token
    */
   payDues: function (data, token) {
-    console.log("payDues")
+    // console.log("payDues")
     return axios.post("/api/payDues", data, {
       headers: {
         authorization: `Bearer ${token}`
@@ -94,7 +93,7 @@ export default {
   },
 
   getUserPayments: function (token) {
-    console.log("getUserPayments")
+    // console.log("getUserPayments")
     return axios.get("/api/getUserPayments", {
       headers: {
         authorization: `Bearer ${token}`
@@ -103,7 +102,7 @@ export default {
   },
 
   getUserEvents: function (token) {
-    console.log("getUserEvents")
+    // console.log("getUserEvents")
     return axios.get("/api/getUserEvents", {
       headers: {
         authorization: `Bearer ${token}`
@@ -112,8 +111,8 @@ export default {
   },
 
   newEventRSVP: function (newEventRSVP, token){
-    console.log("newEventRSVP")
-    console.log(newEventRSVP)
+    // console.log("newEventRSVP")
+    // console.log(newEventRSVP)
     return axios.post("/api/newEventRSVP", newEventRSVP, {
       headers: {
         authorization: `Bearer ${token}`
@@ -129,10 +128,8 @@ export default {
    * @param {*} token
    */
   makeDonation: function (data, token) {
-    console.log("Make Donation")
-
+    // console.log("Make Donation")
     return axios.post("/api/makeDonation", data, {
-    // return axios.post("/api/makeStripePayment", data, {
       headers: {
         authorization: `Bearer ${token}`
       }
@@ -145,4 +142,18 @@ export default {
   makeAnonymousDonation: function (data) {
     return axios.post("/api/makeAnonymousDonation", data)
   },
+
+  makePayment: function (data, token=null) {
+    // console.log('makePayment')
+    if (data.type.includes("donation") & !!token) {
+      // console.log("makeDonation")
+      return this.makeDonation(data, token);
+    } else if (data.type.includes("donation")) {
+      // console.log("makeAnonymousDonation")
+      return this.makeAnonymousDonation(data, token);
+    } else if (data.categoryId === "membership") {
+      // console.log("payDues")
+      return this.payDues(data, token);
+    }
+  }
 };
