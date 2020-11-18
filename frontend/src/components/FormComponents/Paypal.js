@@ -5,6 +5,8 @@ import { DONATIONCATEGORIES } from '../../constants/donationCategories';
 import { MEMBERSHIPS } from '../../constants/memberships';
 import * as ROUTES from "../../constants/routes";
 import API from "../../utils/API"
+import Button from '../BuildingComponents/Button';
+import MakeDonation from '../Donate/MakeDonation';
 
 /** Create a payment object based on type that returns amount, fee, totalAmount, and description
  * @params type can be a donationType example: donation200 for $200 or a membership type that we can get the amount and description from the MEMBERSHIPS
@@ -38,14 +40,21 @@ function Payment(type, categoryId=null) {
  */
 function Paypal(props) {
   const { dbPayment, token } = props
+  const payment = new Payment(dbPayment.type, dbPayment.categoryId);
+
   const [success, setSuccess] = useState(false);
   const paypal = useRef();
-  const payment = new Payment(dbPayment.type, dbPayment.categoryId);
+
   const paypalDescriptionLength = 127;
   const description = `${payment.description} ${dbPayment.comment || ""} ${dbPayment.otherMemberName || ""} ${dbPayment.otherMemberEmail || ""}`;
   const paypalDescription = (description.length > 123) ? description.substring(0,paypalDescriptionLength) + "..." : description;
 
   useEffect(() => {
+    if (!dbPayment) {
+      dbPaymentExists(dbPayment)
+      return
+    }
+
     window.paypal
       .Buttons({
         createOrder: (data, actions, err) => {
@@ -86,6 +95,25 @@ function Paypal(props) {
       .render(paypal.current);
   }, []);
 
+  function dbPaymentExists (dbPaymentObj) {
+    // if dbPayment does not exist display MakeDonation Page
+    if (dbPaymentObj === undefined) {
+      return <div> <Link className="donationCancelButton" to={ROUTES.DONATE}><Button>Go To Make Donation Page</Button></Link>
+      {/* <MakeDonation checkout={false}></MakeDonation> */}
+      </div>
+    }
+
+    return ( <div>
+      {get(dbPayment, "type") && (get(dbPayment, "type").includes("donation"))
+            ? <p>Please complete your {get(payment, "description")} + ${get(payment, "fee")} fee for a total of ${get(payment, "totalAmount")} using PayPal</p>
+            : <p>Please complete your ${get(payment, "amount")} payment for {get(payment, "description")} + ${get(payment, "fee")} fee using PayPal</p>
+          }
+
+          <div ref={paypal}></div>
+    </div>
+    )
+  }
+
   return (
     <div>
       {success
@@ -96,13 +124,8 @@ function Paypal(props) {
             : null
           }
         </div>
-        : <div>
-          {(get(dbPayment, "type").includes("donation"))
-            ? <p>Please complete your {get(payment, "description")} + ${get(payment, "fee")} fee for a total of ${get(payment, "totalAmount")} using PayPal</p>
-            : <p>Please complete your ${get(payment, "amount")} payment for {get(payment, "description")} + ${get(payment, "fee")} fee using PayPal</p>
-          }
-          <div ref={paypal}></div>
-        </div>
+        : dbPaymentExists(dbPayment)
+
       }
     </div>
   );

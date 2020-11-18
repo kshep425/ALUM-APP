@@ -65,11 +65,9 @@ function DonationType(props) {
   const [donationCategoryId, setDonationCategoryId] = useState();
   const [donationComment, setDonationComment] = useState("");
 
-  function handleDonationAmountChange(event) {
-    event.preventDefault()
-    if (isValid(event.target.value)) {
-      setDonationAmount("donation" + event.target.value);
-    }
+  function handleDonationCategoryClick(event) {
+    event.preventDefault();
+    setDonationCategoryId(event.target.value);
   }
 
   function handleDonationAmountClick(event) {
@@ -77,14 +75,11 @@ function DonationType(props) {
     setDonationAmount(event.target.value);
   }
 
-  function handleDonationCategoryClick(event) {
-    event.preventDefault();
-    setDonationCategoryId(event.target.value);
-  }
-
-  function handleCommentChange(event) {
+  function handleDonationAmountChange(event) {
     event.preventDefault()
-    setDonationComment(event.target.value)
+    if (isValid(event.target.value)) {
+      setDonationAmount("donation" + event.target.value);
+    }
   }
 
   function isValid(val) {
@@ -94,6 +89,11 @@ function DonationType(props) {
     }
     setValid(true);
     return true;
+  }
+
+  function handleCommentChange(event) {
+    event.preventDefault()
+    setDonationComment(event.target.value)
   }
 
   return (
@@ -175,7 +175,6 @@ function DonationType(props) {
           className="donationCommentBox"
           value={donationComment}
           onChange={handleCommentChange}
-          onfocus="if(this.defaultValue=='Add Comment'){ this.value=''; this.style.color='#000';}"
         >
         </textarea>
       </div>

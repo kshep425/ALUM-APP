@@ -20,6 +20,7 @@ const PayMembershipDues = () => {
     const memberType = get(memberTypeRef, "current.attributes.value.value");
     let spouseName;
     let spouseEmail;
+    let emailIsValid;
 
     if(!memberType){
       setCheckout(false);
@@ -30,12 +31,18 @@ const PayMembershipDues = () => {
     if(memberType.includes("Married")) {
       spouseName = get(memberTypeRef, "current.attributes.spousename.value");
       spouseEmail = get(memberTypeRef, "current.attributes.spouseemail.value");
+      emailIsValid = get(memberTypeRef, "current.attributes.isvalidemail.value");
 
       // if spouseName or spouseEmail are null alert
-      if (!spouseName && !spouseEmail) {
+      if (!spouseName || !spouseEmail) {
         alert("Please enter spouse name and email");
         return;
       };
+
+      if (emailIsValid === "false" || spouseEmail.length <= 5) {
+        alert("Please enter a valid email");
+        return;
+      }
     }
 
     setDbPayment({
@@ -57,14 +64,15 @@ const PayMembershipDues = () => {
         memberId = authUser.members.id
         token = authUser.token
         return (
-          <div>
+          <div className="membershipDuesContainer">
             <h1>Pay Membership Dues</h1>
             {checkout
             ? <Paypal dbPayment={dbPayment} token={token} />
             : <div>
               <MemberTypeForm memberTypeRef={memberTypeRef} />
-              <Link to={ROUTES.MYMSU}><Button>Cancel</Button></Link>
-              <Button onClick={handleSubmit}>MakePayment</Button>
+              <Button className="submitButton" onClick={handleSubmit}>Make Payment</Button>
+              <Link to={ROUTES.MYMSU}><Button className="cancelButton">Cancel</Button></Link>
+
             </div>
           }
           </div>
