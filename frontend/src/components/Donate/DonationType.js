@@ -60,6 +60,7 @@ function displayDonationCampaign(startDate = null, endDate = null) {
 // console.log("sd > cd, ed < cd: ", displayDonationCampaign("November 1, 2020", "November 1, 2021"))
 
 function DonationType(props) {
+  const {handleDonationCategory} = props
   const [donationAmount, setDonationAmount] = useState("");
   const [valid, setValid] = useState(true);
   const [donationCategoryId, setDonationCategoryId] = useState();
@@ -68,6 +69,7 @@ function DonationType(props) {
   function handleDonationCategoryClick(event) {
     event.preventDefault();
     setDonationCategoryId(event.target.value);
+    handleDonationCategory(event.target.value)
   }
 
   function handleDonationAmountClick(event) {
