@@ -6,7 +6,7 @@ export const DONATIONCATEGORIES = [
     endDate: "April 1, 2021",
     totalGoal: 10000,
     memberGoal: 200,
-    description: "Pledge to give $200+ by April 1, 2020 for scholarship donations to current and future MSU students from Howard County.",
+    description: "Please donate $200 or more by April 1, 2020 towards scholarships for current and future MSU students from Howard County.",
     otherMember: false
   },
   {
@@ -26,7 +26,7 @@ export const DONATIONCATEGORIES = [
     endDate: null,
     totalGoal: null,
     memberGoal: null,
-    description: "Please make a donation to Howard County MSU Alumni Chapter.  Donations can used for scholarships, MSU, events, and other chapter needs.  Add a comment for what you would like this to go towards. Please include member's name and email if the donation is related to them.",
+    description: "Make a donation to Howard County MSU Alumni Chapter.  In the comments, specify the purpose of the donation.",
     otherMember: true
   }
 ]
