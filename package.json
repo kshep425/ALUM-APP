@@ -36,7 +36,7 @@
     "firebase-service": "^4.0.221",
     "http2": "^3.3.7",
     "if-env": "^1.0.4",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
     "mysql": "^2.18.1",
