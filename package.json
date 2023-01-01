@@ -44,7 +44,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
-    "pdfjs-dist": "^2.2.228",
+    "pdfjs-dist": "^2.16.105",
     "react-calendar": "^3.0.0",
     "react-google-login": "^5.1.1",
     "react-places-autocomplete": "^7.2.1",
